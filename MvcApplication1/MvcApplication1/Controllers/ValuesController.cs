@@ -7,6 +7,9 @@ using System.Web.Http;
 
 namespace MvcApplication1.Controllers
 {
+    using Core.Interface;
+    using Core.Model;
+
     using Newtonsoft.Json;
 
     public class RankTableEntry
@@ -38,6 +41,21 @@ namespace MvcApplication1.Controllers
     }
     public class ValuesController : ApiController
     {
+        private ICrudService<Users> userService;
+        public ValuesController(ICrudService<Users> userServ)
+        {
+            userService = userServ;
+            userService.Create(new Users
+                                   {
+                                       Messages = new List<Message>(),
+                                       Login = "Asd",
+                                       Name = "svcas",
+                                       Password = "Asc",
+                                       RegisterDateTime = DateTime.Now
+                                   });
+            var z = userService.GetAll();
+            var b = z;
+        }
         // GET api/values
       static  List<RankTableEntry>  entries = new List<RankTableEntry>
                                             {

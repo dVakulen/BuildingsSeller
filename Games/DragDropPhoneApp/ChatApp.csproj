@@ -104,12 +104,15 @@
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IoC\ServiceLocator.cs" />
     <Compile Include="MainPage.xaml.cs" />
     <Compile Include="Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\RankTableEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WinnersRatingPage.xaml.cs">
       <DependentUpon>WinnersRatingPage.xaml</DependentUpon>
     </Compile>

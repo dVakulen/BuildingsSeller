@@ -10,11 +10,15 @@ using Microsoft.Phone.Shell;
 
 namespace DragDropPhoneApp
 {
+    using Windows.Devices.Geolocation;
+
     public partial class Menu : PhoneApplicationPage
     {
         public Menu()
         {
             InitializeComponent();
+          //  Geolocator geolocator = new Geolocator();
+           // geolocator.DesiredAccuracy = Windows.Devices.Geolocation.PositionAccuracy.High;
         }
 
         private void Game_Click(object sender, RoutedEventArgs e)
