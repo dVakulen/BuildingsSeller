@@ -106,6 +106,9 @@
     </Compile>
     <Compile Include="IoC\ServiceLocator.cs" />
     <Compile Include="MainPage.xaml.cs" />
+    <Compile Include="Maps.xaml.cs">
+      <DependentUpon>Maps.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Maps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Menu.xaml">
       <SubType>Designer</SubType>

@@ -200,7 +200,7 @@
             if (FirstTimeLoad)
             {
                 FirstTimeLoad = false;
-                this.NavigationService.Navigate(new Uri("/Menu.xaml", UriKind.Relative));
+                this.NavigationService.Navigate(new Uri("/Maps.xaml", UriKind.Relative));
             }
         }
 
