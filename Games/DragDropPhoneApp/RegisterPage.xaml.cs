@@ -13,13 +13,18 @@ namespace DragDropPhoneApp
     using BuildSeller.Core.Model;
 
     using DragDropPhoneApp.ApiConsumer;
+    using DragDropPhoneApp.ViewModel;
 
     public partial class RegisterPage : PhoneApplicationPage
     {
+        private MainViewModel dataContext;
         public RegisterPage()
         {
-            InitializeComponent(); 
-            
+            InitializeComponent();
+            this.dataContext = App.DataContext;
+            this.dataContext = App.DataContext;
+            /*
+ * 
             ApiService<Users>.SendPost(new Users
             {
                 Phone = "Asd",
@@ -42,7 +47,23 @@ namespace DragDropPhoneApp
                 UsersLiked = new List<UserInteraction>(),
 
 
-            });
+            }, false);*/
+        }
+
+        private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+          
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            dataContext.CurrentUser.RegisterDateTime = DateTime.Now;
+            dataContext.CurrentUser.PaidSeller = true;
+            dataContext.CurrentUser.PaidUser = true;
+            dataContext.CurrentUser.Activated = true;
+            ApiService<Users>.SendPost(dataContext.CurrentUser, false);
+            MessageBox.Show("Registration successfull");
+            this.NavigationService.Navigate(new Uri("/RealtyList.xaml", UriKind.Relative));
         }
     }
 }

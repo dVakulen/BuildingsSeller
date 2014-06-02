@@ -265,6 +265,7 @@
     <Compile Include="Controllers\RealtyController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\SubscribesController.cs" />
+    <Compile Include="Controllers\UserApiController.cs" />
     <Compile Include="Controllers\UserManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CustomAuthorize.cs" />

@@ -1,7 +1,7 @@
-using GalaSoft.MvvmLight;
-
 namespace DragDropPhoneApp.ViewModel
 {
+    #region Using Directives
+
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
@@ -14,11 +14,62 @@ namespace DragDropPhoneApp.ViewModel
 
     using DragDropPhoneApp.Helpers;
 
+    using GalaSoft.MvvmLight;
+
+    #endregion
+
     public class MainViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        #region Fields
+
+        public Users CurrentUser;
+
+        public List<Realty> realtys;
+
+        private bool isLoading;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        public MainViewModel()
+        {
+            this.Realtys = new List<Realty>();
+            this.CurrentUser = new Users();
+        }
+
+        #endregion
+
+        #region Public Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
+        #region Public Properties
+
+        public Realty CurrentRealty { get; set; }
+
+        public List<AlphaKeyGroup<Realty>> GroupedRealtiesForRent
+        {
+            get
+            {
+                var cards = this.Realtys.Where(v => v.IsForRent);
+                return AlphaKeyGroup<Realty>.CreateGroups(cards, s => s.Named, true);
+            }
+        }
+
+        public List<AlphaKeyGroup<Realty>> GroupedRealtiesForSell
+        {
+            get
+            {
+                var cards = this.Realtys.Where(v => !v.IsForRent);
+                return AlphaKeyGroup<Realty>.CreateGroups(cards, s => s.Named, true);
+            }
+        }
 
         public bool IsAuthorized { get; set; }
-        private bool isLoading;
+
         public bool IsLoading
         {
             get
@@ -33,15 +84,6 @@ namespace DragDropPhoneApp.ViewModel
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (null != handler)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }  public List<Realty> realtys;
         public List<Realty> Realtys
         {
             get
@@ -55,42 +97,27 @@ namespace DragDropPhoneApp.ViewModel
 
                 Deployment.Current.Dispatcher.BeginInvoke(
                     () =>
-                    {
-                        // this.CardsCount = value.Count;
-                        this.NotifyPropertyChanged("GroupedRealtiesForRent");
-                        this.NotifyPropertyChanged("GroupedRealtiesForSell");
-                    });
+                        {
+                            // this.CardsCount = value.Count;
+                            this.NotifyPropertyChanged("GroupedRealtiesForRent");
+                            this.NotifyPropertyChanged("GroupedRealtiesForSell");
+                        });
             }
         }
-        public List<AlphaKeyGroup<Realty>> GroupedRealtiesForRent
-        {
-            get
-            {
-                var cards = this.Realtys.Where(v => v.IsForRent);
-                return AlphaKeyGroup<Realty>.CreateGroups(cards, s => s.Named, true);
-            }
-        }
-        public Realty CurrentRealty { get; set; }
-        public List<AlphaKeyGroup<Realty>> GroupedRealtiesForSell
-        {
-            get
-            {
-                var cards = this.Realtys.Where(v => !v.IsForRent);
-                return AlphaKeyGroup<Realty>.CreateGroups(cards, s => s.Named, true);
-            }
-        }
-        public MainViewModel()
-        {
-            Realtys = new List<Realty>();
 
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+        #endregion
+
+        #region Public Methods and Operators
+
+        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (null != handler)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
+
+        #endregion
     }
 }

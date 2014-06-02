@@ -65,11 +65,11 @@ namespace DragDropPhoneApp.ApiConsumer
 
 
             HttpWebRequest myReq =
-(HttpWebRequest)WebRequest.Create(uri.OriginalString + string.Format("?login={0}&pass={1}", login, pass));
+(HttpWebRequest)WebRequest.Create(uriRealtApi.OriginalString + string.Format("?login={0}&pass={1}", login, pass));
 
             //       Uri uri = new Uri(http://host.ru/forum/cont/add.php?parm=p);
-            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(uri);
-            StartWebRequest(uri.OriginalString + string.Format("?login={0}&pass={1}", login, pass));
+            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(uriRealtApi);
+            StartWebRequest(uriRealtApi.OriginalString + string.Format("?login={0}&pass={1}", login, pass));
             object s = new object();
             //  IAsyncResult httpWebResponse = httpWebRequest.BeginGetResponse(ar => { }, s);
             //  while (!httpWebResponse.IsCompleted)
@@ -82,7 +82,7 @@ namespace DragDropPhoneApp.ApiConsumer
             return;
 
             client.Headers["Accept"] = "application/json";
-            client.DownloadStringAsync(new Uri(uri.OriginalString + string.Format("?login={0}&pass={1}", login, pass)));
+            client.DownloadStringAsync(new Uri(uriRealtApi.OriginalString + string.Format("?login={0}&pass={1}", login, pass)));
             var z = client.ResponseHeaders;
             var b = z;
 
@@ -137,11 +137,12 @@ namespace DragDropPhoneApp.ApiConsumer
                 }
 
             };
-            client.DownloadStringAsync(uri);
+            client.DownloadStringAsync(uriRealtApi);
 
         }
-        static Uri uri = new Uri("http://localhost:61251/api/buildapi/");
-        public static void SendPost(T gizmo)
+        static Uri uriRealtApi = new Uri("http://localhost:61251/api/buildapi/");
+        static Uri uriUserApi = new Uri("http://localhost:61251/api/userapi/");
+        public static void SendPost(T gizmo, bool isRealtApi =true)
         {
 
 
@@ -183,7 +184,17 @@ namespace DragDropPhoneApp.ApiConsumer
             WebClient webClientQuote = new WebClient();
 
             webClientQuote.Headers["content-type"] = "application/json";
-            webClientQuote.UploadStringAsync((uri), "POST", data1);
+            if (isRealtApi)
+            webClientQuote.UploadStringAsync((uriRealtApi), "POST", data1);
+            else
+            {
+
+                webClientQuote.UploadStringAsync(uriUserApi, "POST", data1);
+            }
         }
+
+
+    
+
     }
 }
