@@ -114,15 +114,15 @@ namespace BuildSeller
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Bootstrapper.Bootstrap(); 
-        
+            Bootstrapper.Bootstrap();
+
 
 
 
         }
         public static void ConfigureWindsor(HttpConfiguration configuration)
         {
-            container = new WindsorContainer();
+            container =IoC.Container;
             container.Install(FromAssembly.This());
             container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel, true));
             var dependencyResolver = new WindsorDependencyResolver(container);

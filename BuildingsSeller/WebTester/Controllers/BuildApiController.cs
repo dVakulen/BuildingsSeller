@@ -11,9 +11,12 @@ using BuildSeller.Core.Repository;
 using BuildSeller.Infra;
 using BuildSeller.Service;
 
+using Newtonsoft.Json;
 namespace BuildSeller.Controllers
 {
-    using Newtonsoft.Json;
+    using BuildSeller.Core.Service;
+
+    using Castle.Core.Internal;
 
     public class RealtyTojson
     {
@@ -139,10 +142,11 @@ namespace BuildSeller.Controllers
     {
 
         private readonly IRealtyService realtyService;
-
-        public BuildApiController()//IRealtyService realtyServic
+        private readonly IUserService userService;
+        public BuildApiController(IRealtyService realtyServic , IUserService userServic)
         {
-            this.realtyService =  new RealtyService(IoC.Resolve<IRepo<Realty>>());//realtyServic;
+            this.realtyService = realtyServic;
+            this.userService = userServic; // new RealtyService(IoC.Resolve<IRepo<Realty>>());//realtyServic;
         }
         public string Get(int userId, int authorId, int skip, int take)//IEnumerable<Message>
         {
@@ -187,10 +191,42 @@ namespace BuildSeller.Controllers
         {
             return  realtyService.Where(c => c.Id == id).FirstOrDefault();
         }
-
-        // POST api/buildapi
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Get(string login, string pass)
         {
+            if(login.IsNullOrEmpty() || pass.IsNullOrEmpty())
+                return Request.CreateResponse(HttpStatusCode.OK);
+            if (userService.Get(login, pass) != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+        public HttpResponseMessage Post([FromBody]string value)
+        {
+            if (value != null)
+            {
+                var user =JsonConvert.DeserializeObject<Users>(value);
+                var sdf =
+                    JsonConvert.DeserializeObject<Users>(
+                        "{\"Activated\":false,\"PaidUser\":true,\"Banned\":true,\"PaidSeller\":true,\"Email\":\"Asd\",\"FirstName\":\"dsccd\",\"LastName\":\"asdfcvf\",\"Login\":\"Addddddddd\",\"LoginHash\":null,\"Password\":\"Asdddddd\",\"Patronymic\":\"scasca\",\"Adress\":\"dsa\",\"Phone\":\"Asd\",\"Likes\":2,\"Dislikes\":1,\"Comments\":\"Asdcdf\",\"UsersLiked\":[],\"RegisterDateTime\":\"2014-06-02T12:03:57.0732605+03:00\",\"Roles\":[],\"Id\":0}");
+                var g = sdf;
+
+                if (user == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest);
+                }  
+                if(userService.GetAll().Any(v=>v.Login == user.Login))
+                    return  Request.CreateResponse(HttpStatusCode.Conflict);
+
+                userService.Create(user);
+              //  messageService.Create(v);
+                return Request.CreateResponse(HttpStatusCode.Accepted);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
         }
 
         // PUT api/buildapi/5

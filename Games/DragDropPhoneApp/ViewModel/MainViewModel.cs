@@ -2,25 +2,42 @@ using GalaSoft.MvvmLight;
 
 namespace DragDropPhoneApp.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
-    public class MainViewModel : ViewModelBase
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
+    public class MainViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        public bool IsAuthorized { get; set; }
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get
+            {
+                return this.isLoading;
+            }
+
+            set
+            {
+                this.isLoading = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (null != handler)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
+
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.

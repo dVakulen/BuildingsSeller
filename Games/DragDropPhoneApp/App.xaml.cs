@@ -15,6 +15,8 @@ using Microsoft.Phone.Shell;
 
 namespace DragDropPhoneApp
 {
+    using DragDropPhoneApp.ViewModel;
+
     public partial class App : Application
     {
         /// <summary>
@@ -22,7 +24,15 @@ namespace DragDropPhoneApp
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
+        static ViewModelLocator locator = new ViewModelLocator();
 
+        public static MainViewModel DataContext
+        {
+            get
+            {
+                return locator.Main;
+            }
+        }
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
