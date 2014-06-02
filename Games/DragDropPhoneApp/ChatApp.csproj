@@ -122,6 +122,9 @@
     </Compile>
     <Compile Include="Model\RankTableEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealtyDetailsPage.xaml.cs">
+      <DependentUpon>RealtyDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RealtyList.xaml.cs">
       <DependentUpon>RealtyList.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RealtyDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

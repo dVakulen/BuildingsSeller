@@ -23,24 +23,28 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="Realty descript" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ScrollViewer >
+        <Grid x:Name="ContentPanel" Margin="14,138,10,23" Grid.RowSpan="2">
+            <Image  Stretch="UniformToFill"   Source="{Binding CurrentRealty.PictureSource}" Margin="25,1,35,311"   >
+                <!--, Converter={StaticResource BooleanToVisibilityConverter}-->
+            </Image>
+            <ScrollViewer Margin="-10,296,10,83" >
                 <StackPanel Margin="20" Name="TeamsStackPanel">
-                    <TextBox HorizontalAlignment="Left" Height="72" Margin="-10,78,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72" Margin="0,150,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72" Margin="-10,222,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72" Margin="0,294,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72" Margin="-10,366,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72" Margin="10,438,-10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72" Margin="0,525,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="456"/>
+                    <Button x:Name="ShowOnMap" Content="ShowOnMap" Width="377" Click="Button_Click"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Named}" VerticalAlignment="Top" Width="419"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Price}" VerticalAlignment="Top" Width="456"/>
 
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Square}" VerticalAlignment="Top" Width="456"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Address}" VerticalAlignment="Top" Width="456"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Description}" VerticalAlignment="Top" Width="456"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Owner.Phone}" VerticalAlignment="Top" Width="456"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Named}" VerticalAlignment="Top" Width="456"/>
                 </StackPanel>
             </ScrollViewer>
-         
+
         </Grid>
     </Grid>
 

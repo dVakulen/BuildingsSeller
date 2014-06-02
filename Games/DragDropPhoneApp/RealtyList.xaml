@@ -141,7 +141,7 @@
                                         ListFooterTemplate="{StaticResource GroupHeader}"
                                            GroupHeaderTemplate="{StaticResource LongListSelectorGroupHeaderTemmplate}"
                                            ItemTemplate="{StaticResource LongListSelectorItemTemplate}"
-                                           HideEmptyGroups ="true"  IsGroupingEnabled ="true" LayoutMode="List" />
+                                           HideEmptyGroups ="true"  SelectionChanged="BlogsLongListSelector_SelectionChanged"  IsGroupingEnabled ="true" LayoutMode="List" />
             </phone:PivotItem>
 
             <phone:PivotItem Header="Realty for Rent">
@@ -153,7 +153,7 @@
                                         ListFooterTemplate="{StaticResource GroupHeader}"
                                            GroupHeaderTemplate="{StaticResource LongListSelectorGroupHeaderTemmplate}"
                                            ItemTemplate="{StaticResource LongListSelectorItemTemplate}"
-                                           HideEmptyGroups ="true"  IsGroupingEnabled ="true" LayoutMode="List" />
+                                           HideEmptyGroups ="true"  IsGroupingEnabled ="true" LayoutMode="List" SelectionChanged="BlogsLongListSelector_SelectionChanged" />
             </phone:PivotItem>
 
         </phone:Pivot>
