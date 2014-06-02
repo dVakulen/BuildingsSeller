@@ -11,7 +11,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
     <phone:PhoneApplicationPage.Resources>
 
         <phone:JumpListItemBackgroundConverter x:Key="BackgroundConverter"/>
@@ -108,7 +108,7 @@
 
         <DataTemplate x:Key="LongListSelectorItemTemplate">
             <StackPanel Orientation="Horizontal" Margin="4,4">
-                <Image DataContext="{Binding PictureSource}" Width="40" Height="40" Stretch="UniformToFill"   Source="Assets/Tiles/FlipCycleTileSmall.png" Margin="40,-160,0,0" Canvas.ZIndex="50" RenderTransformOrigin="0.5,0.5"  >
+                <Image Source="{Binding PictureSource}" Width="40" Height="40" Stretch="UniformToFill"  >
                     <!--, Converter={StaticResource BooleanToVisibilityConverter}-->
                 </Image>
                 <TextBlock Text="{Binding Named}"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
@@ -132,19 +132,19 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Pivot Title="Images" Name="pivot" Margin="-3, 0, 0, 0" >
 
-            <phone:PivotItem Header="Card Images">
+            <phone:PivotItem Header="Realty for Sell">
 
-                <phone:LongListSelector Name="ImagesList" Margin="13,-30,0,0" 
-                                       
-                                        ItemsSource="{Binding GroupedCardsList}"
-                                        ItemTemplate="{StaticResource ItemTemplate}"                     
-                                        JumpListStyle="{StaticResource JumpListStyle}" 
-                                        IsGroupingEnabled="True"
-                                        LayoutMode="Grid" 
-                                        GridCellSize="100,100"/>
+                <phone:LongListSelector Name="RealtyforSell"   
+                                           ItemsSource="{Binding GroupedRealtiesForRent}"
+                                           JumpListStyle="{StaticResource LongListSelectorJumpListStyle}"  
+                                        ListHeaderTemplate="{StaticResource GroupHeader}"
+                                        ListFooterTemplate="{StaticResource GroupHeader}"
+                                           GroupHeaderTemplate="{StaticResource LongListSelectorGroupHeaderTemmplate}"
+                                           ItemTemplate="{StaticResource LongListSelectorItemTemplate}"
+                                           HideEmptyGroups ="true"  IsGroupingEnabled ="true" LayoutMode="List" />
             </phone:PivotItem>
-           
-            <phone:PivotItem Header="Card Names">
+
+            <phone:PivotItem Header="Realty for Rent">
 
                 <phone:LongListSelector Name="BlogsLongListSelector"   
                                            ItemsSource="{Binding GroupedRealtiesForSell}"

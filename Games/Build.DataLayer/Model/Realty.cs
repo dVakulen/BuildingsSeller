@@ -20,10 +20,8 @@
             {
                 BitmapImage biImg = new BitmapImage();
                 MemoryStream ms = new MemoryStream(Picture);
-
+               
                 biImg.SetSource(ms);
-
-              //  ImageSource imgSrc = biImg as ImageSource;
 
                 return biImg;
             }

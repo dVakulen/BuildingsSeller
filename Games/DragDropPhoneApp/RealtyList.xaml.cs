@@ -18,6 +18,7 @@ namespace DragDropPhoneApp
     using BuildSeller.Core.Model;
 
     using DragDropPhoneApp.ApiConsumer;
+    using DragDropPhoneApp.Helpers;
     using DragDropPhoneApp.ViewModel;
 
     public partial class RealtyList : PhoneApplicationPage
@@ -66,6 +67,34 @@ namespace DragDropPhoneApp
             this.bWorker.WorkerSupportsCancellation = false;
             this.bWorker.DoWork += this.bw_DoWork;
             this.bWorker.RunWorkerCompleted += this.bw_RunWorkerCompleted;
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            Indicator.setLoadingIndicator(this, "Loading realties");
+            dataContext.IsLoading = true;
+        }
+
+        private void BlogsLongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is LongListSelector)
+            {
+                var sendr = sender as LongListSelector;
+
+                if (sendr.SelectedItem == null)
+                {
+                    return;
+                }
+                if (!(sendr.SelectedItem is Realty))
+                {
+                    return;
+                }
+                var realt = sender as Realty;
+                dataContext.CurrentRealty = realt;
+                this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            }
+
         }
     }
 }

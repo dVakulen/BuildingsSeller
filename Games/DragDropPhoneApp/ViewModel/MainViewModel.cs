@@ -16,7 +16,7 @@ namespace DragDropPhoneApp.ViewModel
 
     public class MainViewModel : ViewModelBase, INotifyPropertyChanged
     {
-       
+
         public bool IsAuthorized { get; set; }
         private bool isLoading;
         public bool IsLoading
@@ -56,7 +56,7 @@ namespace DragDropPhoneApp.ViewModel
                 Deployment.Current.Dispatcher.BeginInvoke(
                     () =>
                     {
-                       // this.CardsCount = value.Count;
+                        // this.CardsCount = value.Count;
                         this.NotifyPropertyChanged("GroupedRealtiesForRent");
                         this.NotifyPropertyChanged("GroupedRealtiesForSell");
                     });
@@ -66,15 +66,16 @@ namespace DragDropPhoneApp.ViewModel
         {
             get
             {
-                var cards = this.Realtys.Where(v => v.IsForRent); 
+                var cards = this.Realtys.Where(v => v.IsForRent);
                 return AlphaKeyGroup<Realty>.CreateGroups(cards, s => s.Named, true);
             }
         }
+        public Realty CurrentRealty { get; set; }
         public List<AlphaKeyGroup<Realty>> GroupedRealtiesForSell
         {
             get
             {
-                var cards = this.Realtys.Where(v=>!v.IsForRent);
+                var cards = this.Realtys.Where(v => !v.IsForRent);
                 return AlphaKeyGroup<Realty>.CreateGroups(cards, s => s.Named, true);
             }
         }
