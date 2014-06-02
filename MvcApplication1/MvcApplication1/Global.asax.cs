@@ -54,6 +54,9 @@ namespace MvcApplication1
             GlobalConfiguration.Configuration.Services.Replace(
      typeof(IHttpControllerActivator),
      new WindsorCompositionRoot(container));
+
+
+            // ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory11(IoC.Container));
         }
 
       protected void Application_End()

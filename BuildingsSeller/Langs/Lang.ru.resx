@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="AddressCountry" xml:space="preserve">
+    <value>Страна</value>
+  </data>
+  <data name="AddressFax" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="AddressFirstName" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="AddressLastName" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="AddressPhone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="AddressStreet" xml:space="preserve">
+    <value>улица</value>
+  </data>
+  <data name="AddressTown" xml:space="preserve">
+    <value>Town</value>
+  </data>
+  <data name="AddressZipCode" xml:space="preserve">
+    <value>Zip</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Назад к списку</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Категории</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Сменить пароль</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Контакты</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Подробно</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="EmailSended" xml:space="preserve">
+    <value>имейл послан</value>
+  </data>
+  <data name="HeaderPartialLogoff" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="HeaderPartialLogon" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="HeaderPartialWelcome" xml:space="preserve">
+    <value>Привет</value>
+  </data>
+  <data name="HeaderTitle" xml:space="preserve">
+    <value>MVC Basic Site</value>
+  </data>
+  <data name="HomeSubText" xml:space="preserve">
+    <value>To learn more about ASP.NET MVC visit http://asp.net/mvc. The page features videos, tutorials, and samples to help you get the most from ASP.NET MVC. If you have any questions about ASP.NET MVC visit our forums.</value>
+  </data>
+  <data name="HomeTitle" xml:space="preserve">
+    <value>Дом</value>
+  </data>
+  <data name="IndexTitle" xml:space="preserve">
+    <value>Добро пожаловать!</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="LogOnErrorMessage" xml:space="preserve">
+    <value>Юзернейм или пароль неверен</value>
+  </data>
+  <data name="LogOnLegend" xml:space="preserve">
+    <value>Информация о аккаунте</value>
+  </data>
+  <data name="LogOnLoginButton" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="LogOnMessage" xml:space="preserve">
+    <value>Введите юзернейм и пароль</value>
+  </data>
+  <data name="LogOnMessage2" xml:space="preserve">
+    <value>if you don't have an account.</value>
+  </data>
+  <data name="LogOnModelPassword" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="LogOnModelUsername" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="LogOnRegisterLink" xml:space="preserve">
+    <value>register</value>
+  </data>
+  <data name="LogOnTitle" xml:space="preserve">
+    <value>Логон</value>
+  </data>
+  <data name="LogOnValidationSummary" xml:space="preserve">
+    <value>Логин был неудачным</value>
+  </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Управление акаунтом</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>Про</value>
+  </data>
+  <data name="MenuHome" xml:space="preserve">
+    <value>Домой</value>
+  </data>
+  <data name="Realty" xml:space="preserve">
+    <value>Недвижимость</value>
+  </data>
+  <data name="RegisterBack" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="RegisterInvalidUsername" xml:space="preserve">
+    <value>The username is invalid! There is already a registred user for this username.</value>
+  </data>
+  <data name="RegisterRegister" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="RegisterThanks" xml:space="preserve">
+    <value>Thank you for your registration!</value>
+  </data>
+  <data name="RegisterTitle" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="SendrestorationEmai" xml:space="preserve">
+    <value>Послать письмо с паролем</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Показать</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>Подтвердите имейл</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>Подписатся</value>
+  </data>
+  <data name="Suggest1" xml:space="preserve">
+    <value>ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that enables a clean separation of concerns and that gives you full control over markup for enjoyable, agile development. ASP.NET MVC includes many features that enable fast, TDD-friendly development for creating sophisticated applications that use the latest web standards.</value>
+  </data>
+  <data name="UserAndAddressComfirmEmail" xml:space="preserve">
+    <value>Подтвердите имейл</value>
+  </data>
+  <data name="UserAndAddressComfirmPassword" xml:space="preserve">
+    <value>Подтвердите пароль</value>
+  </data>
+  <data name="UserAndAddressEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="UserAndAddressPassword" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="UserAndAddressUsername" xml:space="preserve">
+    <value>Юзернейм</value>
+  </data>
+  <data name="ValidationRequired" xml:space="preserve">
+    <value>Нужно</value>
+  </data>
+  <data name="WebAppTitle" xml:space="preserve">
+    <value>MVC Basic </value>
+  </data>
+  <data name="WebBuildings" xml:space="preserve">
+    <value>Строения онлайн</value>
+  </data>
+  <data name="BuildSellerPasswordRecovery" xml:space="preserve">
+    <value>Восстановление пароля вебтестер</value>
+  </data>
+  <data name="Adress" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="DateCreated" xml:space="preserve">
+    <value>Дата создания</value>
+  </data>
+  <data name="MyCabinet" xml:space="preserve">
+    <value>Мой кабинет</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Владелец</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Платежи</value>
+  </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Фото</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Цена</value>
+  </data>
+  <data name="Square" xml:space="preserve">
+    <value>Площадь</value>
+  </data>
+  <data name="UserFunc" xml:space="preserve">
+    <value>Функционал пользователя</value>
+  </data>
+</root>

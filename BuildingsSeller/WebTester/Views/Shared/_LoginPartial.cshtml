@@ -1,0 +1,39 @@
+﻿@using System.Globalization
+@using System.Threading
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink(@Langs.Lang.HeaderPartialWelcome + " " + User.Identity.GetUserName() + "!", "Manage", "Account", null, new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">@Langs.Lang.HeaderPartialLogoff</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", null, new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", null, new { id = "loginLink" })</li>
+    </ul>
+}
+<ul >
+    @{
+        CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+        @currentCulture.Name
+        if (currentCulture.Name == "en-US")
+        {
+            <li>@Html.ActionLink("Russian", "ChangeCurrentCulture", "Lang", new { id = "1" }, null)</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("English", "ChangeCurrentCulture", "Lang", new { id = "0" }, null)</li>
+        }
+
+    }
+</ul>

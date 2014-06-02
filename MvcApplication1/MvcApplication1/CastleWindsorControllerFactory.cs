@@ -28,11 +28,11 @@ namespace BuildSeller
     /// 
     public class WindsorCompositionRoot : IHttpControllerActivator
     {
-        private readonly IWindsorContainer _container;
+        private readonly IWindsorContainer container;
 
         public WindsorCompositionRoot(IWindsorContainer container)
         {
-            _container = container;
+            this.container = container;
         }
 
         public IHttpController Create(
@@ -41,11 +41,11 @@ namespace BuildSeller
             Type controllerType)
         {
             var controller =
-                (IHttpController)_container.Resolve(controllerType);
+                (IHttpController)container.Resolve(controllerType);
 
             request.RegisterForDispose(
                 new Release(
-                    () => _container.Release(controller)));
+                    () => container.Release(controller)));
 
             return controller;
         }

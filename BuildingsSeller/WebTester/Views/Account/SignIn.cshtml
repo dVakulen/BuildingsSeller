@@ -1,0 +1,25 @@
+﻿@model BuildSeller.Models.LoginViewModel
+@{
+    ViewBag.Title = "SignIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sign In</h2>
+<div class="explain">
+    <p>adds </p>
+</div>
+<div style="margin: auto; width: 600px;">
+    @using (Html.BeginForm())
+    {
+        @Html.EditorFor(o => o.Login)
+        @Html.EditorFor(o => o.Password)
+        @Html.EditorFor(o => o.RememberMe)
+        <div class="efield">
+            <div class="elabel">&nbsp;</div>
+            <input type='submit' value='log in' />
+        </div>
+    }
+    <br class="cbt" />
+    <br />
+    @Html.ValidationSummary(true)
+</div>

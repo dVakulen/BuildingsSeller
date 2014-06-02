@@ -1,0 +1,49 @@
+﻿@model BuildSeller.Models.StatModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@Html.Raw(@ViewBag.Message)</h3>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script src="../../Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
+@using (Html.BeginForm("GetStatistic", "Statistics", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.Label("Choose cat", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Cats", ViewBag.Cats as SelectList, new { @id = "catsList", @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Until, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Until)
+                @Html.ValidationMessageFor(model => model.Until)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ToTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ToTime)
+                @Html.ValidationMessageFor(model => model.ToTime)
+                
+ 
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="GetStat" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

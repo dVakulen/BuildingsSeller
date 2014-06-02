@@ -1,0 +1,18 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "CreateMessage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateMessage</h2>
+@using (Html.BeginForm("SendMessage", "GlobalMessenger", new { id = Model }, FormMethod.Post))
+{
+    <p>
+        Add title: @Html.TextBox("Title", string.Empty)
+    
+    
+        Write message:  @Html.TextArea("Message", string.Empty)
+        <input type="submit" value="Send" />
+    </p>
+}

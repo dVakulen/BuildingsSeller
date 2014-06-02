@@ -63,7 +63,37 @@
         #endregion
 
         #region Public Methods and Operators
+        public void SendPost(RankTableEntry gizmo)
+        {
 
+
+
+            return; //Nah!
+            var serializedString = JsonConvert.SerializeObject(gizmo);
+            //   client1.UploadStringAsync(d, serializedString);
+            //  SendPost(d, serializedString);
+            string quote = serializedString;
+            //S1: Generate the JSON Serializer Data
+            DataContractJsonSerializer jsonData =
+                new DataContractJsonSerializer(typeof(RankTableEntry));
+            MemoryStream memStream = new MemoryStream();
+            //S2 : Write data into Memory Stream
+            jsonData.WriteObject(memStream, quote);
+
+            //S3 : Read the bytes from Stream do that it can then beconverted to JSON String 
+            byte[] jsonDataToPost = memStream.ToArray();
+            memStream.Close();
+
+
+            string uri = "http://localhost:4232/api/values/";
+
+            //S4: Ehencode the stream into string format
+            var data1 = Encoding.UTF8.GetString(jsonDataToPost, 0, jsonDataToPost.Length);
+            //S5: Save Data in the QuoteMaster Table
+            WebClient webClientQuote = new WebClient();
+            webClientQuote.Headers["content-type"] = "application/json";
+            webClientQuote.UploadStringAsync(new Uri(uri), "POST", data1);
+        }
         private void OnTimerTick(object sender, EventArgs e)
         {
             secondsElapsed++;
@@ -213,34 +243,7 @@
 
             return moved;
         }
-        public void SendPost(RankTableEntry gizmo)
-        {
-
-            var serializedString = JsonConvert.SerializeObject(gizmo);
-            //   client1.UploadStringAsync(d, serializedString);
-            //  SendPost(d, serializedString);
-            string quote = serializedString;
-            //S1: Generate the JSON Serializer Data
-            DataContractJsonSerializer jsonData =
-                new DataContractJsonSerializer(typeof(RankTableEntry));
-            MemoryStream memStream = new MemoryStream();
-            //S2 : Write data into Memory Stream
-            jsonData.WriteObject(memStream, quote);
-
-            //S3 : Read the bytes from Stream do that it can then beconverted to JSON String 
-            byte[] jsonDataToPost = memStream.ToArray();
-            memStream.Close();
-
-
-            string uri = "http://localhost:4232/api/values/";
-
-            //S4: Ehencode the stream into string format
-            var data1 = Encoding.UTF8.GetString(jsonDataToPost, 0, jsonDataToPost.Length);
-            //S5: Save Data in the QuoteMaster Table
-            WebClient webClientQuote = new WebClient();
-            webClientQuote.Headers["content-type"] = "application/json";
-            webClientQuote.UploadStringAsync(new Uri(uri), "POST", data1);
-        }
+       
         private void congratulateWinner()
         {
             MessageBox.Show("Winner, elapsed time = " + secondsElapsed);

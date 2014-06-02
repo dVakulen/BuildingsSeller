@@ -1,0 +1,36 @@
+﻿@using System.Diagnostics
+
+@{
+    ViewBag.Title = "DeleteRoleForUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Delete A User from a Role</h3>
+
+<h2>@Html.Raw(@ViewBag.Message)</h2>
+@using (Html.BeginForm("DeleteRoleForUser", "UserManager"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Username : @try
+                   {
+                       @Html.DropDownList("UsersName", ViewBag.UsersNames as SelectList, new { @id = "userNamesList" })
+                   }
+                   catch (Exception ex)
+                   {
+                       Debug.WriteLine(ex.ToString());
+                   }
+
+        Role Name: @try
+                   {
+                       @Html.DropDownList("RoleName", ViewBag.Roles as SelectList)
+                   }
+                   catch (Exception ex)
+                   {
+                       Debug.WriteLine(ex.ToString());
+                   }
+    </p>
+
+    <input type="submit" value="Delete this user from Role" />
+}

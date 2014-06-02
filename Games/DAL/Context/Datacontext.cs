@@ -8,6 +8,8 @@ namespace DragDropPhoneApp.Context
 {
     using System.Data.Linq;
 
+    using DragDropPhoneApp.Model;
+
     public class GameContext : DataContext
     {
         private const string ConnectionString = "DataSource=isostore:/Test.sdf";

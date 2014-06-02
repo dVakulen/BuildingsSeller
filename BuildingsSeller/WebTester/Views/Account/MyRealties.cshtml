@@ -1,0 +1,101 @@
+﻿@using BuildSeller.Core
+@model IEnumerable<BuildSeller.Core.Model.Realty>
+
+@{
+    ViewBag.Title = Langs.Lang.Realty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<h2>@Html.Raw(@ViewBag.Message)</h2>
+<p>
+    @Html.ActionLink(Langs.Lang.Create, "Create", "Realty")
+</p>
+
+<script>
+    document.getElementById('saas').style.visibility = 'hidden';
+    var form = document.getElementById("formid");
+
+    document.getElementById("Link1").addEventListener("click", function() {
+        form.submit();
+    });
+</script>
+<table class="table table-hover" >
+    <tr>
+        <th>
+            @Html.DisplayName(Langs.Lang.Name) 
+        </th>
+        <th>
+          
+            @Html.DisplayName(Langs.Lang.Category)
+        </th>
+        <th>
+            @Html.DisplayName(Langs.Lang.Adress)
+        </th>
+        <th>
+            @Html.DisplayName(Langs.Lang.Owner)
+        </th>
+        <th>
+            @Html.DisplayName(Langs.Lang.Price)
+        </th>
+        <th>
+            @Html.DisplayName(Langs.Lang.Square)
+        </th>
+        <th>
+            @Html.DisplayName(Langs.Lang.Picture)
+        </th>
+        <th>
+            @Html.DisplayName(Langs.Lang.DateCreated)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Named)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildCategory.CatName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.ActionLink(item.Owner.Login, "Details", "UserManager", new { id = item.Owner.Id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Square)
+            </td>
+            <td>
+                @if (item.Picture != null)
+                {
+                    string base64 = Convert.ToBase64String(item.Picture);
+                    string imgSrc = string.Format("data:image/jpg;base64,{0} ", base64);
+
+                    <img src="@imgSrc" width="200" height="115"   />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+            
+                @Html.ActionLink(Langs.Lang.Edit, "Edit","Realty",new { id = item.Id },null) |
+          
+                @Html.ActionLink(Langs.Lang.Details, "Details","Realty", new { id = item.Id },null) |@if (RolesManager.IsUserInRole(User.Identity.Name, UsersRoles.Administrator))
+                {
+                    @Html.ActionLink(Langs.Lang.Delete, "Delete","Realty", new { id = item.Id },null)
+                }
+                
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br/>

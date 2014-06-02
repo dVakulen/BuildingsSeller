@@ -1,0 +1,211 @@
+﻿@using BuildSeller.Core
+@model BuildSeller.Core.Model.Realty
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+   
+</style>
+
+
+
+
+
+<script type="text/javascript"
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js">
+
+
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('li img').on('click', function () {
+            var src = $(this).attr('src');
+            var img = '<img src="' + src + '" class="img-responsive"/>';
+
+            var index = $(this).parent('li').index();
+
+            var html = '';
+            html += img;
+            html += '<div style="height:25px;clear:both;display:block;">';
+            //   html += '<a class="controls next" href="' + (index + 2) + '">next &raquo;</a>';
+            //   html += '<a class="controls previous" href="' + (index) + '">&laquo; prev</a>';
+            html += '</div>';
+
+            $('#myModal').modal();
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myModal .modal-body').html(html);
+                $('a.controls').trigger('click');
+            });
+            $('#myModal').on('hidden.bs.modal', function () {
+                $('#myModal .modal-body').html('');
+            });
+
+
+        });
+        var IsMouseOnImg = false;
+        $(function () {
+
+            var myTimeout;
+            $('.imgthumb').mouseenter(function () {
+                myTimeout = setTimeout(function () {
+                    $('.imgthumb').animate({
+                        height: '100%',
+                        width: '100%',
+                    });
+
+                }, 500);
+            }).mouseleave(function () {
+                $('.imgthumb').animate({
+                    height: '25%',
+                    width: '25%',
+                });
+                clearTimeout(myTimeout);
+            });
+         
+        });
+
+    });
+
+
+</script>
+
+<h2>Details</h2>
+
+<div>
+    <h4>Realty</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Named)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Named)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            @if (Model.Picture != null)
+            {
+                string base64 = Convert.ToBase64String(Model.Picture);
+                string imgSrc = string.Format("data:image/jpg;base64,{0} ", base64);
+
+                <img src="@imgSrc" width="250" height="155" class="imgthumb "  />
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        @if (User != null && RolesManager.IsUserPaid(User.Identity.Name))
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Owner)
+            </dt>
+
+            <dd>Email:    @Html.DisplayFor(model => model.Owner.Email)
+                <br />
+                Phone :   @Html.DisplayFor(model => model.Owner.Phone)
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildCategory.CatName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Square)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Square)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+        <dd>
+            <div class="row">
+
+                <div class="container">
+                    <div class="row" style="border-bottom: 1px dashed #ccc; margin-bottom: 40px; padding: 0 0 20px 0; text-align: center;">
+                        <h3 style="font-family: arial; font-size: 30px; font-weight: bold;">
+                            <p>
+                                See more photos<p />
+                        </h3>
+                    </div>
+
+                    <ul class="row">
+                        @foreach (var img in Model.Photos)
+                        {
+                            <li class="col-sm-3 col-xs-4">  <!-- /col-lg-2 col-md-2  --> 
+                                @if (img != null)
+                                {
+                                    string base64 = Convert.ToBase64String(img.Content);
+                                    string imgSrc = string.Format("data:image/jpg;base64,{0} ", base64);
+
+                                    <img src="@imgSrc" class=" img-responsive"  />
+                                }
+                            </li>
+                            <br />
+                        }
+                    </ul>
+                </div>
+                <!-- /container -->
+
+            </div>
+        </dd>
+    </dl>
+
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<p>
+    @Html.ActionLink("Search for alike realties", "SearchSameRealties", new { id = Model.Id }) |
+    @Html.ActionLink(Langs.Lang.BackToList, "Index")
+
+</p>

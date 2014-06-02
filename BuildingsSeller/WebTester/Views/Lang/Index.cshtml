@@ -1,0 +1,19 @@
+﻿@using Langs
+@Lang.Language:<a id='clang' href="">@ViewBag.lang</a>
+<script type='text/javascript'>
+    $(function() {
+        var isopen = false;
+        $('#clang').click(function(e) {
+            e.preventDefault();
+            if (isopen) {
+                $('#clang').next().remove();
+                isopen = false;
+                return false;
+            }
+            $.post('@Url.Action("langs", "Lang")', function(r) {
+                $('#clang').after(r);
+                isopen = true;
+            });
+        });
+    });
+</script>

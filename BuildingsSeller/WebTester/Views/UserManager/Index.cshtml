@@ -1,0 +1,101 @@
+﻿@using PagedList.Mvc
+@using BuildSeller.Core.Model
+@model PagedList.IPagedList<BuildSeller.Core.Model.Users>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<h2>@Html.Raw(@ViewBag.Message)</h2>
+<p>
+    @Html.ActionLink("Create New", "Create") | 
+    
+    @Html.ActionLink("Manage roles", "ManageUsers")
+</p>
+
+@using (Html.BeginForm("Index", "UserManager", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table table-hover">
+    <tr>
+        <th>Login
+        </th>
+        <th>FirstName
+        </th>
+        <th>
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>Patronymic
+        </th>
+        <th>Email
+        </th>
+        <th>Activated
+        </th>
+        <td>IsBanned
+        </td>
+        <th>
+            @Html.ActionLink("Created", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (Users item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patronymic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Banned)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegisterDateTime)
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i>Пользователь</a>
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</li>
+
+                        <li>@Html.ActionLink("Details", "Details", new { id = item.Id })</li>
+
+                        <li>
+                            @Html.ActionLink("Ban/Unban", "Ban", new { id = item.Id })</li>
+
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", 
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encryption.cs" />
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Interface\ICrudService.cs" />
     <Compile Include="Interface\IRepo.cs" />
@@ -47,7 +48,6 @@
     <Compile Include="Model\Users.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NewFolder1\" />
     <Folder Include="Repository\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

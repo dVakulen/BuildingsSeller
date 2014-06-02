@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BuildSeller.Core.Model.Realty>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>BuildSeller based on ASP.NET</h1>
+    <p class="lead">BuildSeller is a great site, where you can trade with other people.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            BuildSeller  gives you a way to buy and sell realties
+        </p>
+        <h3>New items in assortiment</h3>
+        <ul class="media-list">
+
+            @foreach (var item in Model)
+            {
+                <li class="media">
+                    <a class="pull-left" href="@Url.Action("Details", "Realty", new { id = item.Id }, null)" class="elements" >
+                        @if (item.Picture != null)
+                        {
+                            string base64 = Convert.ToBase64String(item.Picture);
+                            string imgSrc = string.Format("data:image/jpg;base64,{0} ", base64);
+
+                            <img src="@imgSrc"  class="media-object" width="100" height="64"  />
+                        }
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">@Html.DisplayFor(modelitem => item.Named)</h4>
+                        <h4>@Html.DisplayFor(modelitem => item.Description) </h4>
+                    </div>
+                    <h4>Owner reputation
+                        <span class="badge">@item.Owner.Likes/@item.Owner.Dislikes</span></h4>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h2>Leave your orders</h2>
+        <p>And mail will be sended to you when new building  added to list </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Categories total statistics</h2>
+        @if (ViewBag.Statistic != null)
+        {
+            var stat = ViewBag.Statistic as IEnumerable<string>;
+            <ul>
+                @foreach (string statString in stat)
+                {
+                    <li>@statString</li>
+                }
+            </ul>
+        }
+
+    </div>
+</div>

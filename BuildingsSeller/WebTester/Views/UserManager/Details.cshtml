@@ -1,0 +1,152 @@
+﻿@model BuildSeller.Core.Model.Users
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Users</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Activated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaidUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaidUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Banned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Banned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaidSeller)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaidSeller)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Login)
+        </dd>
+
+      
+        <dt>
+            @Html.DisplayNameFor(model => model.Patronymic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patronymic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Likes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Likes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dislikes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dislikes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterDateTime)
+        </dd>
+        <dd>
+            Отзывы
+        </dd>
+        <dd>
+            <span style="white-space: pre-line">@Model.Comments</span>
+        </dd>
+        <dd>
+            
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" onclick=" location.href = '@Url.Action("Like", "UserManager", new { id = Model.Id })    ' ">Like</button>
+                <button type="button" class="btn btn-default" onclick=" location.href = '@Url.Action("DisLike", "UserManager", new { id = Model.Id })    ' ">Dislike</button>
+
+            </div>
+        </dd>
+    </dl>
+</div>
+@using (Html.BeginForm("AddComment", "UserManager", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id)
+    <p>
+        Add comment: @Html.TextBox("Comment", string.Empty)
+        <input type="submit" value="Add" />
+    </p>
+}
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

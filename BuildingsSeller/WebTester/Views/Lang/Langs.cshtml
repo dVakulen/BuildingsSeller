@@ -1,0 +1,15 @@
+﻿@model IDictionary<string, string>
+<ul id='langs' class='ui-widget-content'>
+    @foreach (var o in Model)
+    {
+        <li data-val='@o.Key'>@o.Value</li>
+    } 
+</ul>
+<script type='text/javascript'>
+    $(function() {
+        $('#langs li').click(function() {
+            $.post('@Url.Action("change", "Lang")', { l: $(this).data('val') }, function() { location.reload(true); });
+
+        });
+    });
+</script>

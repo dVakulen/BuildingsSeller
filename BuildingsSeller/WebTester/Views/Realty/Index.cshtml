@@ -1,0 +1,198 @@
+﻿@using BuildSeller.Core
+@using PagedList.Mvc
+@model PagedList.IPagedList<BuildSeller.Core.Model.Realty>
+
+@{
+    ViewBag.Title = Langs.Lang.Realty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cats = ViewBag.Cats as SelectList;
+}
+
+<h2>@Langs.Lang.Realty list</h2>
+<h2>@Html.Raw(@ViewBag.Message)</h2>
+@if (User != null && RolesManager.IsUserInRole(User.Identity.Name, UsersRoles.Seller))
+{
+    <p>
+
+        <button class="btn btn-default" type="button">@Html.ActionLink(Langs.Lang.Create, "Create")</button>
+
+    </p>
+}
+<style>
+    .realt {
+        cursor: pointer;
+    }
+</style>
+<script src="../../Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        //$(".btn-group").removeClass("realt");
+        //     $(".btn-group").removeClass();
+        if (!('@ViewBag.CurrCat' == 'All')) {
+            $("select#catsList").val('@ViewBag.CurrCat');
+        }
+        $(function () {
+            $('#catsList').change(function () {
+                var url = '@Url.Action("Index", "Realty", new { category = "__cat__" })';
+                window.location.href = url.replace('__cat__', $("#catsList option:selected").text());
+            });
+        });
+        $(".realt").click(function (event) {
+            var target = $(event.target);
+            var id = $(this).attr('id');
+            if (!target.is(".btn") && !target.is("a")) {
+                var url = '@Url.Action("Details", "Realty", new { id = "__id__" })';
+                window.location.href = url.replace('__id__', id);
+            }
+        });
+        var b = false;
+        if ('@ViewBag.Rent' == 'True') {
+            $(".nav-pills li").toggleClass("active");
+        }
+
+        document.getElementById('saas').style.visibility = 'hidden';
+        var form = document.getElementById("formid");
+
+        document.getElementById("Link1").addEventListener("click", function () {
+            form.submit();
+        });
+    });
+
+</script>
+
+<div class="row">
+    <div class="col-md-8">
+        @Html.Hidden("RedirectTo", Url.Action("Index", "Realty"))
+        @using (Html.BeginForm("Index", "Realty", FormMethod.Get, new { @id = "formid" }))
+        {
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" id="Refresh" data-toggle="dropdown">Action <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a id="Link1" href="#">Search by name</a></li>
+                            </ul>
+                        </div>
+                        <!-- /btn-group -->
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Find" })
+                    </div>
+                    <!-- /input-group -->
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+            <!-- /.row -->
+            <input type="submit" value="Search" id="saas" />
+        }
+    </div>
+    <div class="col-md-2">
+        @Html.DropDownList("Cats", ViewBag.Cats as SelectList, new { @id = "catsList", @class = "form-control" })
+    </div>
+    <div class="col-md-2">
+        <ul class="nav nav-pills">
+            <li class="active">@Html.ActionLink("Rent", "Index", new { forRent = false })</li>
+            <li>@Html.ActionLink("Sale", "Index", new { forRent = true })</li>
+
+        </ul>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayName(Langs.Lang.Name)
+        </th>
+        <th>
+
+            @Html.ActionLink(Langs.Lang.Category, "Index", new { sortOrder = ViewBag.CatSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.DisplayName(Langs.Lang.Adress)
+        </th>
+        @if (User != null && RolesManager.IsUserPaid(User.Identity.Name))
+        {
+            <th>
+                @Html.DisplayName(Langs.Lang.Owner)
+            </th>
+        }
+        <th>
+            @Html.DisplayName(Langs.Lang.Price)
+        </th>
+        <th>
+            @Html.DisplayName(Langs.Lang.Square)
+        </th>
+        <th>
+            @Html.DisplayName(Langs.Lang.Picture)
+        </th>
+        <th>
+            @Html.ActionLink(Langs.Lang.DateCreated, "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="realt" id ="@item.Id">
+            <td>
+                @Html.DisplayFor(modelItem => item.Named)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildCategory.CatName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            @if (User != null && RolesManager.IsUserPaid(User.Identity.Name))
+            {
+                <td>
+                    @Html.ActionLink(item.Owner.Login, "Details", "UserManager", new { id = item.Owner.Id }, null)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Square)
+            </td>
+            <td>
+                @if (item.Picture != null)
+                {
+                    string base64 = Convert.ToBase64String(item.Picture);
+                    string imgSrc = string.Format("data:image/jpg;base64,{0} ", base64);
+
+                    <img src="@imgSrc" width="200" height="115"   />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i>@Langs.Lang.Realty</a>
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+
+                        <li>@Html.ActionLink(Langs.Lang.Details, "Details", new { id = item.Id })</li>
+                        <li>@Html.ActionLink("Search for alike", "SearchSameRealties", new { id = item.Id })</li>
+
+                        @if (RolesManager.IsUserInRole(User.Identity.Name, UsersRoles.Administrator))
+                        {
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+                        }
+                    </ul>
+                </div>
+            </td>
+
+
+        </tr>
+    }
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

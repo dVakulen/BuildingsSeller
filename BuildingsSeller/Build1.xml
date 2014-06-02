@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+    ToolsVersion="4.0"
+    DefaultTargets="Build">
+
+    <PropertyGroup>
+        <OutputDir>D:\WebTestBuild</OutputDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectToBuild Include="WebTester.sln">
+            <Properties>OutputPath=$(OutputDir);Configuration=Release; Platform=Any CPU </Properties>
+        </ProjectToBuild>
+		
+		
+<SourceFilesExclude Include="**\.hg\**" />
+<SourceFilesExclude Include="build**" />
+<SourceFilesExclude Include="**\.*" />
+<SourceFilesExclude Include="**\bin\**" />
+<SourceFilesExclude Include="**\obj\**" />
+<SourceFilesExclude Include="**\Test\**" />
+<SourceFilesExclude Include="**\TestResults\**" />
+<SourceFilesExclude Include="**\*.user" />
+<SourceFilesExclude Include="**\*.suo" />
+<SourceFilesExclude Include="**\*.cache" />
+<SourceFilesExclude Include="**\*.vsmdi" />
+<SourceFilesExclude Include="**\*.testsettings" />
+    </ItemGroup>
+
+<ItemGroup>
+<SourceFiles Include="**\*.*" Exclude="@(SourceFilesExclude)" />
+</ItemGroup>
+
+    <Target Name="Build">
+	
+        <MSBuild Projects="@(ProjectToBuild)"/>
+		 <Zip SourceFolder="$(OutputDir)\_PublishedWebsites" OutputFileName="D:\WebTesterSiteMSBuild.zip" />
+		 <RemoveDir Directories="$(OutputDir)" />
+    </Target>
+	
+  
+<Target Name="Zip">
+<ItemGroup>
+<BinDirectoryFiles Include="$(BuildOutputDir)\bin\**" />
+</ItemGroup>
+<Zip Files="@(BinDirectoryFiles)" WorkingDirectory="$(BuildOutputDir)\bin\"
+ZipFileName=".\$(BuildOutputDir)\Binaries.zip" />
+</Target>
+  <UsingTask TaskName="Zip" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <SourceFolder ParameterType="System.String" Required="true"/>
+      <OutputFileName ParameterType="System.String" Required="true" />
+      <NoBackup ParameterType="System.Boolean" Required="false" />      
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Core" />
+      <Reference Include="Microsoft.CSharp" />
+      <Reference Include="System.IO.Compression" />
+      <Reference Include="System.IO.Compression.FileSystem" />
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Net" />
+      <Using Namespace="System.Linq" />      
+      <Using Namespace="System.Reflection" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Using Namespace="System.IO.Compression" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+                try {
+                    SourceFolder = Path.GetFullPath(SourceFolder);
+                    OutputFileName = Path.GetFullPath(OutputFileName);
+                      
+                    Log.LogMessage("Package zip... (" + OutputFileName + " )");
+                    
+                    // Prepare output temp file
+                    var tmpFile = Path.ChangeExtension(OutputFileName, ".zip.tmp");
+                    File.Delete(tmpFile);
+ 
+                    // Zip folder
+                    ZipFile.CreateFromDirectory(SourceFolder, tmpFile);
+ 
+                    // Replace output file
+                    File.Delete(OutputFileName);
+                    File.Move(tmpFile, OutputFileName);
+ 
+                    return true;
+                }
+                catch (Exception ex) {
+                    Log.LogErrorFromException(ex);
+                    return false;
+                }
+            ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+</Project>

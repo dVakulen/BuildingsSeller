@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<build>
+  <major>1</major>
+  <minor>0</minor>
+  <build>34</build>
+  <release>0</release>
+  <companyname>Nix</companyname>
+  <copyright>Copyright 2014</copyright>
+</build>

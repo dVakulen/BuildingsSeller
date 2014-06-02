@@ -15,6 +15,8 @@ namespace BuildSeller.Service
 
     using BuildSeller.Infra;
 
+    using Castle.MicroKernel.Registration;
+
     using Core.Interface;
     using Core.Model;
 
@@ -39,10 +41,15 @@ namespace BuildSeller.Service
         /// </summary>
         public static void Initialize()
         {
+             
             WindsorRegistr.Register(typeof(IDbContextFactory), typeof(DbContextFactory));
             WindsorRegistr.Register(typeof(IRepo<Users>), typeof(Repo<Users>));
+            WindsorRegistr.Register(typeof(IRepo<Message>), typeof(Repo<Message>));
+           // WindsorRegistr.RegisterAllFromAssemblies(AllTypes.FromAssembly(typeof(Users).Assembly).Pick().WithService.FirstInterface());
+            //IoC.Container.Register(AllTypes.FromAssembly(typeof(Repo<>).Assembly).Pick().WithService.FirstInterface());
 
-            WindsorRegistr.Register(typeof(ICrudService<Users>), typeof(CrudService<Users>));
+            WindsorRegistr.Register(typeof(ICrudService<Message>), typeof(CrudService<Message>));
+          WindsorRegistr.Register(typeof(ICrudService<Users>), typeof(CrudService<Users>));
             //  WindsorRegistr.Register(typeof(IDbContextFactory<>), typeof(DbContextFactory));
 
         /*    WindsorRegistr.Register(typeof(IDbContextFactory), typeof(DbContextFactory));

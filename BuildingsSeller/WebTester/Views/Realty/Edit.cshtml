@@ -1,0 +1,163 @@
+﻿@model BuildSeller.Core.Model.Realty
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js">
+
+
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.caption').click(function() {
+            window.location.href = "@Url.Action("Index", "Realty")";
+        });
+    });
+</script>
+<style>
+    .form-actions { margin-left: 70px; }
+</style>
+<h2>Edit</h2>
+<div class="row">
+    <div class="col-md-4">
+       
+     
+        <div class="form-group">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Realty</h4>
+                    <hr />
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Id)
+
+                    @Html.HiddenFor(model => model.Picture)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Named, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Named)
+                            @Html.ValidationMessageFor(model => model.Named)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Price)
+                            @Html.ValidationMessageFor(model => model.Price)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Square, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Square)
+                            @Html.ValidationMessageFor(model => model.Square)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Address)
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Descr", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Description)
+                            @Html.ValidationMessageFor(model => model.Description)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("IsRent", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.IsForRent)
+                            @Html.ValidationMessageFor(model => model.IsForRent)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Created, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Created)
+                            @Html.ValidationMessageFor(model => model.Created)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsSold, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.IsSold)
+                            @Html.ValidationMessageFor(model => model.IsSold)
+                        </div>
+                    </div>
+                    <div class="form-actions ">
+                        <button type="submit" class="btn btn-primary btn-default">Сохранить изменения</button>
+                        <button type="button" class="btn caption">Отмена</button>
+                        <br/>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div>
+
+            <dd>
+                @foreach (var img in Model.Photos)
+                {
+                    <li>
+                        @if (img != null)
+                        {
+                            string base64 = Convert.ToBase64String(img.Content);
+                            string imgSrc = string.Format("data:image/jpg;base64,{0} ", base64);
+
+                            <img src="@imgSrc" width="250" height="155" class="imgthumb"  />
+                        }
+                        @Html.ActionLink(Langs.Lang.Delete, "DeletePhoto", new { id = img.Id, realId = Model.Id })
+
+                    </li>
+                    <br />
+                }
+            </dd>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+    
+        <div>
+            <h2>Add photos of your realty</h2>
+        </div>
+        <div>
+            @using (Html.BeginForm("AddImagesToRealty", "Realty", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <ul>
+                    <li>
+                        <input type="file" name="files" id="files" /></li>
+                    <br />
+
+
+                    <li>
+                        <input type="file" name="files" id="files1" /></li>
+                    <br />
+                    <li>
+               
+                        <button type="submit" class="btn btn-primary btn-default">Загрузить фото</button></li>
+
+                </ul>
+            }
+        </div>
+           
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

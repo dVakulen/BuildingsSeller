@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>@Html.Raw(@ViewBag.Message)</h3>
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        Pay <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li> @Html.ActionLink("Pay for being user", "UserPayment")</li>
+        <li class="divider"></li>
+        <li> @Html.ActionLink("Pay for being seller", "SellerPayment")</li>
+    </ul>
+</div>

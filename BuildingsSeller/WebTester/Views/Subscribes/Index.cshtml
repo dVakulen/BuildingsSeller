@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BuildSeller.Core.Model.BuildCategories>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<h2>@Html.Raw(@ViewBag.Message)</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CatName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CatName)
+            </td>
+            <td>
+                @Html.ActionLink(@Langs.Lang.Subscribe, "Subscribe", new { id = item.Id }) 
+            </td>
+        </tr>
+    }
+
+</table>

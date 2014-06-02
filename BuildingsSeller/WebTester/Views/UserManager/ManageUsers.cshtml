@@ -1,0 +1,99 @@
+﻿@using System.Diagnostics
+@{
+    ViewBag.Title = "ManageUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#EnterprisePull').hide();
+
+        $(function() {
+            $('#thickboxButton').click(function() {
+                $('#thickboxId').click();
+            });
+        });
+        $(function() {
+            $('#userNamesList').change(function() {
+                // alert("asd");
+                $("input[id=EnterprisePull]").click();
+                //    $('form#myForm').submit();
+            });
+        });
+        //  $(".userForm").hover(function () {
+        //   $("#usName").val($("#userNamesList option:selected").text());
+        // });
+    });
+</script>
+
+<div class="spacerBody">
+    <p>&nbsp;</p>
+    <h2>@Html.Raw(@ViewBag.Message)</h2>
+    <p>
+        @Html.ActionLink("Show users list", "Index")|
+        @Html.ActionLink("Create New user", "Create")
+    </p>
+    <h2>Role Add to User</h2>
+
+    @using (Html.BeginForm("RoleAddToUser", "UserManager", null, FormMethod.Post, new { @class = "userForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div class="message-success">@ViewBag.ResultMessage</div>
+        <p>
+            Username :
+            @try
+            {
+                @Html.DropDownList("UsersName", ViewBag.UsersNames as SelectList, new { @id = "userNamesList" })
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            Role Name:
+            @try
+            {
+                @Html.DropDownList("RoleName", ViewBag.Roles as SelectList, new { @class = "rolesList" })
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+        </p>
+        <input type="submit" id="EnterprisePush" name="btnSubmit" value="AddUserToSelectedRole" />
+        <input type="submit" id="EnterprisePull" name="btnSubmit" value="Get" />
+    }
+
+    <div class="hr"></div>
+
+    @if (ViewBag.RolesForThisUser != null)
+    {
+        <text>
+            <h3>Roles for this user </h3>
+
+            <table class="table">
+                <tr>
+                    <th>Role description
+                    </th>
+                    <th>Delete user from this role
+                    </th>
+                </tr>
+                <tr>
+
+                    @foreach (string s in ViewBag.RolesForThisUser)
+                    {
+                        <tr>
+                            <td>
+                                <li>@s </li>
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "DeleteRoleForUser", new { usersName = (ViewBag.UsersNames as SelectList).First().Text, roleName = s })
+                            </td>
+                        </tr>
+                    }
+                </tr>
+            </table>
+        </text>
+    }
+</div>

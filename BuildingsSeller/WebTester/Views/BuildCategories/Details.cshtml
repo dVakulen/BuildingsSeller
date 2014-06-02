@@ -1,0 +1,26 @@
+﻿@model BuildSeller.Core.Model.BuildCategories
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BuildCategories</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CatName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CatName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(@Langs.Lang.BackToList, "Index")
+</p>

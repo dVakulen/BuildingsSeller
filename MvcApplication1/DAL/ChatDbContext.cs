@@ -27,6 +27,7 @@ namespace DAL
         /// </param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
