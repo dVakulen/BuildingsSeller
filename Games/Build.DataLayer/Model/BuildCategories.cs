@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace BuildSeller.Core.Model
 {
+    using Build.DataLayer.Model;
 
     public class BuildCategories : Entity
     {

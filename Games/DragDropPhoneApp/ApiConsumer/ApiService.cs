@@ -14,6 +14,10 @@ namespace DragDropPhoneApp.ApiConsumer
     using System.Windows.Navigation;
     using System.Windows.Threading;
 
+    using Build.DataLayer.Model;
+
+    using BuildSeller.Core.Model;
+
     using DragDropPhoneApp.Model;
     using DragDropPhoneApp.ViewModel;
 
@@ -33,25 +37,25 @@ namespace DragDropPhoneApp.ApiConsumer
         {
             try
             {
-                Thread.Sleep(1000);
+             //   Thread.Sleep(1000);
                 HttpWebResponse response = (result.AsyncState as HttpWebRequest).EndGetResponse(result) as HttpWebResponse;
-  Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    MessageBox.Show("aa");
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                              {
+                               //   MessageBox.Show("aa");
 
-                    if (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext is MainViewModel)
-                    (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as MainViewModel).IsLoading =
-                        false;
-                    ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri("/Menu.xaml", UriKind.Relative));
-                }); 
+                                  if (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext is MainViewModel)
+                                      (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as MainViewModel).IsLoading =
+                                          false;
+                                  ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri("/RealtyList.xaml", UriKind.Relative));
+                              });
                 var z = response.Headers;
                 var b = z;
             }
             catch (WebException)
             {
-                
+
             }
-          
+
         }
 
         public static void Login(string login, string pass)
@@ -63,31 +67,31 @@ namespace DragDropPhoneApp.ApiConsumer
             HttpWebRequest myReq =
 (HttpWebRequest)WebRequest.Create(uri.OriginalString + string.Format("?login={0}&pass={1}", login, pass));
 
-  //       Uri uri = new Uri(http://host.ru/forum/cont/add.php?parm=p);
-HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(uri);
+            //       Uri uri = new Uri(http://host.ru/forum/cont/add.php?parm=p);
+            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(uri);
             StartWebRequest(uri.OriginalString + string.Format("?login={0}&pass={1}", login, pass));
             object s = new object();
-          //  IAsyncResult httpWebResponse = httpWebRequest.BeginGetResponse(ar => { }, s);
-          //  while (!httpWebResponse.IsCompleted)
+            //  IAsyncResult httpWebResponse = httpWebRequest.BeginGetResponse(ar => { }, s);
+            //  while (!httpWebResponse.IsCompleted)
             {
-             //  Thread.Sleep(100);
+                //  Thread.Sleep(100);
             }
-           
-//StreamReader reader = new StreamReader(httpWebResponse.GetResponseStream());
+
+            //StreamReader reader = new StreamReader(httpWebResponse.GetResponseStream());
 
             return;
-            
+
             client.Headers["Accept"] = "application/json";
             client.DownloadStringAsync(new Uri(uri.OriginalString + string.Format("?login={0}&pass={1}", login, pass)));
             var z = client.ResponseHeaders;
             var b = z;
-           
+
             client.DownloadStringCompleted += (s1, e1) =>
             {
 
                 try
                 {
-                //    var data = JsonConvert.DeserializeObject<RankTableEntry[]>(e1.Result.ToString()).OrderBy(v => v.TimePassed);
+                    //    var data = JsonConvert.DeserializeObject<RankTableEntry[]>(e1.Result.ToString()).OrderBy(v => v.TimePassed);
 
                 }
                 catch (Exception)
@@ -98,21 +102,32 @@ HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(uri);
 
             };
         }
-        public static void Get()
+        public static void GetRealties()
         {
             WebClient client = new WebClient();
 
 
-
+          
 
 
             client.Headers["Accept"] = "application/json";
-            client.DownloadStringAsync(uri);
             client.DownloadStringCompleted += (s1, e1) =>
             {
                 try
                 {
-                    var data = JsonConvert.DeserializeObject<RankTableEntry[]>(e1.Result.ToString()).OrderBy(v => v.TimePassed);
+                    var realtys = JsonConvert.DeserializeObject<Realty[]>(e1.Result.ToString());
+                    if (realtys != null)
+                        App.DataContext.Realtys = realtys.ToList();
+                 // var realtys = JsonConvert.DeserializeObject<Realty>(e1.Result.ToString());
+                   // if (realtys != null) //App.DataContext.Realtys = realtys;
+                    Deployment.Current.Dispatcher.BeginInvoke(
+              () =>
+              {
+                  App.DataContext.IsLoading = false;
+
+              });
+
+                    //  var data = JsonConvert.DeserializeObject<RankTableEntry[]>(e1.Result.ToString()).OrderBy(v => v.TimePassed);
 
                 }
                 catch (Exception)
@@ -122,6 +137,8 @@ HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(uri);
                 }
 
             };
+            client.DownloadStringAsync(uri);
+
         }
         static Uri uri = new Uri("http://localhost:61251/api/buildapi/");
         public static void SendPost(T gizmo)

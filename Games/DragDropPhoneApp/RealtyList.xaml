@@ -12,24 +12,151 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.Resources>
 
+        <phone:JumpListItemBackgroundConverter x:Key="BackgroundConverter"/>
+        <phone:JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
+
+        <Style x:Key="JumpListStyle" TargetType="phone:LongListSelector">
+            <Setter Property="LayoutMode" Value="List" />
+            <Setter Property="Margin" Value="12,12,0,0"/>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border Background="{Binding Converter={StaticResource BackgroundConverter}}" 
+                                Width="470" 
+                                Height="70" 
+                                Margin="6">
+                            <TextBlock Text="{Binding Key}"
+                                       Foreground="{Binding Converter={StaticResource ForegroundConverter}}"                                       
+                                       FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                       FontSize="28"  
+                                       Padding="2"
+                                       VerticalAlignment="Bottom"/>
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <DataTemplate x:Key="GroupHeader">
+            <Border Background="Transparent">
+                <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="1"	
+                        Width="400" Height="90" 				 
+                        HorizontalAlignment="Left">
+                    <Button x:Name="AddNew" Content="+" Width="400" HorizontalAlignment="Left"  VerticalAlignment="Center" />
+
+
+                </Border>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ItemTemplate">
+            <StackPanel Height="100" Width="100" Margin="6,6">
+
+                <Image Width="100" Height="100" Stretch="UniformToFill"   Source="{Binding Image.Image}" />
+                <Image DataContext="{Binding PictureSource}" Width="40" Height="40" Stretch="UniformToFill"   Source="Assets/Tiles/FlipCycleTileSmall.png" Margin="40,-160,0,0" Canvas.ZIndex="1" RenderTransformOrigin="0.5,0.5"  >
+                    <!--, Converter={StaticResource BooleanToVisibilityConverter}-->
+                </Image>
+
+            </StackPanel>
+        </DataTemplate>
+
+
+
+
+
+
+
+        <Style x:Key="LongListSelectorJumpListStyle" TargetType="phone:LongListSelector">
+            <Setter Property="GridCellSize"  Value="111,111"/>
+            <Setter Property="LayoutMode" Value="Grid" />
+            <Setter Property="Margin" Value="18,12,0,0"/>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border Background="{Binding Converter={StaticResource BackgroundConverter}}" Margin="6" >
+                            <TextBlock Text="{Binding Key}" 
+                                           FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                           FontSize="48" Padding="11,0,0,0"
+                                           Foreground="{Binding Converter={StaticResource ForegroundConverter}}" VerticalAlignment="Bottom" />
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+      
+
+        <DataTemplate x:Key="LongListSelectorGroupHeaderTemmplate">
+            <Border Background="Transparent" Padding="5">
+                <Border Background="{StaticResource PhoneAccentBrush}" BorderBrush="{StaticResource PhoneAccentBrush}" BorderThickness="2"	
+                                       Width="62" Height="62" Margin="0,0,18,0"  				 
+                                        HorizontalAlignment="Left">
+                    <TextBlock Text="{Binding Key}" 
+                                               Foreground="{StaticResource PhoneForegroundBrush}" 
+                                               FontSize="48"
+                                               Padding="6"
+                                               FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"/>
+                </Border>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="LongListSelectorItemTemplate">
+            <StackPanel Orientation="Horizontal" Margin="4,4">
+                <Image DataContext="{Binding PictureSource}" Width="40" Height="40" Stretch="UniformToFill"   Source="Assets/Tiles/FlipCycleTileSmall.png" Margin="40,-160,0,0" Canvas.ZIndex="50" RenderTransformOrigin="0.5,0.5"  >
+                    <!--, Converter={StaticResource BooleanToVisibilityConverter}-->
+                </Image>
+                <TextBlock Text="{Binding Named}"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding Price}"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+            </StackPanel>
+        </DataTemplate>
+
+
+
+
+
+
+
+
+
+
+
+    </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <phone:Pivot Title="Images" Name="pivot" Margin="-3, 0, 0, 0" >
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+            <phone:PivotItem Header="Card Images">
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                <phone:LongListSelector Name="ImagesList" Margin="13,-30,0,0" 
+                                       
+                                        ItemsSource="{Binding GroupedCardsList}"
+                                        ItemTemplate="{StaticResource ItemTemplate}"                     
+                                        JumpListStyle="{StaticResource JumpListStyle}" 
+                                        IsGroupingEnabled="True"
+                                        LayoutMode="Grid" 
+                                        GridCellSize="100,100"/>
+            </phone:PivotItem>
+           
+            <phone:PivotItem Header="Card Names">
 
-        </Grid>
+                <phone:LongListSelector Name="BlogsLongListSelector"   
+                                           ItemsSource="{Binding GroupedRealtiesForSell}"
+                                           JumpListStyle="{StaticResource LongListSelectorJumpListStyle}"  
+                                        ListHeaderTemplate="{StaticResource GroupHeader}"
+                                        ListFooterTemplate="{StaticResource GroupHeader}"
+                                           GroupHeaderTemplate="{StaticResource LongListSelectorGroupHeaderTemmplate}"
+                                           ItemTemplate="{StaticResource LongListSelectorItemTemplate}"
+                                           HideEmptyGroups ="true"  IsGroupingEnabled ="true" LayoutMode="List" />
+            </phone:PivotItem>
+
+        </phone:Pivot>
     </Grid>
 
 </phone:PhoneApplicationPage>
