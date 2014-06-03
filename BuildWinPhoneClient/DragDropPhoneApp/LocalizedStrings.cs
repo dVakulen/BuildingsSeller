@@ -11,15 +11,17 @@
 */
 namespace sdkGlobalizationCS
 {
+    using DragDropPhoneApp.Resources;
+
     public class LocalizedStrings
     {
         public LocalizedStrings()
         {
         }
 
-  //      private static AppResources localizedResources = new sdkGlobalizationCS.AppResources();
+        private static AppResources localizedResources = new AppResources();
 
-     //   public sdkGlobalizationCS.AppResources LocalizedResources { get { return localizedResources; } }
+        public AppResources LocalizedResources { get { return localizedResources; } }
     }
 }
 

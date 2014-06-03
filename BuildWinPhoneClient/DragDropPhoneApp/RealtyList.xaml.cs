@@ -76,7 +76,6 @@
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             Indicator.setLoadingIndicator(this, "Loading realties");
-            this.dataContext.IsLoading = true;
         }
 
         private void RunWorker()
@@ -89,24 +88,13 @@
 
         private async void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            Deployment.Current.Dispatcher.BeginInvoke(
-                () =>
-                    {
-                        this.dataContext.IsLoading = true;
-
-                        // this.dataContext.Cards = DataService.GetCards().Result;
-                        // this.dataContext.photos = DataService.GetImages().Result;
-                    });
+         
             ApiService<Realty>.GetRealties();
         }
 
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Deployment.Current.Dispatcher.BeginInvoke(
-                () =>
-                    {
-                        // this.dataContext.IsLoading = false;
-                    });
+            
         }
 
         #endregion

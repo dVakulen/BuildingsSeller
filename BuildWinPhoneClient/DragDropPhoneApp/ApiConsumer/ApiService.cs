@@ -25,22 +25,26 @@
         where T : class
     {
         #region Static Fields
+        private static Uri uriRealtApi = new Uri( "http://localhost:61251/api/buildapi");
+        private static Uri uriUserApi = new Uri( "http://localhost:61251/api/userapi");
+      //  private static Uri uriRealtApi = new Uri(Build.Resources.AppResources.ApiUrl + "api/buildapi");
 
-        private static Uri uriRealtApi = new Uri("http://localhost:61251/api/buildapi");
-
-        private static Uri uriUserApi = new Uri("http://localhost:61251/api/userapi");
+     //   private static Uri uriUserApi = new Uri(Build.Resources.AppResources.ApiUrl + "api/userapi");
 
         private static int skip = 0;
 
-        private static int take = 10;
+        private static int take = 1;
         #endregion
 
         #region Public Methods and Operators
 
         public static void GetRealties()
         {
-            WebClient client = new WebClient();
           
+                Deployment.Current.Dispatcher.BeginInvoke(() => { App.DataContext.IsLoading = true; });
+           
+            WebClient client = new WebClient();
+
 
             client.Headers["Accept"] = "application/json";
             client.DownloadStringCompleted += RealtyDownloadedCallback;
@@ -72,8 +76,7 @@
                     App.DataContext.Realtys = newList;
                 }
                 GetRealties();
-               
-                Deployment.Current.Dispatcher.BeginInvoke(() => { App.DataContext.IsLoading = false; });
+
             }
             catch (Exception)
             {
