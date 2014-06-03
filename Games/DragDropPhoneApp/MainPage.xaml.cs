@@ -52,6 +52,7 @@
             this.InitializeComponent();
             dataContext = App.DataContext;
             DataContext = App.DataContext;
+           
         }
 
         #endregion

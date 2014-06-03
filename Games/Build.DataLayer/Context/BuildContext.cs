@@ -1,13 +1,18 @@
 ﻿#region Using statements
-using System.Data.Linq;
-using System.Diagnostics.CodeAnalysis;
+
+
+
 #endregion
 
-namespace TOS.WinPhone.DataLayer.Context
+namespace Build.DataLayer.Context
 {
+    using System.Data.Linq;
+
+    using Build.DataLayer.Model;
+
     public class BuildContext : DataContext
     {
-        private const string ConnectionString = "DataSource=isostore:/Test.sdf";
+        private const string ConnectionString = "DataSource=isostore:/Build.sdf";
 
         #region Constructor
         public BuildContext()
@@ -30,6 +35,7 @@ namespace TOS.WinPhone.DataLayer.Context
 
         #region Tables
 
+        public Table<CurrentUser> CurrentUser;
         #endregion
     }
 }

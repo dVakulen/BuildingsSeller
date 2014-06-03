@@ -23,23 +23,21 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="BuildSeller" Style="{StaticResource PhoneTextNormalStyle}"/>
-           
+
             <TextBlock Text="Register" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <Button Content="Submit" Tap="Button_Tap"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBox x:Name="Name" HorizontalAlignment="Left" Height="72" Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Login}" VerticalAlignment="Top" Width="411"/>
-            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,441,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.FirstName}" VerticalAlignment="Top" Width="411"/>
-            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,369,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.LastName}" VerticalAlignment="Top" Width="411"/>
-            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,287,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Password}" VerticalAlignment="Top" Width="411"/>
-            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,143,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Patronymic}" VerticalAlignment="Top" Width="411"/>
-
-            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,82,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Adress}" VerticalAlignment="Top" Width="411"/>
-
-
-            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,215,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Phone}" VerticalAlignment="Top" Width="411"/>
-            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,513,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Email}" VerticalAlignment="Top" Width="411"/>
+            <TextBox x:Name="Name" HorizontalAlignment="Left" Height="72" Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Login,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
+            <TextBox   HorizontalAlignment="Left" Height="72" Margin="10,441,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.FirstName,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
+            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,369,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.LastName,Mode=TwoWay}" VerticalAlignment="Top" Width="411"/>
+            <TextBox x:Name="Password"  HorizontalAlignment="Left" Height="72" Margin="10,287,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Password,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
+            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,143,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Patronymic,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
+            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,82,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Adress,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
+            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,513,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Email, Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
+            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,215,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Phone,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
         </Grid>
     </Grid>
 

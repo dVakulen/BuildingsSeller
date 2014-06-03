@@ -1,15 +1,20 @@
 ﻿#region Using statements
-using System;
-using System.Collections.Generic;
-using System.Data.Linq;
-using System.Linq;
-using System.Linq.Expressions;
-using TOS.WinPhone.DataLayer.Context;
-using TOS.WinPhone.DataLayer.Interfaces;
+
+
+
 #endregion
 
-namespace TOS.WinPhone.DataLayer.Repository
+namespace Build.DataLayer.Repository
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Linq;
+    using System.Linq;
+    using System.Linq.Expressions;
+
+    using Build.DataLayer.Context;
+    using Build.DataLayer.Interfaces;
+
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly BuildContext context;

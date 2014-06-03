@@ -137,8 +137,7 @@
                 <phone:LongListSelector Name="RealtyforSell"   
                                            ItemsSource="{Binding GroupedRealtiesForRent}"
                                            JumpListStyle="{StaticResource LongListSelectorJumpListStyle}"  
-                                        ListHeaderTemplate="{StaticResource GroupHeader}"
-                                        ListFooterTemplate="{StaticResource GroupHeader}"
+                                         ListFooterTemplate="{StaticResource GroupHeader}"
                                            GroupHeaderTemplate="{StaticResource LongListSelectorGroupHeaderTemmplate}"
                                            ItemTemplate="{StaticResource LongListSelectorItemTemplate}"
                                            HideEmptyGroups ="true"  SelectionChanged="BlogsLongListSelector_SelectionChanged"  IsGroupingEnabled ="true" LayoutMode="List" />
@@ -149,8 +148,7 @@
                 <phone:LongListSelector Name="BlogsLongListSelector"   
                                            ItemsSource="{Binding GroupedRealtiesForSell}"
                                            JumpListStyle="{StaticResource LongListSelectorJumpListStyle}"  
-                                        ListHeaderTemplate="{StaticResource GroupHeader}"
-                                        ListFooterTemplate="{StaticResource GroupHeader}"
+                                         ListFooterTemplate="{StaticResource GroupHeader}"
                                            GroupHeaderTemplate="{StaticResource LongListSelectorGroupHeaderTemmplate}"
                                            ItemTemplate="{StaticResource LongListSelectorItemTemplate}"
                                            HideEmptyGroups ="true"  IsGroupingEnabled ="true" LayoutMode="List" SelectionChanged="BlogsLongListSelector_SelectionChanged" />

@@ -22,7 +22,7 @@ namespace DragDropPhoneApp.ViewModel
     {
         #region Fields
 
-        public Users CurrentUser;
+        public Users CurrentUser { get; set; }
 
         public List<Realty> realtys;
 
@@ -35,7 +35,19 @@ namespace DragDropPhoneApp.ViewModel
         public MainViewModel()
         {
             this.Realtys = new List<Realty>();
-            this.CurrentUser = new Users();
+            this.CurrentUser = new Users
+                                   {
+                                       Login = "Login",
+                                       Password = "Pass",
+                                       Phone = "Phone",
+                                       Adress = "Address",
+                                       FirstName = "FirstName",
+                                       LastName = "LastName",
+                                       Email = "Emal@asd.ru",
+                                       Patronymic = "Patronymic",
+                                       
+                                       
+                                   };
         }
 
         #endregion

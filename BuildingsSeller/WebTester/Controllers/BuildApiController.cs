@@ -154,16 +154,16 @@ namespace BuildSeller.Controllers
         {
             return  realtyService.Where(c => c.Id == id).FirstOrDefault();
         }
-        public HttpResponseMessage Get(string login, string pass)
+        public IHttpActionResult Get(string login, string pass)
         {
             if(login.IsNullOrEmpty() || pass.IsNullOrEmpty())
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return NotFound();
             if (userService.Get(login, pass) != null)
             {
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Ok();
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return NotFound();
         }
         public HttpResponseMessage Post([FromBody]string value) //register
         {

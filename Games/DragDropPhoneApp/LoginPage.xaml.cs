@@ -41,8 +41,16 @@ namespace DragDropPhoneApp
 
         private void LoginBtn_Tap(object sender, GestureEventArgs e)
         {
-            this.dataContext.IsLoading = true;
-            ApiService<Users>.Login("asdsd", "Asdfvv");
+            
+            if (this.Login.Text != string.Empty && this.Password.Text != string.Empty)
+            {
+                this.dataContext.IsLoading = true;
+                ApiService<Users>.Login(this.Login.Text, this.Password.Text);
+            }
+            else
+            {
+                MessageBox.Show("Username and password fields cannot be empty");
+            }
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)

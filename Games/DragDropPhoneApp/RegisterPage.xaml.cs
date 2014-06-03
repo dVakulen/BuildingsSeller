@@ -22,7 +22,7 @@ namespace DragDropPhoneApp
         {
             InitializeComponent();
             this.dataContext = App.DataContext;
-            this.dataContext = App.DataContext;
+            this.DataContext = App.DataContext;
             /*
  * 
             ApiService<Users>.SendPost(new Users
@@ -50,20 +50,27 @@ namespace DragDropPhoneApp
             }, false);*/
         }
 
-        private void Submit_Click(object sender, RoutedEventArgs e)
-        {
-          
-        }
+      
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             dataContext.CurrentUser.RegisterDateTime = DateTime.Now;
             dataContext.CurrentUser.PaidSeller = true;
             dataContext.CurrentUser.PaidUser = true;
+          //  dataContext.CurrentUser.Login = this.Name.Text;
+        //    dataContext.CurrentUser.Password = this.Password.Text;
             dataContext.CurrentUser.Activated = true;
             ApiService<Users>.SendPost(dataContext.CurrentUser, false);
             MessageBox.Show("Registration successfull");
             this.NavigationService.Navigate(new Uri("/RealtyList.xaml", UriKind.Relative));
+        }
+
+        private void Name_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                (sender as TextBox).SelectAll();
+            }
         }
     }
 }

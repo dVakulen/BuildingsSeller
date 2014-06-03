@@ -11,6 +11,8 @@ namespace BuildSeller.Controllers
     using BuildSeller.Core.Service;
     using BuildSeller.Service;
 
+    using Castle.Core.Internal;
+
     using Newtonsoft.Json;
 
     public class UserApiController : ApiController
@@ -22,16 +24,16 @@ namespace BuildSeller.Controllers
             this.realtyService = realtyServic;
             this.userService = userServic;
         }
-        public HttpResponseMessage Get(string login, string pass)
+        public IHttpActionResult Get(string login, string pass)
         {
-            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(pass))
-                return Request.CreateResponse(HttpStatusCode.OK);
+            if (login.IsNullOrEmpty() || pass.IsNullOrEmpty())
+                return NotFound();
             if (userService.Get(login, pass) != null)
             {
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Ok();
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return NotFound();
         }
         public HttpResponseMessage Post([FromBody]string value) //register
         {

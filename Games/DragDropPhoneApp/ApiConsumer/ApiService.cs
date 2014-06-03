@@ -1,200 +1,169 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DragDropPhoneApp.ApiConsumer
+﻿namespace DragDropPhoneApp.ApiConsumer
 {
+    #region Using Directives
+
+    using System;
     using System.IO;
+    using System.Linq;
     using System.Net;
     using System.Runtime.Serialization.Json;
-    using System.Threading;
+    using System.Text;
     using System.Windows;
-    using System.Windows.Navigation;
-    using System.Windows.Threading;
 
     using Build.DataLayer.Model;
 
-    using BuildSeller.Core.Model;
-
-    using DragDropPhoneApp.Model;
     using DragDropPhoneApp.ViewModel;
 
     using Microsoft.Phone.Controls;
 
     using Newtonsoft.Json;
 
-    static class ApiService<T> where T : class
+    #endregion
+
+    internal static class ApiService<T>
+        where T : class
     {
-        private static void StartWebRequest(string url)
+        #region Static Fields
+
+        private static Uri uriRealtApi = new Uri("http://localhost:61251/api/buildapi/");
+
+        private static Uri uriUserApi = new Uri("http://localhost:61251/api/userapi/");
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public static void GetRealties()
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.BeginGetResponse(new AsyncCallback(FinishWebRequest), request);
+            WebClient client = new WebClient();
+
+            client.Headers["Accept"] = "application/json";
+            client.DownloadStringCompleted += (s1, e1) =>
+                {
+                    try
+                    {
+                        var realtys = JsonConvert.DeserializeObject<Realty[]>(e1.Result.ToString());
+                        if (realtys != null)
+                        {
+                            App.DataContext.Realtys = realtys.ToList();
+                        }
+
+                        Deployment.Current.Dispatcher.BeginInvoke(() => { App.DataContext.IsLoading = false; });
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                };
+            client.DownloadStringAsync(uriRealtApi);
         }
+
+        public static void Login(string login, string pass)
+        {
+            WebClient client = new WebClient();
+
+            HttpWebRequest myReq =
+                (HttpWebRequest)
+                WebRequest.Create(uriRealtApi.OriginalString + string.Format("?login={0}&pass={1}", login, pass));
+
+            // Uri uri = new Uri(http://host.ru/forum/cont/add.php?parm=p);
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(uriRealtApi);
+            StartWebRequest(uriUserApi.OriginalString + string.Format("?login={0}&pass={1}", login, pass), null);
+            object s = new object();
+
+            // IAsyncResult httpWebResponse = httpWebRequest.BeginGetResponse(ar => { }, s);
+            {
+                // while (!httpWebResponse.IsCompleted)
+                // Thread.Sleep(100);
+            }
+        }
+
+        public static void SendPost(T gizmo, bool isRealtApi = true)
+        {
+            var serializedString = JsonConvert.SerializeObject(gizmo);
+
+            DataContractJsonSerializer jsonData = new DataContractJsonSerializer(typeof(T));
+            MemoryStream memStream = new MemoryStream();
+            jsonData.WriteObject(memStream, serializedString);
+
+            byte[] jsonDataToPost = memStream.ToArray();
+            memStream.Close();
+
+            var data1 = Encoding.UTF8.GetString(jsonDataToPost, 0, jsonDataToPost.Length);
+
+            WebClient webClient = new WebClient();
+          
+            webClient.Headers["content-type"] = "application/json";
+            if (isRealtApi)
+            {
+                webClient.UploadStringAsync(uriRealtApi, "POST", data1);
+            }
+            else
+            {
+                webClient.UploadStringAsync(uriUserApi, "POST", data1);
+            }
+        }
+
+        #endregion
+
+        #region Methods
 
         private static void FinishWebRequest(IAsyncResult result)
         {
             try
             {
-             //   Thread.Sleep(1000);
-                HttpWebResponse response = (result.AsyncState as HttpWebRequest).EndGetResponse(result) as HttpWebResponse;
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
-                              {
-                               //   MessageBox.Show("aa");
-
-                                  if (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext is MainViewModel)
-                                      (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as MainViewModel).IsLoading =
-                                          false;
-                                  ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri("/RealtyList.xaml", UriKind.Relative));
-                              });
-                var z = response.Headers;
-                var b = z;
-            }
-            catch (WebException)
-            {
-
-            }
-
-        }
-
-        public static void Login(string login, string pass)
-        {
-
-            WebClient client = new WebClient();
-
-
-            HttpWebRequest myReq =
-(HttpWebRequest)WebRequest.Create(uriRealtApi.OriginalString + string.Format("?login={0}&pass={1}", login, pass));
-
-            //       Uri uri = new Uri(http://host.ru/forum/cont/add.php?parm=p);
-            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(uriRealtApi);
-            StartWebRequest(uriRealtApi.OriginalString + string.Format("?login={0}&pass={1}", login, pass));
-            object s = new object();
-            //  IAsyncResult httpWebResponse = httpWebRequest.BeginGetResponse(ar => { }, s);
-            //  while (!httpWebResponse.IsCompleted)
-            {
-                //  Thread.Sleep(100);
-            }
-
-            //StreamReader reader = new StreamReader(httpWebResponse.GetResponseStream());
-
-            return;
-
-            client.Headers["Accept"] = "application/json";
-            client.DownloadStringAsync(new Uri(uriRealtApi.OriginalString + string.Format("?login={0}&pass={1}", login, pass)));
-            var z = client.ResponseHeaders;
-            var b = z;
-
-            client.DownloadStringCompleted += (s1, e1) =>
-            {
-
-                try
+                HttpWebResponse response =
+                    (result.AsyncState as HttpWebRequest).EndGetResponse(result) as HttpWebResponse;
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    //    var data = JsonConvert.DeserializeObject<RankTableEntry[]>(e1.Result.ToString()).OrderBy(v => v.TimePassed);
-
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-
-            };
-        }
-        public static void GetRealties()
-        {
-            WebClient client = new WebClient();
-
-
-          
-
-
-            client.Headers["Accept"] = "application/json";
-            client.DownloadStringCompleted += (s1, e1) =>
-            {
-                try
-                {
-                    var realtys = JsonConvert.DeserializeObject<Realty[]>(e1.Result.ToString());
-                    if (realtys != null)
-                        App.DataContext.Realtys = realtys.ToList();
-                 // var realtys = JsonConvert.DeserializeObject<Realty>(e1.Result.ToString());
-                   // if (realtys != null) //App.DataContext.Realtys = realtys;
                     Deployment.Current.Dispatcher.BeginInvoke(
-              () =>
-              {
-                  App.DataContext.IsLoading = false;
+                        () =>
+                            {
+                                if (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext is MainViewModel)
+                                {
+                                    (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as
+                                     MainViewModel).IsLoading = false;
+                                }
 
-              });
-
-                    //  var data = JsonConvert.DeserializeObject<RankTableEntry[]>(e1.Result.ToString()).OrderBy(v => v.TimePassed);
-
+                                ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(
+                                    new Uri("/RealtyList.xaml", UriKind.Relative));
+                            });
                 }
-                catch (Exception)
+                else
                 {
-
-                    throw;
+                    Deployment.Current.Dispatcher.BeginInvoke(
+                        () => { MessageBox.Show("No user with such credentials"); });
                 }
-
-            };
-            client.DownloadStringAsync(uriRealtApi);
-
+            }
+            catch (WebException e)
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(
+                    () =>
+                        {
+                            (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as MainViewModel)
+                                .IsLoading = false;
+                            MessageBox.Show("No user with such credentials");
+                        });
+            }
         }
-        static Uri uriRealtApi = new Uri("http://localhost:61251/api/buildapi/");
-        static Uri uriUserApi = new Uri("http://localhost:61251/api/userapi/");
-        public static void SendPost(T gizmo, bool isRealtApi =true)
+
+        private static void StartWebRequest(string url, AsyncCallback asyncCallback, string method = "GET")
         {
-
-
-
-            var serializedString = JsonConvert.SerializeObject(gizmo);
-            //   client1.UploadStringAsync(d, serializedString);
-            //  SendPost(d, serializedString);
-            string quote = serializedString;
-            //S1: Generate the JSON Serializer Data
-            DataContractJsonSerializer jsonData =
-                new DataContractJsonSerializer(typeof(T));
-            MemoryStream memStream = new MemoryStream();
-            //S2 : Write data into Memory Stream
-            jsonData.WriteObject(memStream, quote);
-
-            //S3 : Read the bytes from Stream do that it can then beconverted to JSON String 
-            byte[] jsonDataToPost = memStream.ToArray();
-            memStream.Close();
-
-
-
-            //S4: Ehencode the stream into string format
-            var data1 = Encoding.UTF8.GetString(jsonDataToPost, 0, jsonDataToPost.Length);
-
-
-            try
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = method;
+            AsyncCallback callback;
+            if (asyncCallback == null)
             {
-                T f1d = JsonConvert.DeserializeObject<T>(serializedString);
-                var gb1 = f1d;
-                //    T fd = JsonConvert.DeserializeObject<T>(data1);
-                //   var gb = fd;
+                callback = FinishWebRequest;
             }
-            catch (Exception)
-            {
-
-            }
-
-            //S5: Save Data in the QuoteMaster Table
-            WebClient webClientQuote = new WebClient();
-
-            webClientQuote.Headers["content-type"] = "application/json";
-            if (isRealtApi)
-            webClientQuote.UploadStringAsync((uriRealtApi), "POST", data1);
             else
             {
-
-                webClientQuote.UploadStringAsync(uriUserApi, "POST", data1);
+                callback = asyncCallback;
             }
+
+            request.BeginGetResponse(callback, request);
         }
 
-
-    
-
+        #endregion
     }
 }

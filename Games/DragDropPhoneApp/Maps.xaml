@@ -60,8 +60,6 @@
                 <maps:Map
                         
                 Name="map1"
-                Center="50.0000000,36.2500000"
-                ZoomLevel="11" 
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 LandmarksEnabled="True" />

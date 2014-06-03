@@ -1,12 +1,16 @@
 ﻿#region Using statements
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+
+
+
 #endregion
 
-namespace TOS.WinPhone.DataLayer.Interfaces
+namespace Build.DataLayer.Interfaces
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+
     public interface IRepository<T>
     {
         void Insert(T entity);
