@@ -54,13 +54,14 @@ namespace DragDropPhoneApp.Helpers
             if (items == null)
             {
                 return null;
-            }
+            } int index=0;
 
             foreach (T item in items)
             {
-                int index;
+                index++;
                 {
-                    index = slg.GetGroupIndex(keySelector(item));
+                    //  index = slg.GetGroupIndex(keySelector(item));       GroupHeaderTemplate="{StaticResource LongListSelectorGroupHeaderTemmplate}"
+                                
                 }
 
                 if (index >= 0 && index < list.Count)
@@ -71,6 +72,7 @@ namespace DragDropPhoneApp.Helpers
 
             if (sort)
             {
+                return list;
                 foreach (AlphaKeyGroup<T> group in list)
                 {
                     group.Sort(

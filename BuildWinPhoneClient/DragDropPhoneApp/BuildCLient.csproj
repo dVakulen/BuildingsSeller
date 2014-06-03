@@ -18,8 +18,7 @@
     </TargetFrameworkProfile>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <SilverlightApplication>true</SilverlightApplication>
-    <SupportedCultures>
-    </SupportedCultures>
+    <SupportedCultures>en-GB;qps-ploc;ru-RU</SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>DragDropPhoneApp_$(Configuration)_$(Platform).xap</XapFilename>
@@ -96,6 +95,9 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
   </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>3.0</MultilingualAppToolkitVersion>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="ApiConsumer\ApiService.cs" />
     <Compile Include="App.xaml.cs">
@@ -128,6 +130,11 @@
     </Compile>
     <Compile Include="RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AppResources.qps-ploc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.qps-ploc.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -178,9 +185,13 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="README_FIRST.txt" />
     <Content Include="SplashScreenImage.jpg" />
+    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -204,6 +215,9 @@
     <Reference Include="GalaSoft.MvvmLight.WP8">
       <HintPath>..\packages\MvvmLightLibs.4.3.31.1\lib\wp8\GalaSoft.MvvmLight.WP8.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\MvvmLightLibs.4.3.31.1\lib\wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -225,15 +239,48 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\AppResources.en-GB.resx" />
+    <EmbeddedResource Include="Resources\AppResources.en-GB.resx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.en-GB.xlf</DependentUpon>
+      <culture>en-GB</culture>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AppResources.qps-ploc.resx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.qps-ploc.xlf</DependentUpon>
+      <culture>qps-ploc</culture>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.qps-ploc.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\AppResources.ru-RU.resx" />
+    <EmbeddedResource Include="Resources\AppResources.ru-RU.resx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.ru-RU.xlf</DependentUpon>
+      <culture>ru-RU</culture>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="Resources\AppResources.en-GB.xlf">
+      <Generator>XliffResxGenerator</Generator>
+      <LastGenOutput>AppResources.en-GB.resx</LastGenOutput>
+    </XliffResource>
+    <XliffResource Include="Resources\AppResources.qps-ploc.xlf">
+      <Generator>XliffResxGenerator</Generator>
+      <LastGenOutput>AppResources.qps-ploc.resx</LastGenOutput>
+    </XliffResource>
+    <XliffResource Include="Resources\AppResources.ru-RU.xlf">
+      <Generator>XliffResxGenerator</Generator>
+      <LastGenOutput>AppResources.ru-RU.resx</LastGenOutput>
+    </XliffResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

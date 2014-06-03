@@ -105,5 +105,33 @@
             this.dataContext.isInRealtyCreating = true;
             this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
         }
+
+        private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+       
+        }
+
+        private void StackPanel_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+          //  MessageBox.Show("sdd");
+
+        }
+
+        private void SortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!(sender is ListPicker))
+            {
+                return;
+            }
+
+            if ((sender as ListPicker).SelectedIndex == 1)
+            {
+                this.dataContext.OrderBy = true;
+            }
+            else
+            {
+                this.dataContext.OrderBy = false;
+            }
+        }
     }
 }

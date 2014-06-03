@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
-  <DefaultLanguage xmlns="" code="" />
+  <DefaultLanguage xmlns="" code="en-US" />
+  <Languages xmlns="">
+    <Language code="en-GB" />
+    <Language code="qps-ploc" />
+    <Language code="ru-RU" />
+  </Languages>
   <App xmlns="" ProductID="{87555bfe-031d-45a2-94ba-ec960fd90426}" Title="DragDropPhoneApp" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="DragDropPhoneApp author" Description="Sample description" Publisher="DragDropPhoneApp" PublisherID="{53964b37-da9f-4e49-8e1b-e0880d1ae0d7}">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
@@ -32,14 +37,10 @@
           <Count>0</Count>
           <BackgroundImageURI IsResource="false" IsRelative="true">Background.png</BackgroundImageURI>
           <Title>DragDropPhoneApp</Title>
-          <BackContent>
-          </BackContent>
-          <BackBackgroundImageURI>
-          </BackBackgroundImageURI>
-          <BackTitle>
-          </BackTitle>
-          <DeviceLockImageURI>
-          </DeviceLockImageURI>
+          <BackContent></BackContent>
+          <BackBackgroundImageURI></BackBackgroundImageURI>
+          <BackTitle></BackTitle>
+          <DeviceLockImageURI></DeviceLockImageURI>
           <HasLarge>false</HasLarge>
         </TemplateFlip>
       </PrimaryToken>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp", "DragDropPhoneApp\ChatApp.csproj", "{87555BFE-031D-45A2-94BA-EC960FD90426}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildCLient", "DragDropPhoneApp\BuildCLient.csproj", "{87555BFE-031D-45A2-94BA-EC960FD90426}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Build.DataLayer", "Build.DataLayer\Build.DataLayer.csproj", "{2B2708AC-9266-430A-8B79-6B8DD1D33C4B}"
 EndProject

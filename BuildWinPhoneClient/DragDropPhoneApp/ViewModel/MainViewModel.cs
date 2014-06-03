@@ -80,7 +80,25 @@ namespace DragDropPhoneApp.ViewModel
                 return AlphaKeyGroup<Realty>.CreateGroups(cards, s => s.Named, true);
             }
         }
+        public bool OrderBy
+        {
+            get
+            {
+                return this.orderByPrice;
+            }
 
+            set
+            {
+                if (this.orderByPrice != value)
+                {
+                    this.orderByPrice = value;
+                            this.NotifyPropertyChanged("GroupedRealtiesForRent");
+                            this.NotifyPropertyChanged("GroupedRealtiesForSell");
+                }
+            }
+        }
+
+        private bool orderByPrice;
         public bool IsAuthorized { get; set; }
 
         public bool IsLoading
@@ -101,7 +119,7 @@ namespace DragDropPhoneApp.ViewModel
         {
             get
             {
-                return this.realtys;
+                return orderByPrice ? realtys.OrderByDescending(b => b.Price).ToList() : realtys.OrderByDescending(b => b.Square).ToList(); 
             }
 
             set
@@ -111,7 +129,6 @@ namespace DragDropPhoneApp.ViewModel
                 Deployment.Current.Dispatcher.BeginInvoke(
                     () =>
                         {
-                            // this.CardsCount = value.Count;
                             this.NotifyPropertyChanged("GroupedRealtiesForRent");
                             this.NotifyPropertyChanged("GroupedRealtiesForSell");
                         });
