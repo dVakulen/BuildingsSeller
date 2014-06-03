@@ -27,6 +27,7 @@ namespace DragDropPhoneApp.ViewModel
         public List<Realty> realtys;
 
         private bool isLoading;
+        public bool isInRealtyCreating;
 
         #endregion
 

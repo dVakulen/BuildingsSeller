@@ -34,14 +34,17 @@
             <ScrollViewer Margin="-10,296,10,83" >
                 <StackPanel Margin="20" Name="TeamsStackPanel">
                     <Button x:Name="ShowOnMap" Content="ShowOnMap" Width="377" Click="Button_Click"/>
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Named}" VerticalAlignment="Top" Width="419"/>
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Price}" VerticalAlignment="Top" Width="456"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Square}" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Address}" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Description}" VerticalAlignment="Top" Width="456"/>
+                    <Button x:Name="Submit" Content="Submit" Width="377" Visibility="Collapsed" Tap="Submit_Tap" />
+
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Named, Mode=TwoWay}" VerticalAlignment="Top" Width="419"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Price, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
+
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Square, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Address, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Description, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
                     <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Owner.Phone}" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Named}" VerticalAlignment="Top" Width="456"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Named, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
                 </StackPanel>
             </ScrollViewer>
 

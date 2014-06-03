@@ -39,6 +39,7 @@
             this.bWorker.WorkerSupportsCancellation = false;
             this.bWorker.DoWork += this.bw_DoWork;
             this.bWorker.RunWorkerCompleted += this.bw_RunWorkerCompleted;
+            this.dataContext.isInRealtyCreating = false;
         }
 
         #endregion
@@ -109,5 +110,12 @@
         }
 
         #endregion
+       
+        private void AddNew_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            this.dataContext.CurrentRealty = new Realty();
+            this.dataContext.isInRealtyCreating = true;
+            this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
+        }
     }
 }

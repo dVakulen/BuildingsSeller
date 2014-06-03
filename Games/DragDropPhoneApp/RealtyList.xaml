@@ -45,7 +45,7 @@
                 <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="1"	
                         Width="400" Height="90" 				 
                         HorizontalAlignment="Left">
-                    <Button x:Name="AddNew" Content="+" Width="400" HorizontalAlignment="Left"  VerticalAlignment="Center" />
+                    <Button x:Name="AddNew" Content="+" Width="400" HorizontalAlignment="Left"  VerticalAlignment="Center" Tap="AddNew_Tap" />
 
 
                 </Border>

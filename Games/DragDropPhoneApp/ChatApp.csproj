@@ -97,7 +97,6 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ApiConsumer\ApiRepository.cs" />
     <Compile Include="ApiConsumer\ApiService.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

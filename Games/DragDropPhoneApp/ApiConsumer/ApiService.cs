@@ -3,6 +3,7 @@
     #region Using Directives
 
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Net;
@@ -25,10 +26,13 @@
     {
         #region Static Fields
 
-        private static Uri uriRealtApi = new Uri("http://localhost:61251/api/buildapi/");
+        private static Uri uriRealtApi = new Uri("http://localhost:61251/api/buildapi");
 
-        private static Uri uriUserApi = new Uri("http://localhost:61251/api/userapi/");
+        private static Uri uriUserApi = new Uri("http://localhost:61251/api/userapi");
 
+        private static int skip = 0;
+
+        private static int take = 10;
         #endregion
 
         #region Public Methods and Operators
@@ -36,26 +40,45 @@
         public static void GetRealties()
         {
             WebClient client = new WebClient();
+          
 
             client.Headers["Accept"] = "application/json";
-            client.DownloadStringCompleted += (s1, e1) =>
-                {
-                    try
-                    {
-                        var realtys = JsonConvert.DeserializeObject<Realty[]>(e1.Result.ToString());
-                        if (realtys != null)
-                        {
-                            App.DataContext.Realtys = realtys.ToList();
-                        }
+            client.DownloadStringCompleted += RealtyDownloadedCallback;
+            if (take == 0)
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() => { App.DataContext.IsLoading = false; });
+                return;
+            }
+            client.DownloadStringAsync(
+                new Uri(uriRealtApi.OriginalString + string.Format("?skip={0}&take={1}", skip, take)));
+            skip += take;
+        }
 
-                        Deployment.Current.Dispatcher.BeginInvoke(() => { App.DataContext.IsLoading = false; });
-                    }
-                    catch (Exception)
+        public static void RealtyDownloadedCallback(object s1, DownloadStringCompletedEventArgs e1)
+        {
+            try
+            {
+                var realtys = JsonConvert.DeserializeObject<Realty[]>(e1.Result.ToString());
+                if (realtys != null)
+                {
+                    var newList = new List<Realty>();
+                    newList.AddRange(App.DataContext.Realtys);
+                    var downloadedRealtyList = realtys.ToList();
+                    newList.AddRange(downloadedRealtyList);
+                    if (downloadedRealtyList.Count < take)
                     {
-                        throw;
+                        take = 0;
                     }
-                };
-            client.DownloadStringAsync(uriRealtApi);
+                    App.DataContext.Realtys = newList;
+                }
+                GetRealties();
+               
+                Deployment.Current.Dispatcher.BeginInvoke(() => { App.DataContext.IsLoading = false; });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public static void Login(string login, string pass)
@@ -92,7 +115,7 @@
             var data1 = Encoding.UTF8.GetString(jsonDataToPost, 0, jsonDataToPost.Length);
 
             WebClient webClient = new WebClient();
-          
+
             webClient.Headers["content-type"] = "application/json";
             if (isRealtApi)
             {
@@ -118,16 +141,16 @@
                 {
                     Deployment.Current.Dispatcher.BeginInvoke(
                         () =>
+                        {
+                            if (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext is MainViewModel)
                             {
-                                if (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext is MainViewModel)
-                                {
-                                    (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as
-                                     MainViewModel).IsLoading = false;
-                                }
+                                (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as
+                                 MainViewModel).IsLoading = false;
+                            }
 
-                                ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(
-                                    new Uri("/RealtyList.xaml", UriKind.Relative));
-                            });
+                            ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(
+                                new Uri("/RealtyList.xaml", UriKind.Relative));
+                        });
                 }
                 else
                 {
@@ -139,11 +162,16 @@
             {
                 Deployment.Current.Dispatcher.BeginInvoke(
                     () =>
-                        {
-                            (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as MainViewModel)
-                                .IsLoading = false;
-                            MessageBox.Show("No user with such credentials");
-                        });
+                    {
+
+
+                        //       (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as MainViewModel)
+                        //      .IsLoading = false;
+                        MessageBox.Show("No user with such credentials");
+
+
+
+                    });
             }
         }
 

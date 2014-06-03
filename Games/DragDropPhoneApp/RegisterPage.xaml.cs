@@ -62,7 +62,7 @@ namespace DragDropPhoneApp
             dataContext.CurrentUser.Activated = true;
             ApiService<Users>.SendPost(dataContext.CurrentUser, false);
             MessageBox.Show("Registration successfull");
-            this.NavigationService.Navigate(new Uri("/RealtyList.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
         }
 
         private void Name_Tap(object sender, System.Windows.Input.GestureEventArgs e)

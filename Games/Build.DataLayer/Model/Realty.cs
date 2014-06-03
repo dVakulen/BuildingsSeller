@@ -19,6 +19,10 @@
             get
             {
                 BitmapImage biImg = new BitmapImage();
+                if (Picture == null)
+                {
+                    return null;
+                }
                 MemoryStream ms = new MemoryStream(Picture);
                
                 biImg.SetSource(ms);

@@ -10,6 +10,9 @@ using Microsoft.Phone.Shell;
 
 namespace DragDropPhoneApp
 {
+    using Build.DataLayer.Model;
+
+    using DragDropPhoneApp.ApiConsumer;
     using DragDropPhoneApp.ViewModel;
 
     public partial class RealtyDetailsPage : PhoneApplicationPage
@@ -20,6 +23,10 @@ namespace DragDropPhoneApp
             InitializeComponent();
             dataContext = App.DataContext;
             DataContext = App.DataContext;
+            if (dataContext.isInRealtyCreating)
+            {
+                this.Submit.Visibility = Visibility.Visible;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -27,6 +34,15 @@ namespace DragDropPhoneApp
 
             this.NavigationService.Navigate(new Uri("/Maps.xaml", UriKind.Relative));
 
+        }
+
+        private void Submit_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (dataContext.CurrentRealty.Address != string.Empty && dataContext.CurrentRealty.Named != string.Empty)
+            {
+                dataContext.CurrentRealty.Created = DateTime.Now;
+                ApiService<Realty>.SendPost(dataContext.CurrentRealty);
+            }
         }
     }
 }

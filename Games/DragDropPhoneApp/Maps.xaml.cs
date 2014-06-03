@@ -73,6 +73,11 @@ namespace DragDropPhoneApp
 
             this.geoQ = new RouteQuery();
             this.geoQ.QueryCompleted += this.geoQ_QueryCompleted;
+            if (dataContext.isInRealtyCreating)
+            {
+                this.GetRouteBtn.Visibility = Visibility.Collapsed;
+                this.Submit.Visibility = Visibility.Visible;
+            }
         }
 
         #endregion
@@ -94,6 +99,7 @@ namespace DragDropPhoneApp
             this.map1.Layers.Add(this.markerLayer);
             this.markerLayer.Add(this.OriginMarker);
             this.markerLayer.Add(this.DestinationMarker);
+            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -143,29 +149,32 @@ namespace DragDropPhoneApp
         private MapOverlay MakeDotMarker(GeoCoordinate location, bool isDestination)
         {
             MapOverlay Marker = new MapOverlay();
-
+            
             Marker.GeoCoordinate = location;
 
-            Ellipse Circhegraphic = new Ellipse();
+            Ellipse circle = new Ellipse();
             if (isDestination)
             {
-                Circhegraphic.Fill = new SolidColorBrush(Colors.Green);
-                Circhegraphic.Stroke = new SolidColorBrush(Colors.Orange);
+                circle.Fill = new SolidColorBrush(Colors.Green);
+                circle.Stroke = new SolidColorBrush(Colors.Orange);
             }
             else
             {
-                Circhegraphic.Fill = new SolidColorBrush(Colors.Yellow);
-                Circhegraphic.Stroke = new SolidColorBrush(Colors.Red);
+                circle.Fill = new SolidColorBrush(Colors.Yellow);
+                circle.Stroke = new SolidColorBrush(Colors.Red);
             }
 
-            Circhegraphic.StrokeThickness = 20;
-            Circhegraphic.Opacity = 0.8;
-            Circhegraphic.Height = 50;
-            Circhegraphic.Width = 50;
-
-            Marker.Content = Circhegraphic;
+            circle.StrokeThickness = 20;
+            circle.Opacity = 0.8;
+            circle.Height = 50;
+            circle.Width = 50;
+            if (isDestination && dataContext.isInRealtyCreating)
+            {
+                circle.Visibility = Visibility.Collapsed;
+            }
+            Marker.Content = circle;
             Marker.PositionOrigin = new Point(0.5, 0.5);
-            Circhegraphic.MouseLeftButtonDown += this.textt_MouseLeftButtonDown;
+            circle.MouseLeftButtonDown += this.textt_MouseLeftButtonDown;
 
             return Marker;
         }
@@ -295,7 +304,7 @@ namespace DragDropPhoneApp
         {
             this.zoomSlider.Value = this.map1.ZoomLevel;
         }
-
+        
         private void textt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse clickedOne = sender as Ellipse;
@@ -304,6 +313,11 @@ namespace DragDropPhoneApp
                  if (this.DestinationMarker.Content == clickedOne)
                 {
                     this.selectedMarker = this.DestinationMarker;
+                    this.draggingNow = true;
+                    this.map1.IsEnabled = false;
+                }else if (this.OriginMarker.Content == clickedOne && dataContext.isInRealtyCreating)
+                {
+                    this.selectedMarker = this.OriginMarker;
                     this.draggingNow = true;
                     this.map1.IsEnabled = false;
                 }
@@ -319,5 +333,14 @@ namespace DragDropPhoneApp
         }
 
         #endregion
+
+        private void Submit_Tap(object sender, GestureEventArgs e)
+        {
+            dataContext.CurrentRealty.MapPosX = this.OriginMarker.GeoCoordinate.Latitude;
+            dataContext.CurrentRealty.MapPosY = this.OriginMarker.GeoCoordinate.Longitude;
+            MessageBox.Show("accepted");
+
+            this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
+        }
     }
 }

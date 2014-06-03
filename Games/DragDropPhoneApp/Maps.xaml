@@ -15,7 +15,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
- 
+
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -30,7 +30,7 @@
             <StackPanel Orientation="Horizontal" Grid.Row="1" >
                 <Button x:Name="Hplus" Content="+" Click="Button_Click_1" />
                 <Button x:Name="Hmins" Content="-" Click="Button_Click_1" />
-                <Button x:Name="TrMod" Content="Drive" Click="Button_Click_1" Width="328" />
+                <Button x:Name="TrMod" Content="Drive" Click="Button_Click_1" Width="328" Visibility="Collapsed" />
             </StackPanel>
         </StackPanel>
 
@@ -70,6 +70,7 @@
 
             </Grid>
             <Button x:Name="GetRouteBtn" Grid.ColumnSpan="4" Grid.Row="9" Content="get the Route" Click="Button_Click_1"/>
+            <Button x:Name="Submit" Content="Submit" HorizontalAlignment="Left" Margin="158,-95,0,0" VerticalAlignment="Top" Width="286" Visibility="Collapsed" Tap="Submit_Tap"/>
         </Grid>
 
     </Grid>
