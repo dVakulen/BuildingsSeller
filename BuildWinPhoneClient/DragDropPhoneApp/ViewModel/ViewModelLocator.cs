@@ -21,6 +21,7 @@ namespace DragDropPhoneApp.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+
             }
         }
     }

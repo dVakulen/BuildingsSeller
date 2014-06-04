@@ -20,6 +20,8 @@ namespace BuildSeller.Infra
         }
 
         public static void RegisterAllFromAssemblies(string a)
+
+
         {
             IoC.Container.Register(
             AllTypes.FromAssemblyNamed(a)
