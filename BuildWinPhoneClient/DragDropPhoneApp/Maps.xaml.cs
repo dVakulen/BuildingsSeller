@@ -50,7 +50,7 @@ namespace DragDropPhoneApp
         private MapLayer markerLayer;
 
         private MapOverlay selectedMarker;
-        private MainViewModel dataContext; 
+        private MainViewModel dataContext;
         #endregion
 
         // Constructor
@@ -68,7 +68,7 @@ namespace DragDropPhoneApp
 
             this.AddResultToMap(
                 new GeoCoordinate(dataContext.CurrentRealty.MapPosX, dataContext.CurrentRealty.MapPosY),
-                new GeoCoordinate(dataContext.CurrentRealty.MapPosX + 1, dataContext.CurrentRealty.MapPosY+1));
+                new GeoCoordinate(dataContext.CurrentRealty.MapPosX + 1, dataContext.CurrentRealty.MapPosY + 1));
 
             this.geoRev = new ReverseGeocodeQuery();
             this.geoRev.QueryCompleted += this.geoRev_QueryCompleted;
@@ -78,7 +78,7 @@ namespace DragDropPhoneApp
             StartGeoLoc();
             if (dataContext.isInRealtyCreating)
             {
-                this.Save.IsEnabled = false;
+                //this.Save.IsEnabled = false;
                 this.GetRouteBtn.Visibility = Visibility.Collapsed;
                 this.Submit.Visibility = Visibility.Visible;
             }
@@ -90,17 +90,17 @@ namespace DragDropPhoneApp
         private async void StartGeoLoc()
         {
 
-          
-GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
+
+            GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
             watcher.MovementThreshold = 20;
-             watcher.Start();
-             watcher.PositionChanged += (o, args) =>
-                 {
-                     this.DestinationMarker.GeoCoordinate = watcher.Position.Location;
-                     Start_ReverceGeoCoding(this.DestinationMarker);
-                     StartGeoQ();
-                 };
-      
+            watcher.Start();
+            watcher.PositionChanged += (o, args) =>
+                {
+                    this.DestinationMarker.GeoCoordinate = watcher.Position.Location;
+                    Start_ReverceGeoCoding(this.DestinationMarker);
+                    StartGeoQ();
+                };
+
         }
         private void AddResultToMap(GeoCoordinate origin, GeoCoordinate destination)
         {
@@ -111,13 +111,13 @@ GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Defa
             }
 
             this.OriginMarker = this.MakeDotMarker(origin, false);
-           this.DestinationMarker = this.MakeDotMarker(destination, true);
+            this.DestinationMarker = this.MakeDotMarker(destination, true);
             this.map1.SetView(origin, 14);
             this.markerLayer = new MapLayer();
             this.map1.Layers.Add(this.markerLayer);
             this.markerLayer.Add(this.OriginMarker);
             this.markerLayer.Add(this.DestinationMarker);
-            
+
         }
 
         private void StartGeoQ()
@@ -141,7 +141,7 @@ GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Defa
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-           
+
             if (sender == this.GetRouteBtn)
             {
                 StartGeoQ();
@@ -151,7 +151,7 @@ GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Defa
         private MapOverlay MakeDotMarker(GeoCoordinate location, bool isDestination)
         {
             MapOverlay Marker = new MapOverlay();
-            
+
             Marker.GeoCoordinate = location;
 
             Ellipse circle = new Ellipse();
@@ -172,7 +172,7 @@ GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Defa
             circle.Width = 50;
             if (isDestination && dataContext.isInRealtyCreating)
             {
-              //  circle.Visibility = Visibility.Collapsed;
+                //  circle.Visibility = Visibility.Collapsed;
             }
             Marker.Content = circle;
             Marker.PositionOrigin = new Point(0.5, 0.5);
@@ -202,8 +202,12 @@ GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Defa
         }
 
         private void Touch_FrameReported(object sender, TouchFrameEventArgs e)
-        {return;
-            
+        {
+            if (!dataContext.isInRealtyCreating)
+            {
+                return;
+            }
+
             if (this.draggingNow)
             {
                 TouchPoint tPoint = e.GetPrimaryTouchPoint(this.map1);
@@ -246,10 +250,10 @@ GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Defa
             }
             catch (TargetInvocationException)
             {
-                
-               Debug.WriteLine("wrong data to query");
+
+                Debug.WriteLine("wrong data to query");
             }
-       
+
         }
 
         private void geoRev_QueryCompleted(object sender, QueryCompletedEventArgs<IList<MapLocation>> e)
@@ -305,21 +309,22 @@ GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Defa
 
         private void map1_ZoomLevelChanged(object sender, MapZoomLevelChangedEventArgs e)
         {
-         
-        
+
+
         }
-        
+
         private void textt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse clickedOne = sender as Ellipse;
             if (clickedOne != null && this.OriginMarker != null && this.DestinationMarker != null)
             {
-                 if (this.DestinationMarker.Content == clickedOne)
+                if (this.DestinationMarker.Content == clickedOne)
                 {
                     this.selectedMarker = this.DestinationMarker;
                     this.draggingNow = true;
                     this.map1.IsEnabled = false;
-                }else if (this.OriginMarker.Content == clickedOne && dataContext.isInRealtyCreating)
+                }
+                else if (this.OriginMarker.Content == clickedOne && dataContext.isInRealtyCreating)
                 {
                     this.selectedMarker = this.OriginMarker;
                     this.draggingNow = true;
@@ -328,7 +333,7 @@ GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Defa
             }
         }
 
-     
+
         #endregion
 
         private void Submit_Tap(object sender, GestureEventArgs e)
@@ -354,12 +359,12 @@ GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Defa
         {
             Microsoft.Phone.Maps.MapsSettings.ApplicationContext.ApplicationId = "87555bfe-031d-45a2-94ba-ec960fd90426";
             Microsoft.Phone.Maps.MapsSettings.ApplicationContext.AuthenticationToken = "AqA8uwlJ0rHF34MD6sXxAgRhmZTuQwGtw-jR0ZN82R2-b4p3m8i-W8aDv-zjP4bo";
-    
+
         }
 
         private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
         {
-        
+
             this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
 
         }
@@ -372,7 +377,7 @@ GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Defa
                 dataContext.CurrentRealty.MapPosY = this.OriginMarker.GeoCoordinate.Longitude;
                 MessageBox.Show("accepted");
             }
-          
+
             this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
         }
     }

@@ -55,14 +55,14 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ItemTemplate">
-            <StackPanel Height="100" Width="100" Margin="6,6" Tap="StackPanel_Tap">
+            <Grid   >
+                <!--   <StackPanel Height="100" Width="100" Margin="6,6" Tap="StackPanel_Tap">v-->
 
-                <Image Width="100" Height="100" Stretch="UniformToFill"   Source="{Binding Image.Image}" />
-                <Image DataContext="{Binding PictureSource}" Width="40" Height="40" Stretch="UniformToFill"   Source="Assets/Tiles/FlipCycleTileSmall.png" Margin="40,-160,0,0" Canvas.ZIndex="1" RenderTransformOrigin="0.5,0.5"  >
+                <Image DataContext="{Binding PictureSource}" Width="100" Height="100" Stretch="UniformToFill"   Source="Assets/Tiles/FlipCycleTileSmall.png"  Canvas.ZIndex="1" RenderTransformOrigin="0.5,0.5"  >
                     <!--, Converter={StaticResource BooleanToVisibilityConverter}-->
                 </Image>
 
-            </StackPanel>
+            </Grid >
         </DataTemplate>
 
 
@@ -114,13 +114,33 @@
         </DataTemplate>
 
         <DataTemplate x:Key="LongListSelectorItemTemplate">
-            <StackPanel Orientation="Horizontal" Margin="4,4" Tap="StackPanel_Tap_1" Width="400">
-                <Image Source="{Binding PictureSource}" Width="40" Height="40" Stretch="UniformToFill"  >
+            <StackPanel HorizontalAlignment="Center" >
+                <Image Source="{Binding PictureSource}" Width="200" Height="200" Stretch="UniformToFill"  >
                     <!--, Converter={StaticResource BooleanToVisibilityConverter}-->
                 </Image>
-                <TextBlock Text="{Binding Named}"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <TextBlock Text="{Binding Price}"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
 
+                    <TextBlock Text="Name:"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Named}"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+               
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+
+                    <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+
+                    <TextBlock Text="Price:"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <TextBlock Text="{Binding Price}"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+
+                    <TextBlock Text="Square:"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <TextBlock Text="{Binding Square}"    Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+                </StackPanel>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
 
@@ -164,7 +184,7 @@
         </phone:Pivot>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
+        <shell:ApplicationBar Mode="Minimized" Opacity="1.0" IsMenuEnabled="True" IsVisible="True" >
 
           
             <shell:ApplicationBar.MenuItems>

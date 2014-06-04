@@ -54,14 +54,15 @@ namespace DragDropPhoneApp.Helpers
             if (items == null)
             {
                 return null;
-            } int index=0;
+            } 
+            int index = 0;
 
             foreach (T item in items)
             {
                 index++;
                 {
                     //  index = slg.GetGroupIndex(keySelector(item));       GroupHeaderTemplate="{StaticResource LongListSelectorGroupHeaderTemmplate}"
-                                
+
                 }
 
                 if (index >= 0 && index < list.Count)

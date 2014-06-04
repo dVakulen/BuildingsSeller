@@ -85,10 +85,12 @@
   <ItemGroup>
     <Compile Include="Context\BuildContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Model\BaseImage.cs" />
     <Compile Include="Model\BuildCategories.cs" />
     <Compile Include="Model\CurrentUser.cs" />
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\ImageAttachments.cs" />
+    <Compile Include="Model\Photo.cs" />
     <Compile Include="Model\RankTableEntry.cs" />
     <Compile Include="Model\Realty.cs" />
     <Compile Include="Model\Role.cs" />
@@ -96,7 +98,6 @@
     <Compile Include="Model\UserInteraction.cs" />
     <Compile Include="Model\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\ApiRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -30,7 +30,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <toolkit:PhoneTextBox Hint="Login" x:Name="Login"   HorizontalAlignment="Left" Height="72" Margin="20,133,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="398" Tap="Login_Tap"/>
-            <toolkit:PhoneTextBox  Hint="Password"  x:Name="Password" HorizontalAlignment="Left" Height="72" Margin="20,228,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="398" Tap="Login_Tap"/>
+            <toolkit:PhoneTextBox  Hint="Password"  x:Name="Password" HorizontalAlignment="Left" Height="72" Margin="20,228,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="398" Tap="Login_Tap" InputScope="Password"/>
 
             <Button x:Name="LoginBtn" Content="{Binding Path=LocalizedResources.Login, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,326,0,0" Width="398" Click="LoginBtn_Click" Tap="LoginBtn_Tap"/>
 

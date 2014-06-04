@@ -59,7 +59,5 @@ namespace DragDropPhoneApp
             Indicator.setLoadingIndicator(this, "Loggin in");
         }
 
-        
-
     }
 }

@@ -3,7 +3,6 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Navigation;
@@ -16,13 +15,13 @@
 
     using Microsoft.Phone.Controls;
 
+    using GestureEventArgs = System.Windows.Input.GestureEventArgs;
+
     #endregion
 
     public partial class RealtyList : PhoneApplicationPage
     {
         #region Fields
-
-        private BackgroundWorker bWorker = new BackgroundWorker();
 
         private MainViewModel dataContext;
 
@@ -35,10 +34,6 @@
             this.InitializeComponent();
             this.dataContext = App.DataContext;
             this.DataContext = App.DataContext;
-            this.bWorker.WorkerReportsProgress = false;
-            this.bWorker.WorkerSupportsCancellation = false;
-            this.bWorker.DoWork += this.bw_DoWork;
-            this.bWorker.RunWorkerCompleted += this.bw_RunWorkerCompleted;
             this.dataContext.isInRealtyCreating = false;
         }
 
@@ -48,29 +43,46 @@
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.RunWorker();
+            ApiService<Realty>.GetRealties();
+        }
+
+        private void AddNew_Tap(object sender, GestureEventArgs e)
+        {
+            this.dataContext.CurrentRealty = new Realty();
+            this.dataContext.isInRealtyCreating = true;
+            this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
+        }
+
+        private void Add_new_Click(object sender, EventArgs e)
+        {
+            this.dataContext.CurrentRealty = new Realty();
+            this.dataContext.isInRealtyCreating = true;
+            this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
         }
 
         private void BlogsLongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sender is LongListSelector)
+            var sendr = sender as LongListSelector;
+            if (sendr == null)
             {
-                var sendr = sender as LongListSelector;
-
-                if (sendr.SelectedItem == null)
-                {
-                    return;
-                }
-
-                if (!(sendr.SelectedItem is Realty))
-                {
-                    return;
-                }
-
-                var realt = sendr.SelectedItem as Realty;
-                this.dataContext.CurrentRealty = realt;
-                this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
+                return;
             }
+
+            if (sendr.SelectedItem == null)
+            {
+                return;
+            }
+
+            var realt = sendr.SelectedItem as Realty;
+            if (realt == null)
+            {
+                return;
+            }
+
+            this.dataContext.CurrentRealty = realt;
+            sendr.SelectedItem = null;
+
+            this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -78,53 +90,15 @@
             Indicator.setLoadingIndicator(this, "Loading realties");
         }
 
-        private void RunWorker()
-        {
-            if (this.bWorker.IsBusy != true)
-            {
-                this.bWorker.RunWorkerAsync();
-            }
-        }
-
-        private async void bw_DoWork(object sender, DoWorkEventArgs e)
-        {
-         
-            ApiService<Realty>.GetRealties();
-        }
-
-        private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            
-        }
-
-        #endregion
-       
-        private void AddNew_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            this.dataContext.CurrentRealty = new Realty();
-            this.dataContext.isInRealtyCreating = true;
-            this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
-        }
-
-        private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-       
-        }
-
-        private void StackPanel_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-          //  MessageBox.Show("sdd");
-
-        }
-
         private void SortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!(sender is ListPicker))
+            var sendr = sender as ListPicker;
+            if (sendr == null)
             {
                 return;
             }
 
-            if ((sender as ListPicker).SelectedIndex == 1)
+            if (sendr.SelectedIndex == 1)
             {
                 this.dataContext.OrderBy = true;
             }
@@ -134,11 +108,6 @@
             }
         }
 
-        private void Add_new_Click(object sender, EventArgs e)
-        {
-            this.dataContext.CurrentRealty = new Realty();
-            this.dataContext.isInRealtyCreating = true;
-            this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
-        }
+        #endregion
     }
 }

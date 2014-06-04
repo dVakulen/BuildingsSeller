@@ -27,8 +27,8 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Margin="14,138,10,23" Grid.RowSpan="2">
-            <Image Name="ImageRealt" Stretch="UniformToFill"   Source="{Binding CurrentRealty.PictureSource}" Margin="25,1,35,311"   >
+        <Grid x:Name="ContentPanel" Margin="12,133,12,15" Grid.RowSpan="2">
+            <Image  Tap="Image_Tap" Name="ImageRealt" Stretch="UniformToFill"   Source="{Binding CurrentRealty.PictureSource}" Margin="25,1,35,311"   >
                 <!--, Converter={StaticResource BooleanToVisibilityConverter}-->
             </Image>
             <ScrollViewer Margin="-10,296,10,83" >

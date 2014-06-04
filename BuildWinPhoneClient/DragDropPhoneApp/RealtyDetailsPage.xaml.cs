@@ -30,8 +30,13 @@ namespace DragDropPhoneApp
                 BitmapImage img = new BitmapImage();
                 img.SetSource(
                     Application.GetResourceStream(
-                        new Uri(@"FlipCycleTileMedium.png", UriKind.Relative)).Stream);
+                        new Uri(@"Assets/FlipCycleTileMedium.png", UriKind.Relative)).Stream);
                 this.ImageRealt.Source = img;
+            }
+            else
+            {
+              this.ImageRealt.Source = this.dataContext.CurrentRealty.PictureSource;
+            
             }
             if (dataContext.isInRealtyCreating)
             {
@@ -42,6 +47,13 @@ namespace DragDropPhoneApp
         {
 
             this.NavigationService.Navigate(new Uri("/Maps.xaml", UriKind.Relative));
+
+        }
+        private void Image_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (!dataContext.isInRealtyCreating) return;
+
+            this.NavigationService.Navigate(new Uri("/AllImagesPage.xaml", UriKind.Relative));
 
         }
 

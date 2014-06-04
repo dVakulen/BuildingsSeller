@@ -13,9 +13,28 @@
     [JsonObject]
     public class Realty : Entity
     {
+      
         public BitmapImage PictureSource
 
         {
+
+            set
+            {
+                if (value != null)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        WriteableBitmap btmMap = new WriteableBitmap
+                            (value.PixelWidth, value.PixelHeight);
+
+                        // write an image into the stream
+                        Extensions.SaveJpeg(btmMap, ms,
+                            value.PixelWidth, value.PixelHeight, 0, 100);
+
+                        Picture= ms.ToArray();
+                    }
+                }
+            }
             get
             {
                 BitmapImage biImg = new BitmapImage();
@@ -26,7 +45,6 @@
                 MemoryStream ms = new MemoryStream(Picture);
                
                 biImg.SetSource(ms);
-
                 return biImg;
             }
         }
