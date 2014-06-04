@@ -92,8 +92,8 @@
 
         <DataTemplate x:Key="LongListSelectorHeaderTemplate">
             <toolkit:ListPicker x:Name="SortBy" SelectionChanged="SortBy_SelectionChanged" >
-                <toolkit:ListPickerItem Content="Attack" />
-                <toolkit:ListPickerItem Content="Attribute" />
+                <toolkit:ListPickerItem Content="{Binding Path=LocalizedResources.Price, Source={StaticResource LocalizedStrings}}" />
+                <toolkit:ListPickerItem Content="{Binding Path=LocalizedResources.Square, Source={StaticResource LocalizedStrings}}" />
             </toolkit:ListPicker>
         </DataTemplate>
 
@@ -153,6 +153,8 @@
             <phone:PivotItem Header="Realty for Rent">
 
                 <phone:LongListSelector Name="BlogsLongListSelector"   
+                                        
+                                        ListHeaderTemplate="{StaticResource LongListSelectorHeaderTemplate}"
                                            ItemsSource="{Binding GroupedRealtiesForSell}"
                                            JumpListStyle="{StaticResource LongListSelectorJumpListStyle}"  
                                             ItemTemplate="{StaticResource LongListSelectorItemTemplate}"

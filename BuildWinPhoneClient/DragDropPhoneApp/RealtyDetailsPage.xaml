@@ -9,7 +9,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
+    SupportedOrientations="Portrait" Orientation="Landscape"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
@@ -35,8 +35,7 @@
                 <StackPanel Margin="20" Name="TeamsStackPanel">
                     <Button x:Name="ShowOnMap" Content="ShowOnMap" Width="377" Click="Button_Click"/>
 
-                    <Button x:Name="Submit" Content="Submit" Width="377" Visibility="Collapsed" Tap="Submit_Tap" />
-
+                   
                     <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Named, Mode=TwoWay}" VerticalAlignment="Top" Width="419"/>
                     <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Price, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
 
@@ -50,5 +49,14 @@
 
         </Grid>
     </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
 
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Check.png" Text="save" Click="ApplicationBarIconButton_Click"/>
+            <shell:ApplicationBarIconButton x:Name="Cancel" IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="settings" Click="Cancel_Click"/>
+
+          
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

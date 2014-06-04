@@ -119,7 +119,7 @@ namespace DragDropPhoneApp.ViewModel
         {
             get
             {
-                return orderByPrice ? realtys.OrderByDescending(b => b.Price).ToList() : realtys.OrderByDescending(b => b.Square).ToList(); 
+                return orderByPrice ? realtys.OrderBy(b => b.Price).ToList() : realtys.OrderByDescending(b => b.Square).ToList(); 
             }
 
             set

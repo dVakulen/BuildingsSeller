@@ -10,9 +10,17 @@
           <source>Login</source>
           <target state="new">Login</target>
         </trans-unit>
+        <trans-unit id="Resx/Price" translate="yes" xml:space="preserve">
+          <source>Price</source>
+          <target state="new">Price</target>
+        </trans-unit>
         <trans-unit id="Resx/Registration" translate="yes" xml:space="preserve">
           <source>Registration</source>
           <target state="new">Registration</target>
+        </trans-unit>
+        <trans-unit id="Resx/Square" translate="yes" xml:space="preserve">
+          <source>Square</source>
+          <target state="new">Square</target>
         </trans-unit>
         <trans-unit id="Resx/String" translate="yes" xml:space="preserve">
           <source>String</source>

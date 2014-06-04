@@ -10,9 +10,17 @@
           <source>Login</source>
           <target state="translated" state-qualifier="tm-suggestion">Вход</target>
         </trans-unit>
+        <trans-unit id="Resx/Price" translate="yes" xml:space="preserve">
+          <source>Price</source>
+          <target state="translated" state-qualifier="tm-suggestion">Цена</target>
+        </trans-unit>
         <trans-unit id="Resx/Registration" translate="yes" xml:space="preserve">
           <source>Registration</source>
           <target state="translated" state-qualifier="tm-suggestion">Регистрация</target>
+        </trans-unit>
+        <trans-unit id="Resx/Square" translate="yes" xml:space="preserve">
+          <source>Square</source>
+          <target state="translated">Площадь</target>
         </trans-unit>
         <trans-unit id="Resx/String" translate="yes" xml:space="preserve">
           <source>String</source>

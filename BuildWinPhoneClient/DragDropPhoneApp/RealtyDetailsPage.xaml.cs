@@ -25,7 +25,6 @@ namespace DragDropPhoneApp
             DataContext = App.DataContext;
             if (dataContext.isInRealtyCreating)
             {
-                this.Submit.Visibility = Visibility.Visible;
             }
         }
 
@@ -43,6 +42,22 @@ namespace DragDropPhoneApp
                 dataContext.CurrentRealty.Created = DateTime.Now;
                 ApiService<Realty>.SendPost(dataContext.CurrentRealty);
             }
+        }
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+
+            if (this.dataContext.isInRealtyCreating && dataContext.CurrentRealty.Address != string.Empty && dataContext.CurrentRealty.Named != string.Empty)
+            {
+                dataContext.CurrentRealty.Created = DateTime.Now;
+                ApiService<Realty>.SendPost(dataContext.CurrentRealty);
+            }
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            this.dataContext.isInRealtyCreating = false;
+            this.NavigationService.Navigate(new Uri("/RealtyList.xaml", UriKind.Relative));
         }
     }
 }
