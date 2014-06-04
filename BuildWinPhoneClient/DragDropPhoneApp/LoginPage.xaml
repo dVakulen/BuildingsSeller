@@ -10,7 +10,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
+    SupportedOrientations="Portrait" Orientation="Landscape"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
@@ -23,8 +23,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Login page" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.BuildSeller, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.Login, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -32,7 +32,7 @@
             <toolkit:PhoneTextBox Hint="Login" x:Name="Login"   HorizontalAlignment="Left" Height="72" Margin="20,133,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="398" Tap="Login_Tap"/>
             <toolkit:PhoneTextBox  Hint="Password"  x:Name="Password" HorizontalAlignment="Left" Height="72" Margin="20,228,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="398" Tap="Login_Tap"/>
 
-            <Button x:Name="LoginBtn" Content="login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,326,0,0" Width="398" Click="LoginBtn_Click" Tap="LoginBtn_Tap"/>
+            <Button x:Name="LoginBtn" Content="{Binding Path=LocalizedResources.Login, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,326,0,0" Width="398" Click="LoginBtn_Click" Tap="LoginBtn_Tap"/>
 
         </Grid>
     </Grid>

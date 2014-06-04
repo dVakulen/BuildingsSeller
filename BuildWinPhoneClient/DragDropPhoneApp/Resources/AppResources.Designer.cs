@@ -70,6 +70,15 @@ namespace DragDropPhoneApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BuildSeller.
+        /// </summary>
+        public static string BuildSeller {
+            get {
+                return ResourceManager.GetString("BuildSeller", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
@@ -84,6 +93,33 @@ namespace DragDropPhoneApp.Resources {
         public static string Price {
             get {
                 return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Realty.
+        /// </summary>
+        public static string Realty {
+            get {
+                return ResourceManager.GetString("Realty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  For Rent.
+        /// </summary>
+        public static string RealtyForRent {
+            get {
+                return ResourceManager.GetString("RealtyForRent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For Sell.
+        /// </summary>
+        public static string RealtyForSell {
+            get {
+                return ResourceManager.GetString("RealtyForSell", resourceCulture);
             }
         }
         

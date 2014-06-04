@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildCLient", "DragDropPhon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Build.DataLayer", "Build.DataLayer\Build.DataLayer.csproj", "{2B2708AC-9266-430A-8B79-6B8DD1D33C4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Build.Resources", "Build.DataLayer - Copy\Build.Resources.csproj", "{ED79D5F1-530B-40E5-BE35-0588138FEA3D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,20 +53,6 @@ Global
 		{2B2708AC-9266-430A-8B79-6B8DD1D33C4B}.Release|x64.ActiveCfg = Release|Any CPU
 		{2B2708AC-9266-430A-8B79-6B8DD1D33C4B}.Release|x86.ActiveCfg = Release|x86
 		{2B2708AC-9266-430A-8B79-6B8DD1D33C4B}.Release|x86.Build.0 = Release|x86
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Debug|ARM.ActiveCfg = Debug|ARM
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Debug|ARM.Build.0 = Debug|ARM
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Debug|x86.ActiveCfg = Debug|x86
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Debug|x86.Build.0 = Debug|x86
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Release|ARM.ActiveCfg = Release|ARM
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Release|ARM.Build.0 = Release|ARM
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Release|x64.ActiveCfg = Release|Any CPU
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Release|x86.ActiveCfg = Release|x86
-		{ED79D5F1-530B-40E5-BE35-0588138FEA3D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

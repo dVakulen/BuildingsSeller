@@ -22,13 +22,13 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.BuildSeller, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock Text="Realty descript" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Margin="14,138,10,23" Grid.RowSpan="2">
-            <Image  Stretch="UniformToFill"   Source="{Binding CurrentRealty.PictureSource}" Margin="25,1,35,311"   >
+            <Image Name="ImageRealt" Stretch="UniformToFill"   Source="{Binding CurrentRealty.PictureSource}" Margin="25,1,35,311"   >
                 <!--, Converter={StaticResource BooleanToVisibilityConverter}-->
             </Image>
             <ScrollViewer Margin="-10,296,10,83" >

@@ -12,10 +12,13 @@ namespace DragDropPhoneApp
 {
     using System.Device.Location;
     using System.Diagnostics;
+    using System.IO.IsolatedStorage;
     using System.Reflection;
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Shapes;
+
+    using Windows.Devices.Geolocation;
 
     using DragDropPhoneApp.ViewModel;
 
@@ -72,6 +75,7 @@ namespace DragDropPhoneApp
 
             this.geoQ = new RouteQuery();
             this.geoQ.QueryCompleted += this.geoQ_QueryCompleted;
+            StartGeoLoc();
             if (dataContext.isInRealtyCreating)
             {
                 this.Save.IsEnabled = false;
@@ -83,7 +87,21 @@ namespace DragDropPhoneApp
         #endregion
 
         #region Methods
+        private async void StartGeoLoc()
+        {
 
+          
+GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
+            watcher.MovementThreshold = 20;
+             watcher.Start();
+             watcher.PositionChanged += (o, args) =>
+                 {
+                     this.DestinationMarker.GeoCoordinate = watcher.Position.Location;
+                     Start_ReverceGeoCoding(this.DestinationMarker);
+                     StartGeoQ();
+                 };
+      
+        }
         private void AddResultToMap(GeoCoordinate origin, GeoCoordinate destination)
         {
             if (this.markerLayer != null)
@@ -102,27 +120,31 @@ namespace DragDropPhoneApp
             
         }
 
+        private void StartGeoQ()
+        {
+            if (this.geoQ.IsBusy)
+            {
+                this.geoQ.CancelAsync();
+            }
+
+            this.geoQ.InitialHeadingInDegrees = this.map1.Heading;
+
+            this.geoQ.RouteOptimization = this.optimization;
+            this.geoQ.TravelMode = this.travelMode;
+
+            List<GeoCoordinate> MyWayPoints = new List<GeoCoordinate>();
+            MyWayPoints.Add(this.OriginMarker.GeoCoordinate);
+            MyWayPoints.Add(this.DestinationMarker.GeoCoordinate);
+
+            this.geoQ.Waypoints = MyWayPoints;
+            this.geoQ.QueryAsync();
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
            
             if (sender == this.GetRouteBtn)
             {
-                if (this.geoQ.IsBusy)
-                {
-                    this.geoQ.CancelAsync();
-                }
-
-                this.geoQ.InitialHeadingInDegrees = this.map1.Heading;
-
-                this.geoQ.RouteOptimization = this.optimization;
-                this.geoQ.TravelMode = this.travelMode;
-
-                List<GeoCoordinate> MyWayPoints = new List<GeoCoordinate>();
-                MyWayPoints.Add(this.OriginMarker.GeoCoordinate);
-                MyWayPoints.Add(this.DestinationMarker.GeoCoordinate);
-
-                this.geoQ.Waypoints = MyWayPoints;
-                this.geoQ.QueryAsync();
+                StartGeoQ();
             }
         }
 
@@ -150,7 +172,7 @@ namespace DragDropPhoneApp
             circle.Width = 50;
             if (isDestination && dataContext.isInRealtyCreating)
             {
-                circle.Visibility = Visibility.Collapsed;
+              //  circle.Visibility = Visibility.Collapsed;
             }
             Marker.Content = circle;
             Marker.PositionOrigin = new Point(0.5, 0.5);
@@ -180,7 +202,8 @@ namespace DragDropPhoneApp
         }
 
         private void Touch_FrameReported(object sender, TouchFrameEventArgs e)
-        {
+        {return;
+            
             if (this.draggingNow)
             {
                 TouchPoint tPoint = e.GetPrimaryTouchPoint(this.map1);
@@ -234,7 +257,7 @@ namespace DragDropPhoneApp
 
 
             string GeoStuff = string.Empty;
-
+            return;
             if (e.Result.Count() > 0)
             {
                 if (e.Result[0].Information.Address.Street.Length > 0)

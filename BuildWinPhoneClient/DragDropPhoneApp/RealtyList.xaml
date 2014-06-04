@@ -138,9 +138,9 @@
     <!--   GroupHeaderTemplate="{StaticResource LongListSelectorGroupHeaderTemmplate}"
                                           LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <phone:Pivot Title="Images" Name="pivot" Margin="-3, 0, 0, 0" >
+        <phone:Pivot Title="{Binding Path=LocalizedResources.Realty, Source={StaticResource LocalizedStrings}}" Name="pivot" Margin="-3, 0, 0, 0" >
 
-            <phone:PivotItem Header="Realty for Sell">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.RealtyForSell, Source={StaticResource LocalizedStrings}}">
 
                 <phone:LongListSelector Name="RealtyforSell"   
                                         ListHeaderTemplate="{StaticResource LongListSelectorHeaderTemplate}"
@@ -150,7 +150,7 @@
                                            HideEmptyGroups ="true"  SelectionChanged="BlogsLongListSelector_SelectionChanged"  IsGroupingEnabled ="true" LayoutMode="List" />
             </phone:PivotItem>
 
-            <phone:PivotItem Header="Realty for Rent">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.RealtyForRent, Source={StaticResource LocalizedStrings}}">
 
                 <phone:LongListSelector Name="BlogsLongListSelector"   
                                         
@@ -166,13 +166,10 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
 
-            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Check.png" Text="save"/>
-            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="settings"/>
-
+          
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem x:Name="Add_new" Text="Add new" Click="Add_new_Click" />
-                <shell:ApplicationBarMenuItem Text="menu item 2" />
-            </shell:ApplicationBar.MenuItems>
+                </shell:ApplicationBar.MenuItems>
 
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

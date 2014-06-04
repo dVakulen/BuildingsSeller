@@ -10,6 +10,8 @@ using Microsoft.Phone.Shell;
 
 namespace DragDropPhoneApp
 {
+    using System.Windows.Media.Imaging;
+
     using Build.DataLayer.Model;
 
     using DragDropPhoneApp.ApiConsumer;
@@ -23,6 +25,14 @@ namespace DragDropPhoneApp
             InitializeComponent();
             dataContext = App.DataContext;
             DataContext = App.DataContext;
+            if (this.dataContext.CurrentRealty.Picture == null || this.dataContext.CurrentRealty.Picture.Length ==0)
+            {
+                BitmapImage img = new BitmapImage();
+                img.SetSource(
+                    Application.GetResourceStream(
+                        new Uri(@"Assets/Tiles/FlipCycleTileMedium.png", UriKind.Relative)).Stream);
+                this.ImageRealt.Source = img;
+            }
             if (dataContext.isInRealtyCreating)
             {
             }
@@ -51,6 +61,7 @@ namespace DragDropPhoneApp
             {
                 dataContext.CurrentRealty.Created = DateTime.Now;
                 ApiService<Realty>.SendPost(dataContext.CurrentRealty);
+                MessageBox.Show("Realty created successfully");
             }
         }
 

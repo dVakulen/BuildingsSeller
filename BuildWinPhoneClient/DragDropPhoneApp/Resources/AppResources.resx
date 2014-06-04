@@ -120,11 +120,23 @@
   <data name="Add_new" xml:space="preserve">
     <value>Add new</value>
   </data>
+  <data name="BuildSeller" xml:space="preserve">
+    <value>BuildSeller</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
   <data name="Price" xml:space="preserve">
     <value>Price</value>
+  </data>
+  <data name="Realty" xml:space="preserve">
+    <value>Realty</value>
+  </data>
+  <data name="RealtyForRent" xml:space="preserve">
+    <value> For Rent</value>
+  </data>
+  <data name="RealtyForSell" xml:space="preserve">
+    <value>For Sell</value>
   </data>
   <data name="Registration" xml:space="preserve">
     <value>Registration</value>

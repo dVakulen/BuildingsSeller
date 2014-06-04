@@ -10,6 +10,10 @@
           <source>Add new</source>
           <target state="translated" state-qualifier="tm-suggestion">Добавить</target>
         </trans-unit>
+        <trans-unit id="Resx/BuildSeller" translate="yes" xml:space="preserve">
+          <source>BuildSeller</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">BuildSeller</target>
+        </trans-unit>
         <trans-unit id="Resx/Login" translate="yes" xml:space="preserve">
           <source>Login</source>
           <target state="translated" state-qualifier="tm-suggestion">Вход</target>
@@ -17,6 +21,16 @@
         <trans-unit id="Resx/Price" translate="yes" xml:space="preserve">
           <source>Price</source>
           <target state="translated" state-qualifier="tm-suggestion">Цена</target>
+        </trans-unit>
+        <trans-unit id="Resx/RealtyForSell" translate="yes" xml:space="preserve">
+          <source>For Sell</source>
+          <target state="translated"> для продажи</target></trans-unit>
+        <trans-unit id="Resx/RealtyForRent" translate="yes" xml:space="preserve">
+          <source> For Rent</source>
+          <target state="translated">для аренды</target></trans-unit>
+        <trans-unit id="Resx/Realty" translate="yes" xml:space="preserve">
+          <source>Realty</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Недвижимости</target>
         </trans-unit>
         <trans-unit id="Resx/Registration" translate="yes" xml:space="preserve">
           <source>Registration</source>

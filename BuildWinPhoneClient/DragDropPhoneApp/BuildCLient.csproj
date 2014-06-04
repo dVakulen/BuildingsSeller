@@ -229,10 +229,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Build.DataLayer - Copy\Build.Resources.csproj">
-      <Project>{ed79d5f1-530b-40e5-be35-0588138fea3d}</Project>
-      <Name>Build.Resources</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Build.DataLayer\Build.DataLayer.csproj">
       <Project>{2b2708ac-9266-430a-8b79-6b8dd1d33c4b}</Project>
       <Name>Build.DataLayer</Name>

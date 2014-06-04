@@ -10,6 +10,10 @@
           <source>Add new</source>
           <target state="new">Add new</target>
         </trans-unit>
+        <trans-unit id="Resx/BuildSeller" translate="yes" xml:space="preserve">
+          <source>BuildSeller</source>
+          <target state="new">BuildSeller</target>
+        </trans-unit>
         <trans-unit id="Resx/Login" translate="yes" xml:space="preserve">
           <source>Login</source>
           <target state="new">Login</target>
@@ -17,6 +21,18 @@
         <trans-unit id="Resx/Price" translate="yes" xml:space="preserve">
           <source>Price</source>
           <target state="new">Price</target>
+        </trans-unit>
+        <trans-unit id="Resx/RealtyForSell" translate="yes" xml:space="preserve">
+          <source>For Sell</source>
+          <target state="new">For Sell</target>
+        </trans-unit>
+        <trans-unit id="Resx/RealtyForRent" translate="yes" xml:space="preserve">
+          <source> For Rent</source>
+          <target state="new"> For Rent</target>
+        </trans-unit>
+        <trans-unit id="Resx/Realty" translate="yes" xml:space="preserve">
+          <source>Realty</source>
+          <target state="new">Realty</target>
         </trans-unit>
         <trans-unit id="Resx/Registration" translate="yes" xml:space="preserve">
           <source>Registration</source>

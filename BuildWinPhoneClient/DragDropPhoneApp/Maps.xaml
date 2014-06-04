@@ -50,8 +50,8 @@
             <TextBlock Grid.Row="0" Grid.ColumnSpan="1" Text="Origin:" />
             <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"  x:Name="OriginTitle" />
 
-            <TextBlock Grid.Row="3" Grid.ColumnSpan="1" Text="Destination" />
-            <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"  x:Name="DestinationTitle" />
+            <TextBlock Grid.ColumnSpan="1" Text="Destination" Margin="0,-27,0,27" />
+            <TextBlock  x:Name="DestinationTitle" Margin="0,-32,0,32" />
 
             <Grid Grid.Row="6" Grid.ColumnSpan="4" Margin="12,0,12,0">
 
@@ -63,11 +63,11 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 LandmarksEnabled="True" Loaded="map1_Loaded" />
-               
+
 
 
             </Grid>
-            <Button x:Name="GetRouteBtn" Grid.ColumnSpan="4" Grid.Row="9" Content="get the Route" Click="Button_Click_1"/>
+            <Button x:Name="GetRouteBtn" Grid.ColumnSpan="4" Grid.Row="9" Content="get the Route" Click="Button_Click_1" Visibility="Collapsed"/>
             <Button x:Name="Submit" Content="Submit" HorizontalAlignment="Left" Margin="158,-95,0,0" VerticalAlignment="Top" Width="286" Visibility="Collapsed" Tap="Submit_Tap"/>
         </Grid>
 
@@ -81,7 +81,7 @@
             <shell:ApplicationBarIconButton x:Name="Save" IconUri="/Toolkit.Content/ApplicationBar.Check.png" Text="save" Click="Save_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="cancel" Click="ApplicationBarIconButton_Click_1"/>
 
-              <shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="menu item 1" />
                 <shell:ApplicationBarMenuItem Text="menu item 2" />
             </shell:ApplicationBar.MenuItems>
