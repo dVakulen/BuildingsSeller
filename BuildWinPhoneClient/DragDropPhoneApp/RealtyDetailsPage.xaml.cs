@@ -30,7 +30,7 @@ namespace DragDropPhoneApp
                 BitmapImage img = new BitmapImage();
                 img.SetSource(
                     Application.GetResourceStream(
-                        new Uri(@"Assets/Tiles/FlipCycleTileMedium.png", UriKind.Relative)).Stream);
+                        new Uri(@"FlipCycleTileMedium.png", UriKind.Relative)).Stream);
                 this.ImageRealt.Source = img;
             }
             if (dataContext.isInRealtyCreating)
