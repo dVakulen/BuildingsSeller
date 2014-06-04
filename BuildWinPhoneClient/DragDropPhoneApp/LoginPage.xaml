@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -28,8 +29,9 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBox x:Name="Login" HorizontalAlignment="Left" Height="72" Margin="20,133,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="398" Tap="Login_Tap"/>
-            <TextBox x:Name="Password" HorizontalAlignment="Left" Height="72" Margin="20,228,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="398" Tap="Login_Tap"/>
+            <toolkit:PhoneTextBox Hint="Login" x:Name="Login"   HorizontalAlignment="Left" Height="72" Margin="20,133,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="398" Tap="Login_Tap"/>
+            <toolkit:PhoneTextBox  Hint="Password"  x:Name="Password" HorizontalAlignment="Left" Height="72" Margin="20,228,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="398" Tap="Login_Tap"/>
+
             <Button x:Name="LoginBtn" Content="login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,326,0,0" Width="398" Click="LoginBtn_Click" Tap="LoginBtn_Tap"/>
 
         </Grid>

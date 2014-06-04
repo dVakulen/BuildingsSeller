@@ -21,7 +21,7 @@
     <SupportedCultures>en-GB;qps-ploc;ru-RU</SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>DragDropPhoneApp_$(Configuration)_$(Platform).xap</XapFilename>
+    <XapFilename>BuildClient.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>DragDropPhoneApp.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>

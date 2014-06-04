@@ -57,8 +57,6 @@ namespace DragDropPhoneApp
         public MapPage()
         {
             this.InitializeComponent();
-          //  map1. .CredentialsProvider = New ApplicationIdCredentialsProvider("Your Bing Maps Key");
-           // AqA8uwlJ0rHF34MD6sXxAgRhmZTuQwGtw-jR0ZN82R2-b4p3m8i-W8aDv-zjP4bo
             dataContext = App.DataContext;
             DataContext = App.DataContext;
             Touch.FrameReported += this.Touch_FrameReported;
@@ -76,6 +74,7 @@ namespace DragDropPhoneApp
             this.geoQ.QueryCompleted += this.geoQ_QueryCompleted;
             if (dataContext.isInRealtyCreating)
             {
+                this.Save.IsEnabled = false;
                 this.GetRouteBtn.Visibility = Visibility.Collapsed;
                 this.Submit.Visibility = Visibility.Visible;
             }
@@ -284,7 +283,7 @@ namespace DragDropPhoneApp
         private void map1_ZoomLevelChanged(object sender, MapZoomLevelChangedEventArgs e)
         {
          
-           this.zoomSlider.Value = this.map1.ZoomLevel;
+        
         }
         
         private void textt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -306,14 +305,7 @@ namespace DragDropPhoneApp
             }
         }
 
-        private void zoomSlider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (this.zoomSlider != null)
-            {
-               // this.map1.ZoomLevel = this.zoomSlider.Value;
-            }
-        }
-
+     
         #endregion
 
         private void Submit_Tap(object sender, GestureEventArgs e)
@@ -340,6 +332,25 @@ namespace DragDropPhoneApp
             Microsoft.Phone.Maps.MapsSettings.ApplicationContext.ApplicationId = "87555bfe-031d-45a2-94ba-ec960fd90426";
             Microsoft.Phone.Maps.MapsSettings.ApplicationContext.AuthenticationToken = "AqA8uwlJ0rHF34MD6sXxAgRhmZTuQwGtw-jR0ZN82R2-b4p3m8i-W8aDv-zjP4bo";
     
+        }
+
+        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
+        {
+        
+            this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
+
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            if (dataContext.isInRealtyCreating)
+            {
+                dataContext.CurrentRealty.MapPosX = this.OriginMarker.GeoCoordinate.Latitude;
+                dataContext.CurrentRealty.MapPosY = this.OriginMarker.GeoCoordinate.Longitude;
+                MessageBox.Show("accepted");
+            }
+          
+            this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
         }
     }
 }

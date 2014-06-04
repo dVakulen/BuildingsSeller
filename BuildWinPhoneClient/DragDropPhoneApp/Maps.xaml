@@ -28,8 +28,6 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <StackPanel Orientation="Horizontal" Grid.Row="1" >
-                <Button x:Name="Hplus" Content="+" Click="Button_Click_1" />
-                <Button x:Name="Hmins" Content="-" Click="Button_Click_1" />
                 <Button x:Name="TrMod" Content="Drive" Click="Button_Click_1" Width="328" Visibility="Collapsed" />
             </StackPanel>
         </StackPanel>
@@ -60,13 +58,12 @@
                 <maps:Map
                         
                 Name="map1"
+                    
                     ZoomLevel="10"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                LandmarksEnabled="True" />
-                <StackPanel x:Name="zoomPanel" Background="#77000000" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="211"  Width="52" Margin="0,0,0,60" >
-                    <Slider x:Name="zoomSlider" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="201" Width="42" Minimum="1" Maximum="20" ValueChanged="zoomSlider_ValueChanged_1"  Margin="0,0,0,80"/>
-                </StackPanel>
+                LandmarksEnabled="True" Loaded="map1_Loaded" />
+               
 
 
             </Grid>
@@ -78,11 +75,13 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Add.png" Text="+" Click="ApplicationBarIconButton_Click" />
 
-            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Check.png" Text="save"/>
-            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="settings"/>
+            <shell:ApplicationBarIconButton x:Name="MinHeading" IconUri="/Toolkit.Content/ApplicationBar.Select.png" Text="-" Click="MinHeading_Click"/>
+            <shell:ApplicationBarIconButton x:Name="Save" IconUri="/Toolkit.Content/ApplicationBar.Check.png" Text="save" Click="Save_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="cancel" Click="ApplicationBarIconButton_Click_1"/>
 
-            <shell:ApplicationBar.MenuItems>
+              <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="menu item 1" />
                 <shell:ApplicationBarMenuItem Text="menu item 2" />
             </shell:ApplicationBar.MenuItems>
