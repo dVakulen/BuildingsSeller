@@ -170,7 +170,7 @@
             <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="settings"/>
 
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="menu item 1" />
+                <shell:ApplicationBarMenuItem x:Name="Add_new" Text="Add new" Click="Add_new_Click" />
                 <shell:ApplicationBarMenuItem Text="menu item 2" />
             </shell:ApplicationBar.MenuItems>
 

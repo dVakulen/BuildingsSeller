@@ -133,5 +133,12 @@
                 this.dataContext.OrderBy = false;
             }
         }
+
+        private void Add_new_Click(object sender, EventArgs e)
+        {
+            this.dataContext.CurrentRealty = new Realty();
+            this.dataContext.isInRealtyCreating = true;
+            this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
+        }
     }
 }

@@ -57,7 +57,8 @@ namespace DragDropPhoneApp
         public MapPage()
         {
             this.InitializeComponent();
-
+          //  map1. .CredentialsProvider = New ApplicationIdCredentialsProvider("Your Bing Maps Key");
+           // AqA8uwlJ0rHF34MD6sXxAgRhmZTuQwGtw-jR0ZN82R2-b4p3m8i-W8aDv-zjP4bo
             dataContext = App.DataContext;
             DataContext = App.DataContext;
             Touch.FrameReported += this.Touch_FrameReported;
@@ -104,28 +105,8 @@ namespace DragDropPhoneApp
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (sender == this.Hplus)
-            {
-                this.map1.Heading = this.map1.Heading + 12;
-            }
-            else if (sender == this.Hmins)
-            {
-                this.map1.Heading = this.map1.Heading - 12;
-            }
-            else if (sender == this.TrMod)
-            {
-                if (this.travelMode == TravelMode.Driving)
-                {
-                    this.travelMode = TravelMode.Walking;
-                    this.TrMod.Content = "Walk";
-                }
-                else
-                {
-                    this.travelMode = TravelMode.Driving;
-                    this.TrMod.Content = "Drive";
-                }
-            }
-            else if (sender == this.GetRouteBtn)
+           
+            if (sender == this.GetRouteBtn)
             {
                 if (this.geoQ.IsBusy)
                 {
@@ -302,7 +283,8 @@ namespace DragDropPhoneApp
 
         private void map1_ZoomLevelChanged(object sender, MapZoomLevelChangedEventArgs e)
         {
-            this.zoomSlider.Value = this.map1.ZoomLevel;
+         
+           this.zoomSlider.Value = this.map1.ZoomLevel;
         }
         
         private void textt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -328,7 +310,7 @@ namespace DragDropPhoneApp
         {
             if (this.zoomSlider != null)
             {
-                this.map1.ZoomLevel = this.zoomSlider.Value;
+               // this.map1.ZoomLevel = this.zoomSlider.Value;
             }
         }
 
@@ -341,6 +323,23 @@ namespace DragDropPhoneApp
             MessageBox.Show("accepted");
 
             this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
+        }
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            this.map1.Heading = this.map1.Heading + 12;
+        }
+
+        private void MinHeading_Click(object sender, EventArgs e)
+        {
+            this.map1.Heading = this.map1.Heading - 12;
+        }
+
+        private void map1_Loaded(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Phone.Maps.MapsSettings.ApplicationContext.ApplicationId = "87555bfe-031d-45a2-94ba-ec960fd90426";
+            Microsoft.Phone.Maps.MapsSettings.ApplicationContext.AuthenticationToken = "AqA8uwlJ0rHF34MD6sXxAgRhmZTuQwGtw-jR0ZN82R2-b4p3m8i-W8aDv-zjP4bo";
+    
         }
     }
 }

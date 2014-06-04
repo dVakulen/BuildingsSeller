@@ -135,4 +135,4 @@
   <data name="Square" xml:space="preserve">
     <value>Площадь</value>
   </data>
-</root>
+<data name="Add_new" xml:space="preserve"><value>Добавить</value></data></root>

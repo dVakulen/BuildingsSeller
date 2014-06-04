@@ -6,6 +6,10 @@
     </header>
     <body>
       <group id="Resx">
+        <trans-unit id="Resx/Add_new" translate="yes" xml:space="preserve">
+          <source>Add new</source>
+          <target state="new">Add new</target>
+        </trans-unit>
         <trans-unit id="Resx/Login" translate="yes" xml:space="preserve">
           <source>Login</source>
           <target state="new">Login</target>

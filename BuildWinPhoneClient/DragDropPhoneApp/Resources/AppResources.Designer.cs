@@ -61,6 +61,15 @@ namespace DragDropPhoneApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new.
+        /// </summary>
+        public static string Add_new {
+            get {
+                return ResourceManager.GetString("Add_new", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
