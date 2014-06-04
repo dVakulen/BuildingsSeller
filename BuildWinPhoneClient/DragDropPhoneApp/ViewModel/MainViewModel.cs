@@ -21,13 +21,26 @@ namespace DragDropPhoneApp.ViewModel
     public class MainViewModel : ViewModelBase, INotifyPropertyChanged
     {
         #region Fields
-
+        private List<Photo> phots;
         public Users CurrentUser { get; set; }
 
         public List<Realty> realtys;
 
         private bool isLoading;
         public bool isInRealtyCreating;
+        public List<Photo> photos
+        {
+            get
+            {
+                return this.phots;
+            }
+
+            set
+            {
+                this.phots = value;
+                this.NotifyPropertyChanged("GroupedPhotos");
+            }
+        }
 
         #endregion
 
@@ -78,6 +91,25 @@ namespace DragDropPhoneApp.ViewModel
             {
                 var cards = this.Realtys.Where(v => !v.IsForRent);
                 return AlphaKeyGroup<Realty>.CreateGroups(cards, s => s.Named, true);
+            }
+        }
+
+        public List<KeyedList<string, Photo>> GroupedPhotos
+        {
+            get
+            {
+                if (this.photos == null)
+                {
+                    return null;
+                }
+
+                var groupedPhotos = from photo in this.photos
+                                    orderby photo.TimeStamp
+                                    group photo by photo.TimeStamp.ToString("y")
+                                        into images
+                                        select new KeyedList<string, Photo>(images);
+
+                return new List<KeyedList<string, Photo>>(groupedPhotos);
             }
         }
         public bool OrderBy
