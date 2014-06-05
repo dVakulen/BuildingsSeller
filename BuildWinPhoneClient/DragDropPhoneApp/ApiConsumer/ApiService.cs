@@ -9,6 +9,8 @@
     using System.Net;
     using System.Runtime.Serialization.Json;
     using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows;
 
     using Build.DataLayer.Model;
@@ -25,63 +27,35 @@
         where T : class
     {
         #region Static Fields
-        private static Uri uriRealtApi = new Uri( "http://localhost:61251/api/buildapi");
-        private static Uri uriUserApi = new Uri( "http://localhost:61251/api/userapi");
-      //  private static Uri uriRealtApi = new Uri(Build.Resources.AppResources.ApiUrl + "api/buildapi");
 
-     //   private static Uri uriUserApi = new Uri(Build.Resources.AppResources.ApiUrl + "api/userapi");
-
-        private static int skip = 0;
+        private static int skip;
 
         private static int take = 1;
+
+        private static Uri uriRealtApi = new Uri("http://localhost:61251/api/buildapi");
+
+        private static Uri uriUserApi = new Uri("http://localhost:61251/api/userapi");
+
         #endregion
 
         #region Public Methods and Operators
 
         public static void GetRealties()
         {
-          
-                Deployment.Current.Dispatcher.BeginInvoke(() => { App.DataContext.IsLoading = true; });
-           
-            WebClient client = new WebClient();
+            Deployment.Current.Dispatcher.BeginInvoke(() => { App.DataContext.IsLoading = true; });
 
+            WebClient client = new WebClient();
 
             client.Headers["Accept"] = "application/json";
             client.DownloadStringCompleted += RealtyDownloadedCallback;
             if (take == 0)
             {
-                Deployment.Current.Dispatcher.BeginInvoke(() => { App.DataContext.IsLoading = false; });
-                return;
+                // return;
             }
+
             client.DownloadStringAsync(
                 new Uri(uriRealtApi.OriginalString + string.Format("?skip={0}&take={1}", skip, take)));
             skip += take;
-        }
-
-        public static void RealtyDownloadedCallback(object s1, DownloadStringCompletedEventArgs e1)
-        {
-            try
-            {
-                var realtys = JsonConvert.DeserializeObject<Realty[]>(e1.Result.ToString());
-                if (realtys != null)
-                {
-                    var newList = new List<Realty>();
-                    newList.AddRange(App.DataContext.Realtys);
-                    var downloadedRealtyList = realtys.ToList();
-                    newList.AddRange(downloadedRealtyList);
-                    if (downloadedRealtyList.Count < take)
-                    {
-                        take = 0;
-                    }
-                    App.DataContext.Realtys = newList;
-                }
-                GetRealties();
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
         public static void Login(string login, string pass)
@@ -92,16 +66,33 @@
                 (HttpWebRequest)
                 WebRequest.Create(uriRealtApi.OriginalString + string.Format("?login={0}&pass={1}", login, pass));
 
-            // Uri uri = new Uri(http://host.ru/forum/cont/add.php?parm=p);
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(uriRealtApi);
             StartWebRequest(uriUserApi.OriginalString + string.Format("?login={0}&pass={1}", login, pass), null);
-            object s = new object();
+        }
 
-            // IAsyncResult httpWebResponse = httpWebRequest.BeginGetResponse(ar => { }, s);
-            {
-                // while (!httpWebResponse.IsCompleted)
-                // Thread.Sleep(100);
-            }
+        public static void RealtyDownloadedCallback(object s1, DownloadStringCompletedEventArgs e1)
+        {
+            Task.Factory.StartNew(
+                () =>
+                    {
+                        var realtys = JsonConvert.DeserializeObject<Realty[]>(e1.Result);
+                        if (realtys != null)
+                        {
+                            var newList = new List<Realty>();
+                            newList.AddRange(App.DataContext.Realtys);
+                            var downloadedRealtyList = realtys.ToList();
+                            newList.AddRange(downloadedRealtyList);
+                            if (downloadedRealtyList.Count < take)
+                            {
+                                Deployment.Current.Dispatcher.BeginInvoke(() => { App.DataContext.IsLoading = false; });
+                                Thread.Sleep(100000);
+                            }
+
+                            App.DataContext.Realtys = newList;
+                        }
+
+                        GetRealties();
+                    });
         }
 
         public static void SendPost(T gizmo, bool isRealtApi = true)
@@ -144,16 +135,16 @@
                 {
                     Deployment.Current.Dispatcher.BeginInvoke(
                         () =>
-                        {
-                            if (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext is MainViewModel)
                             {
-                                (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as
-                                 MainViewModel).IsLoading = false;
-                            }
+                                if (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext is MainViewModel)
+                                {
+                                    (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as
+                                     MainViewModel).IsLoading = false;
+                                }
 
-                            ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(
-                                new Uri("/RealtyList.xaml", UriKind.Relative));
-                        });
+                                ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(
+                                    new Uri("/RealtyList.xaml", UriKind.Relative));
+                            });
                 }
                 else
                 {
@@ -165,16 +156,10 @@
             {
                 Deployment.Current.Dispatcher.BeginInvoke(
                     () =>
-                    {
-
-
-                        //       (((PhoneApplicationFrame)Application.Current.RootVisual).DataContext as MainViewModel)
-                        //      .IsLoading = false;
-                        MessageBox.Show("No user with such credentials");
-
-
-
-                    });
+                        {
+                          
+                            MessageBox.Show("No user with such credentials");
+                        });
             }
         }
 

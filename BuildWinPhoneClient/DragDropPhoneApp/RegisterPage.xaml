@@ -9,7 +9,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
+    SupportedOrientations="Portrait" Orientation="Landscape"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
@@ -27,18 +27,21 @@
             <TextBlock Text="Register" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
             <Button Content="Submit" Tap="Button_Tap"/>
         </StackPanel>
-
-        <!--ContentPanel - place additional content here-->
+        <ScrollViewer Name="AsdScrollViewer"  Margin="12,200,12,0">
+            <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        
             <TextBox x:Name="Name" HorizontalAlignment="Left" Height="72" Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Login,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
             <TextBox   HorizontalAlignment="Left" Height="72" Margin="10,441,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.FirstName,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
-            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,369,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.LastName,Mode=TwoWay}" VerticalAlignment="Top" Width="411"/>
+            <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,369,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.LastName,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
             <TextBox x:Name="Password"  HorizontalAlignment="Left" Height="72" Margin="10,287,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Password,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
             <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,143,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Patronymic,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
             <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,82,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Adress,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
             <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,513,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Email, Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
             <TextBox  HorizontalAlignment="Left" Height="72" Margin="10,215,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Phone,Mode=TwoWay}" VerticalAlignment="Top" Width="411" Tap="Name_Tap"/>
-        </Grid>
+
+            </Grid>
+        </ScrollViewer>
     </Grid>
 
 </phone:PhoneApplicationPage>

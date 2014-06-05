@@ -1,6 +1,6 @@
-﻿namespace ImagesGrid.Services
+﻿namespace DragDropPhoneApp.Service
 {
-    using Build.DataLayer.Model;
+   
 
     #region Using Directives
 
@@ -8,50 +8,35 @@
     using System.Collections.Generic;
     using System.IO;
     using System.IO.IsolatedStorage;
-    using System.Linq;
     using System.Threading.Tasks;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
     using System.Windows.Media.Imaging;
-     public static class Consts
-    {
-        #region Static Fields
 
-        public static string ImageFolder = @"\Images";
-
-        public static string ImageFolderSlash = "Images/";
-
-        #endregion
-    }
+    using Build.DataLayer.Model;
 
     #endregion
 
+   
+
     public static class DataService
     {
-
-
-    
         #region Public Methods and Operators
+
         public static byte[] ConvertToBytes(this BitmapImage bitmapImage)
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                WriteableBitmap btmMap = new WriteableBitmap
-                    (bitmapImage.PixelWidth, bitmapImage.PixelHeight);
+                WriteableBitmap btmMap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
 
-                // write an image into the stream
-                Extensions.SaveJpeg(btmMap, ms,
-                    bitmapImage.PixelWidth, bitmapImage.PixelHeight, 0, 100);
+                btmMap.SaveJpeg(ms, bitmapImage.PixelWidth, bitmapImage.PixelHeight, 0, 100);
 
                 return ms.ToArray();
             }
         }
+
         public static BitmapImage FetchImage(Photo photo)
         {
             BitmapImage image = null;
 
-            // AutoResetEvent bitmapInitializationEvt = new AutoResetEvent(false);
             image = new BitmapImage();
 
             using (var imageStream = LoadImage(photo.ImageSource))
@@ -62,14 +47,9 @@
                 }
             }
 
-            // bitmapInitializationEvt.WaitOne();
             return image;
         }
 
-       
-
-
-    
         public static Photo GetImage(string imgName)
         {
             DateTime start = new DateTime(2010, 1, 1);
@@ -120,7 +100,10 @@
             return imgNameList;
         }
 
-     
+        #endregion
+
+        #region Methods
+
         private static Stream LoadImage(string filename)
         {
             if (filename == null)

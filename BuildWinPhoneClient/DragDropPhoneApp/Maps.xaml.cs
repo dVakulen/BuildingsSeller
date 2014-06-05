@@ -75,7 +75,6 @@ namespace DragDropPhoneApp
             StartGeoLoc();
             if (App.DataContext.isInRealtyCreating)
             {
-                //this.Save.IsEnabled = false;
                 this.GetRouteBtn.Visibility = Visibility.Collapsed;
                 this.Submit.Visibility = Visibility.Visible;
             }

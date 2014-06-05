@@ -139,6 +139,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.qps-ploc.resx</DependentUpon>
     </Compile>
+    <Compile Include="Service\Consts.cs" />
     <Compile Include="Service\DataSevice.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

@@ -6,9 +6,8 @@
     using System.Windows;
 
     using DragDropPhoneApp.Helpers;
+    using DragDropPhoneApp.Service;
     using DragDropPhoneApp.ViewModel;
-
-    using ImagesGrid.Services;
 
     using Microsoft.Phone.Controls;
 

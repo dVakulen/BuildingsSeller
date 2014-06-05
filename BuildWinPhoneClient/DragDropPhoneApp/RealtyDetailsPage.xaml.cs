@@ -68,18 +68,21 @@ namespace DragDropPhoneApp
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
+            bool legit = true;
 
             if (!(App.DataContext.isInRealtyCreating && App.DataContext.CurrentRealty.Address != string.Empty && App.DataContext.CurrentRealty.Named != string.Empty))
             {
-                MessageBox.Show("You must fill all fields");
-              return;
+                legit = false;
             }
             if (App.DataContext.CurrentRealty.Picture == null || App.DataContext.CurrentRealty.Picture.Length == 0)
             {
-                MessageBox.Show("You must fill all fields");
-                return;
+                legit = false;
             }
             if (App.DataContext.CurrentRealty.Description == string.Empty || App.DataContext.CurrentRealty.Square == 0 )
+            {
+                legit = false;
+            }
+            if (!legit)
             {
                 MessageBox.Show("You must fill all fields");
                 return;

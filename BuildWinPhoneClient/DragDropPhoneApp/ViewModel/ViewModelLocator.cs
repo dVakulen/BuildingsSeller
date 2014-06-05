@@ -33,7 +33,6 @@ namespace DragDropPhoneApp.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<Repository<CurrentUser>>();
-
             }
         }
     }

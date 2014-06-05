@@ -93,13 +93,13 @@
         <DataTemplate x:Key="LongListSelectorHeaderTemplate">
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
 
-                <toolkit:ListPicker x:Name="SortBy" SelectionChanged="SortBy_SelectionChanged" Width="200" >
+                <toolkit:ListPicker x:Name="SortBy" SelectionChanged="SortBy_SelectionChanged" Width="210" >
                 <toolkit:ListPickerItem Content="{Binding Path=LocalizedResources.Square, Source={StaticResource LocalizedStrings}}" />
                     <toolkit:ListPickerItem Content="{Binding Path=LocalizedResources.Price, Source={StaticResource LocalizedStrings}}" />
             </toolkit:ListPicker>
-                <toolkit:ListPicker x:Name="AAA" SelectionChanged="Ascendng_SelectionChanged" Width="200" >
-                <toolkit:ListPickerItem Content="{Binding Path=LocalizedResources.Ascending, Source={StaticResource LocalizedStrings}}" />
+                <toolkit:ListPicker x:Name="AAA" SelectionChanged="Ascendng_SelectionChanged" Width="210" >
                 <toolkit:ListPickerItem Content="{Binding Path=LocalizedResources.Descending, Source={StaticResource LocalizedStrings}}" />
+                    <toolkit:ListPickerItem Content="{Binding Path=LocalizedResources.Ascending, Source={StaticResource LocalizedStrings}}" />
             </toolkit:ListPicker>
                </StackPanel>
         </DataTemplate>
