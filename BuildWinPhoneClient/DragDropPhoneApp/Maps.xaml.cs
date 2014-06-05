@@ -94,6 +94,7 @@ namespace DragDropPhoneApp
                 {
                     this.DestinationMarker.GeoCoordinate = watcher.Position.Location;
                     Start_ReverceGeoCoding(this.DestinationMarker);
+                    Start_ReverceGeoCoding(this.OriginMarker);
                     StartGeoQ();
                 };
 
@@ -166,10 +167,7 @@ namespace DragDropPhoneApp
             circle.Opacity = 0.8;
             circle.Height = 50;
             circle.Width = 50;
-            if (isDestination && App.DataContext.isInRealtyCreating)
-            {
-                //  circle.Visibility = Visibility.Collapsed;
-            }
+          
             Marker.Content = circle;
             Marker.PositionOrigin = new Point(0.5, 0.5);
             circle.MouseLeftButtonDown += this.textt_MouseLeftButtonDown;
@@ -257,12 +255,12 @@ namespace DragDropPhoneApp
 
 
             string GeoStuff = string.Empty;
-            return;
+          
             if (e.Result.Count() > 0)
             {
                 if (e.Result[0].Information.Address.Street.Length > 0)
                 {
-                    GeoStuff = GeoStuff + e.Result[0].Information.Address.Street;
+                    GeoStuff =  e.Result[0].Information.Address.Street;//GeoStuff +
 
                     if (e.Result[0].Information.Address.HouseNumber.Length > 0)
                     {

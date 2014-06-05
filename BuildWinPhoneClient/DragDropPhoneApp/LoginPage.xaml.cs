@@ -25,18 +25,18 @@ namespace DragDropPhoneApp
 
     public partial class LoginPage : PhoneApplicationPage
     {
+        private IRepository<CurrentUser> userRepository = App.UserRepository;
 
-        private  IRepository<CurrentUser> userRepository = App.UserRepository;
         public LoginPage()
         {
             this.InitializeComponent();
             DataContext = App.DataContext;
         }
 
-        private void Login_Tap(object sender,GestureEventArgs e)
+        private void Login_Tap(object sender, GestureEventArgs e)
         {
             (sender as TextBox).SelectAll();
-           
+
         }
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
@@ -46,7 +46,7 @@ namespace DragDropPhoneApp
 
         private void LoginBtn_Tap(object sender, GestureEventArgs e)
         {
-            
+
             if (this.Login.Text != string.Empty && this.Password.Text != string.Empty)
             {
                 App.DataContext.IsLoading = true;
@@ -69,18 +69,18 @@ namespace DragDropPhoneApp
         {
 
             Indicator.setLoadingIndicator(this, "Loggin in");
-            var user = userRepository.GetAll().OrderByDescending(b=>b.LoginTime).FirstOrDefault();
-           
-            if(user == null)
+            var user = this.userRepository.GetAll().OrderByDescending(b => b.LoginTime).FirstOrDefault();
+
+            if (user == null)
                 return;
             this.Login.Text = user.Login;
             this.Password.Text = user.Password;
             Task.Factory.StartNew(
                 () =>
-                    {
-                        var users = userRepository.GetAll().OrderByDescending(b => b.LoginTime).Skip(1);
-                        userRepository.DeleteAll(users);
-                    });
+                {
+                    var users = userRepository.GetAll().OrderByDescending(b => b.LoginTime).Skip(1);
+                    userRepository.DeleteAll(users);
+                });
         }
 
     }

@@ -15,16 +15,7 @@
 
     public partial class MainPage : PhoneApplicationPage
     {
-        #region Static Fields
-
-        private static bool FirstTimeLoad = true;
-
-        #endregion
-
-        #region Fields
-
-
-        #endregion
+      
 
         #region Constructors and Destructors
 

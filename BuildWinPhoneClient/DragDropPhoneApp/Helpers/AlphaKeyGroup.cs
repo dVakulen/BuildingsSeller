@@ -68,12 +68,6 @@ namespace DragDropPhoneApp.Helpers
                 }
             }
 
-            if (sort)
-            {
-                return list;
-              
-            }
-
             return list;
         }
 
