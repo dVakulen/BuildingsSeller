@@ -30,7 +30,7 @@
                 <phone:PivotItem Header="{Binding Path=LocalizedResources.Image, Source={StaticResource LocalizedStrings}}">
                     <ScrollViewer >
 
-                        <Image  Tap="Image_Tap" Name="ImageRealt" Stretch="UniformToFill"   Source="{Binding CurrentRealty.PictureSource}"   >
+                        <Image MaxWidth="450" Tap="Image_Tap" Name="ImageRealt" Stretch="Fill"   Source="{Binding CurrentRealty.PictureSource}"   >
                 <!--, Converter={StaticResource BooleanToVisibilityConverter}-->
                         </Image>
                     </ScrollViewer>
@@ -69,11 +69,11 @@
             </phone:Pivot>
         </Grid>
     </Grid>
-    <phone:PhoneApplicationPage.ApplicationBar>
+    <phone:PhoneApplicationPage.ApplicationBar >
         <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
 
             <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Check.png" Text="save" Click="ApplicationBarIconButton_Click"/>
-            <shell:ApplicationBarIconButton x:Name="Cancel" IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="settings" Click="Cancel_Click"/>
+            <shell:ApplicationBarIconButton x:Name="Cancel" IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="Cancel" Click="Cancel_Click"/>
 
           
 

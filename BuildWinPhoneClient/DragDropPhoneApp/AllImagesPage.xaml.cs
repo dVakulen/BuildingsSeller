@@ -18,7 +18,6 @@ namespace DragDropPhoneApp
     {
         #region Fields
 
-        private MainViewModel dataContext;
 
         #endregion
 
@@ -28,7 +27,6 @@ namespace DragDropPhoneApp
         {
             this.InitializeComponent();
             this.DataContext = App.DataContext;
-            this.dataContext = App.DataContext;
         }
 
         #endregion
@@ -47,7 +45,7 @@ namespace DragDropPhoneApp
 
                 if (sendr.SelectedItem is Photo)
                 {
-                  this.dataContext.CurrentRealty.PictureSource = (sendr.SelectedItem as Photo).Image;
+                  App.DataContext.CurrentRealty.PictureSource = (sendr.SelectedItem as Photo).Image;
                  
                     sendr.SelectedItem = null;
                     this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));

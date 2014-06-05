@@ -23,7 +23,6 @@
     {
         #region Fields
 
-        private MainViewModel dataContext;
 
         #endregion
 
@@ -32,9 +31,8 @@
         public RealtyList()
         {
             this.InitializeComponent();
-            this.dataContext = App.DataContext;
             this.DataContext = App.DataContext;
-            this.dataContext.isInRealtyCreating = false;
+            App.DataContext.isInRealtyCreating = false;
         }
 
         #endregion
@@ -48,15 +46,15 @@
 
         private void AddNew_Tap(object sender, GestureEventArgs e)
         {
-            this.dataContext.CurrentRealty = new Realty();
-            this.dataContext.isInRealtyCreating = true;
+            App.DataContext.CurrentRealty = new Realty();
+            App.DataContext.isInRealtyCreating = true;
             this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
         }
 
         private void Add_new_Click(object sender, EventArgs e)
         {
-            this.dataContext.CurrentRealty = new Realty();
-            this.dataContext.isInRealtyCreating = true;
+            App.DataContext.CurrentRealty = new Realty();
+            App.DataContext.isInRealtyCreating = true;
             this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
         }
 
@@ -79,9 +77,9 @@
                 return;
             }
 
-            this.dataContext.CurrentRealty = realt;
+            App.DataContext.CurrentRealty = realt;
             sendr.SelectedItem = null;
-            this.dataContext.isInRealtyCreating = false;
+            App.DataContext.isInRealtyCreating = false;
             this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
         }
 
@@ -100,11 +98,11 @@
 
             if (sendr.SelectedIndex == 1)
             {
-                this.dataContext.OrderBy = true;
+                App.DataContext.OrderBy = true;
             }
             else
             {
-                this.dataContext.OrderBy = false;
+                App.DataContext.OrderBy = false;
             }
         }
         private void Ascendng_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -117,11 +115,11 @@
 
             if (sendr.SelectedIndex == 1)
             {
-                this.dataContext.IsAscendingSorting = true;
+                App.DataContext.IsAscendingSorting = true;
             }
             else
             {
-                this.dataContext.IsAscendingSorting = false;
+                App.DataContext.IsAscendingSorting = false;
             }
         }
 

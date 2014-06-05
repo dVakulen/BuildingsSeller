@@ -25,13 +25,11 @@ namespace DragDropPhoneApp
 
     public partial class LoginPage : PhoneApplicationPage
     {
-        private MainViewModel dataContext;
 
         private  IRepository<CurrentUser> userRepository = App.UserRepository;
         public LoginPage()
         {
             this.InitializeComponent();
-            dataContext = App.DataContext;
             DataContext = App.DataContext;
         }
 
@@ -51,7 +49,7 @@ namespace DragDropPhoneApp
             
             if (this.Login.Text != string.Empty && this.Password.Text != string.Empty)
             {
-                this.dataContext.IsLoading = true;
+                App.DataContext.IsLoading = true;
                 ApiService<Users>.Login(this.Login.Text, this.Password.Text);
                 userRepository.Insert(new CurrentUser
                                           {

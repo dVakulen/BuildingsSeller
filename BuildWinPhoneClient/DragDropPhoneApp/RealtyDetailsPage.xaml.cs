@@ -19,13 +19,11 @@ namespace DragDropPhoneApp
 
     public partial class RealtyDetailsPage : PhoneApplicationPage
     {
-        private MainViewModel dataContext; 
         public RealtyDetailsPage()
         {
             InitializeComponent();
-            dataContext = App.DataContext;
             DataContext = App.DataContext;
-            if (this.dataContext.CurrentRealty.Picture == null || this.dataContext.CurrentRealty.Picture.Length ==0)
+            if (App.DataContext.CurrentRealty.Picture == null || App.DataContext.CurrentRealty.Picture.Length ==0)
             {
                 BitmapImage img = new BitmapImage();
                 img.SetSource(
@@ -35,11 +33,13 @@ namespace DragDropPhoneApp
             }
             else
             {
-              this.ImageRealt.Source = this.dataContext.CurrentRealty.PictureSource;
+              this.ImageRealt.Source = App.DataContext.CurrentRealty.PictureSource;
             
             }
-            if (dataContext.isInRealtyCreating)
+            if (!App.DataContext.isInRealtyCreating)
             {
+                this.ApplicationBar.Mode = ApplicationBarMode.Minimized;
+                this.ApplicationBar.IsVisible = false;
             }
         }
 
@@ -51,7 +51,7 @@ namespace DragDropPhoneApp
         }
         private void Image_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            if (!dataContext.isInRealtyCreating) return;
+            if (!App.DataContext.isInRealtyCreating) return;
 
             this.NavigationService.Navigate(new Uri("/AllImagesPage.xaml", UriKind.Relative));
 
@@ -59,39 +59,41 @@ namespace DragDropPhoneApp
 
         private void Submit_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            if (dataContext.CurrentRealty.Address != string.Empty && dataContext.CurrentRealty.Named != string.Empty)
+            if (App.DataContext.CurrentRealty.Address != string.Empty && App.DataContext.CurrentRealty.Named != string.Empty)
             {
-                dataContext.CurrentRealty.Created = DateTime.Now;
-                ApiService<Realty>.SendPost(dataContext.CurrentRealty);
+                App.DataContext.CurrentRealty.Created = DateTime.Now;
+                ApiService<Realty>.SendPost(App.DataContext.CurrentRealty);
             }
         }
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
 
-            if (!(this.dataContext.isInRealtyCreating && dataContext.CurrentRealty.Address != string.Empty && dataContext.CurrentRealty.Named != string.Empty))
+            if (!(App.DataContext.isInRealtyCreating && App.DataContext.CurrentRealty.Address != string.Empty && App.DataContext.CurrentRealty.Named != string.Empty))
             {
                 MessageBox.Show("You must fill all fields");
               return;
             }
-            if (this.dataContext.CurrentRealty.Picture == null || this.dataContext.CurrentRealty.Picture.Length == 0)
+            if (App.DataContext.CurrentRealty.Picture == null || App.DataContext.CurrentRealty.Picture.Length == 0)
             {
                 MessageBox.Show("You must fill all fields");
                 return;
             }
-            if (this.dataContext.CurrentRealty.Description == string.Empty || this.dataContext.CurrentRealty.Square == 0 )
+            if (App.DataContext.CurrentRealty.Description == string.Empty || App.DataContext.CurrentRealty.Square == 0 )
             {
                 MessageBox.Show("You must fill all fields");
                 return;
             }
-            dataContext.CurrentRealty.Created = DateTime.Now;
-            ApiService<Realty>.SendPost(dataContext.CurrentRealty);
+            App.DataContext.CurrentRealty.Created = DateTime.Now;
+            ApiService<Realty>.SendPost(App.DataContext.CurrentRealty);
             MessageBox.Show("Realty created successfully");
+             App.DataContext.CurrentRealty = new Realty();
+            Cancel_Click(null, null);
         }
 
         private void Cancel_Click(object sender, EventArgs e)
         {
-            this.dataContext.isInRealtyCreating = false;
+            App.DataContext.isInRealtyCreating = false;
             this.NavigationService.Navigate(new Uri("/RealtyList.xaml", UriKind.Relative));
         }
     }

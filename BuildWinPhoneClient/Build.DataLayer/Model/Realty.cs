@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Windows.Documents;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
@@ -13,21 +14,21 @@
     [JsonObject]
     public class Realty : Entity
     {
-      
+
         public BitmapImage PictureSource
 
         {
 
             set
             {
-                if (value != null)
+                if (value != null )
                 {
+                 
                     using (MemoryStream ms = new MemoryStream())
                     {
                         WriteableBitmap btmMap = new WriteableBitmap
-                            (value.PixelWidth, value.PixelHeight);
-
-                        // write an image into the stream
+                            (value);
+                       
                         Extensions.SaveJpeg(btmMap, ms,
                             value.PixelWidth, value.PixelHeight, 0, 100);
 
@@ -37,6 +38,7 @@
             }
             get
             {
+              
                 BitmapImage biImg = new BitmapImage();
                 if (Picture == null)
                 {

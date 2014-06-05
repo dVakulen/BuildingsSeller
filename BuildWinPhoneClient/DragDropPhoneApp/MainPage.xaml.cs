@@ -24,7 +24,6 @@
 
         #region Fields
 
-        private MainViewModel dataContext;
 
         #endregion
 
@@ -33,7 +32,6 @@
         public MainPage()
         {
             this.InitializeComponent();
-            this.dataContext = App.DataContext;
             this.DataContext = App.DataContext;
         }
 
@@ -49,9 +47,9 @@
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             Indicator.setLoadingIndicator(this, "Loading");
-           
-            this.dataContext.isInRealtyCreating = false;
-            this.dataContext.photos = DataService.GetImages().Result;
+
+            App.DataContext.isInRealtyCreating = false;
+            App.DataContext.photos = DataService.GetImages().Result;
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)

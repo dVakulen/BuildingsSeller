@@ -50,25 +50,22 @@ namespace DragDropPhoneApp
         private MapLayer markerLayer;
 
         private MapOverlay selectedMarker;
-        private MainViewModel dataContext;
         #endregion
 
-        // Constructor
 
         #region Constructors and Destructors
 
         public MapPage()
         {
             this.InitializeComponent();
-            dataContext = App.DataContext;
             DataContext = App.DataContext;
             Touch.FrameReported += this.Touch_FrameReported;
 
             this.map1.ZoomLevelChanged += this.map1_ZoomLevelChanged;
 
             this.AddResultToMap(
-                new GeoCoordinate(dataContext.CurrentRealty.MapPosX, dataContext.CurrentRealty.MapPosY),
-                new GeoCoordinate(dataContext.CurrentRealty.MapPosX + 1, dataContext.CurrentRealty.MapPosY + 1));
+                new GeoCoordinate(App.DataContext.CurrentRealty.MapPosX, App.DataContext.CurrentRealty.MapPosY),
+                new GeoCoordinate(App.DataContext.CurrentRealty.MapPosX + 1, App.DataContext.CurrentRealty.MapPosY + 1));
 
             this.geoRev = new ReverseGeocodeQuery();
             this.geoRev.QueryCompleted += this.geoRev_QueryCompleted;
@@ -76,7 +73,7 @@ namespace DragDropPhoneApp
             this.geoQ = new RouteQuery();
             this.geoQ.QueryCompleted += this.geoQ_QueryCompleted;
             StartGeoLoc();
-            if (dataContext.isInRealtyCreating)
+            if (App.DataContext.isInRealtyCreating)
             {
                 //this.Save.IsEnabled = false;
                 this.GetRouteBtn.Visibility = Visibility.Collapsed;
@@ -170,7 +167,7 @@ namespace DragDropPhoneApp
             circle.Opacity = 0.8;
             circle.Height = 50;
             circle.Width = 50;
-            if (isDestination && dataContext.isInRealtyCreating)
+            if (isDestination && App.DataContext.isInRealtyCreating)
             {
                 //  circle.Visibility = Visibility.Collapsed;
             }
@@ -203,7 +200,7 @@ namespace DragDropPhoneApp
 
         private void Touch_FrameReported(object sender, TouchFrameEventArgs e)
         {
-            if (!dataContext.isInRealtyCreating)
+            if (!App.DataContext.isInRealtyCreating)
             {
                 return;
             }
@@ -324,7 +321,7 @@ namespace DragDropPhoneApp
                     this.draggingNow = true;
                     this.map1.IsEnabled = false;
                 }
-                else if (this.OriginMarker.Content == clickedOne && dataContext.isInRealtyCreating)
+                else if (this.OriginMarker.Content == clickedOne && App.DataContext.isInRealtyCreating)
                 {
                     this.selectedMarker = this.OriginMarker;
                     this.draggingNow = true;
@@ -338,8 +335,8 @@ namespace DragDropPhoneApp
 
         private void Submit_Tap(object sender, GestureEventArgs e)
         {
-            dataContext.CurrentRealty.MapPosX = this.OriginMarker.GeoCoordinate.Latitude;
-            dataContext.CurrentRealty.MapPosY = this.OriginMarker.GeoCoordinate.Longitude;
+            App.DataContext.CurrentRealty.MapPosX = this.OriginMarker.GeoCoordinate.Latitude;
+            App.DataContext.CurrentRealty.MapPosY = this.OriginMarker.GeoCoordinate.Longitude;
             MessageBox.Show("accepted");
 
             this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
@@ -371,10 +368,10 @@ namespace DragDropPhoneApp
 
         private void Save_Click(object sender, EventArgs e)
         {
-            if (dataContext.isInRealtyCreating)
+            if (App.DataContext.isInRealtyCreating)
             {
-                dataContext.CurrentRealty.MapPosX = this.OriginMarker.GeoCoordinate.Latitude;
-                dataContext.CurrentRealty.MapPosY = this.OriginMarker.GeoCoordinate.Longitude;
+                App.DataContext.CurrentRealty.MapPosX = this.OriginMarker.GeoCoordinate.Latitude;
+                App.DataContext.CurrentRealty.MapPosY = this.OriginMarker.GeoCoordinate.Longitude;
                 MessageBox.Show("accepted");
             }
 
