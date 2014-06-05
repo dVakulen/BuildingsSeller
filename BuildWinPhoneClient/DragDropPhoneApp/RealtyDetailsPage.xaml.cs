@@ -69,12 +69,24 @@ namespace DragDropPhoneApp
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
 
-            if (this.dataContext.isInRealtyCreating && dataContext.CurrentRealty.Address != string.Empty && dataContext.CurrentRealty.Named != string.Empty)
+            if (!(this.dataContext.isInRealtyCreating && dataContext.CurrentRealty.Address != string.Empty && dataContext.CurrentRealty.Named != string.Empty))
             {
-                dataContext.CurrentRealty.Created = DateTime.Now;
-                ApiService<Realty>.SendPost(dataContext.CurrentRealty);
-                MessageBox.Show("Realty created successfully");
+                MessageBox.Show("You must fill all fields");
+              return;
             }
+            if (this.dataContext.CurrentRealty.Picture == null || this.dataContext.CurrentRealty.Picture.Length == 0)
+            {
+                MessageBox.Show("You must fill all fields");
+                return;
+            }
+            if (this.dataContext.CurrentRealty.Description == string.Empty || this.dataContext.CurrentRealty.Square == 0 )
+            {
+                MessageBox.Show("You must fill all fields");
+                return;
+            }
+            dataContext.CurrentRealty.Created = DateTime.Now;
+            ApiService<Realty>.SendPost(dataContext.CurrentRealty);
+            MessageBox.Show("Realty created successfully");
         }
 
         private void Cancel_Click(object sender, EventArgs e)

@@ -59,7 +59,7 @@
                         
                 Name="map1"
                     
-                    ZoomLevel="10"
+                    ZoomLevel="8"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 LandmarksEnabled="True" Loaded="map1_Loaded" />

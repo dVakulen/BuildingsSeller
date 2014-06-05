@@ -135,4 +135,4 @@
   <data name="Square" xml:space="preserve">
     <value>Площадь</value>
   </data>
-<data name="Add_new" xml:space="preserve"><value>Добавить</value></data><data name="BuildSeller" xml:space="preserve"><value>BuildSeller</value></data><data name="RealtyForSell" xml:space="preserve"><value> для продажи</value><comment></comment></data><data name="RealtyForRent" xml:space="preserve"><value>для аренды</value><comment></comment></data><data name="Realty" xml:space="preserve"><value>Недвижимости</value></data></root>
+<data name="Add_new" xml:space="preserve"><value>Добавить</value></data><data name="BuildSeller" xml:space="preserve"><value>BuildSeller</value></data><data name="RealtyForSell" xml:space="preserve"><value> для продажи</value><comment></comment></data><data name="RealtyForRent" xml:space="preserve"><value>для аренды</value><comment></comment></data><data name="Realty" xml:space="preserve"><value>Недвижимость</value></data><data name="Image" xml:space="preserve"><value>Изображение</value></data><data name="Details" xml:space="preserve"><value>Сведения:</value></data></root>

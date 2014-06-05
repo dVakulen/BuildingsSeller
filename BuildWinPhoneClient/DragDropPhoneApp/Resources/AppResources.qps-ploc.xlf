@@ -10,9 +10,25 @@
           <source>Add new</source>
           <target state="new">Add new</target>
         </trans-unit>
+        <trans-unit id="Resx/Ascending" translate="yes" xml:space="preserve">
+          <source>Ascending</source>
+          <target state="new">Ascending</target>
+        </trans-unit>
         <trans-unit id="Resx/BuildSeller" translate="yes" xml:space="preserve">
           <source>BuildSeller</source>
           <target state="new">BuildSeller</target>
+        </trans-unit>
+        <trans-unit id="Resx/Descending" translate="yes" xml:space="preserve">
+          <source>Descending</source>
+          <target state="new">Descending</target>
+        </trans-unit>
+        <trans-unit id="Resx/Image" translate="yes" xml:space="preserve">
+          <source>Image</source>
+          <target state="new">Image</target>
+        </trans-unit>
+        <trans-unit id="Resx/Details" translate="yes" xml:space="preserve">
+          <source>Details</source>
+          <target state="new">Details</target>
         </trans-unit>
         <trans-unit id="Resx/Login" translate="yes" xml:space="preserve">
           <source>Login</source>

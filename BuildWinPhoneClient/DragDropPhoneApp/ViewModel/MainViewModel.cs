@@ -130,6 +130,25 @@ namespace DragDropPhoneApp.ViewModel
             }
         }
 
+        private bool isAscendingSorting;
+        public bool IsAscendingSorting
+        {
+            get
+            {
+                return this.isAscendingSorting;
+            }
+
+            set
+            {
+                if (this.isAscendingSorting != value)
+                {
+                    this.isAscendingSorting = value;
+                    this.NotifyPropertyChanged("GroupedRealtiesForRent");
+                    this.NotifyPropertyChanged("GroupedRealtiesForSell");
+                }
+            }
+        }
+
         private bool orderByPrice;
         public bool IsAuthorized { get; set; }
 
@@ -151,7 +170,13 @@ namespace DragDropPhoneApp.ViewModel
         {
             get
             {
-                return orderByPrice ? realtys.OrderBy(b => b.Price).ToList() : realtys.OrderByDescending(b => b.Square).ToList(); 
+                return orderByPrice
+                           ? (isAscendingSorting
+                                  ? realtys.OrderBy(b => b.Price).ToList()
+                                  : realtys.OrderByDescending(b => b.Price).ToList())
+                           : (isAscendingSorting
+                                  ? realtys.OrderBy(b => b.Square).ToList()
+                                  : realtys.OrderByDescending(b => b.Square).ToList());
             }
 
             set

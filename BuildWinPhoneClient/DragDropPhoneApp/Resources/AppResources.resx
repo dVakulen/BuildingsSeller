@@ -120,8 +120,20 @@
   <data name="Add_new" xml:space="preserve">
     <value>Add new</value>
   </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
   <data name="BuildSeller" xml:space="preserve">
     <value>BuildSeller</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>

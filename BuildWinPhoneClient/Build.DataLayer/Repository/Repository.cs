@@ -17,13 +17,13 @@ namespace Build.DataLayer.Repository
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly BuildContext context;
+        private readonly BuildContext context = new BuildContext();
         private Table<TEntity> dataTable;
 
         #region Constructor
-        public Repository(BuildContext dataContext)
+        public Repository()
         {
-            this.context = dataContext;
+           
             this.dataTable = this.context.GetTable<TEntity>();
         } 
         #endregion

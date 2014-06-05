@@ -10,9 +10,25 @@
           <source>Add new</source>
           <target state="translated" state-qualifier="tm-suggestion">Добавить</target>
         </trans-unit>
+        <trans-unit id="Resx/Ascending" translate="yes" xml:space="preserve">
+          <source>Ascending</source>
+          <target state="translated" state-qualifier="tm-suggestion">По возрастанию</target>
+        </trans-unit>
         <trans-unit id="Resx/BuildSeller" translate="yes" xml:space="preserve">
           <source>BuildSeller</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">BuildSeller</target>
+        </trans-unit>
+        <trans-unit id="Resx/Descending" translate="yes" xml:space="preserve">
+          <source>Descending</source>
+          <target state="translated" state-qualifier="tm-suggestion">По убыванию</target>
+        </trans-unit>
+        <trans-unit id="Resx/Image" translate="yes" xml:space="preserve">
+          <source>Image</source>
+          <target state="translated" state-qualifier="tm-suggestion">Изображение</target>
+        </trans-unit>
+        <trans-unit id="Resx/Details" translate="yes" xml:space="preserve">
+          <source>Details</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Сведения:</target>
         </trans-unit>
         <trans-unit id="Resx/Login" translate="yes" xml:space="preserve">
           <source>Login</source>
@@ -30,7 +46,7 @@
           <target state="translated">для аренды</target></trans-unit>
         <trans-unit id="Resx/Realty" translate="yes" xml:space="preserve">
           <source>Realty</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Недвижимости</target>
+          <target state="translated">Недвижимость</target>
         </trans-unit>
         <trans-unit id="Resx/Registration" translate="yes" xml:space="preserve">
           <source>Registration</source>

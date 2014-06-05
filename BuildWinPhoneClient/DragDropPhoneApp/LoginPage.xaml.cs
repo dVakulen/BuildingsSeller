@@ -10,7 +10,12 @@ using Microsoft.Phone.Shell;
 
 namespace DragDropPhoneApp
 {
+    using System.Threading.Tasks;
     using System.Windows.Input;
+
+    using Build.DataLayer.Interfaces;
+    using Build.DataLayer.Model;
+    using Build.DataLayer.Repository;
 
     using BuildSeller.Core.Model;
 
@@ -21,6 +26,8 @@ namespace DragDropPhoneApp
     public partial class LoginPage : PhoneApplicationPage
     {
         private MainViewModel dataContext;
+
+        private  IRepository<CurrentUser> userRepository = App.UserRepository;
         public LoginPage()
         {
             this.InitializeComponent();
@@ -46,6 +53,13 @@ namespace DragDropPhoneApp
             {
                 this.dataContext.IsLoading = true;
                 ApiService<Users>.Login(this.Login.Text, this.Password.Text);
+                userRepository.Insert(new CurrentUser
+                                          {
+                                              Login = this.Login.Text,
+                                              Password = this.Password.Text,
+                                              LoginTime = DateTime.Now
+                                          });
+                userRepository.SubmitChanges();
             }
             else
             {
@@ -57,6 +71,18 @@ namespace DragDropPhoneApp
         {
 
             Indicator.setLoadingIndicator(this, "Loggin in");
+            var user = userRepository.GetAll().OrderByDescending(b=>b.LoginTime).FirstOrDefault();
+           
+            if(user == null)
+                return;
+            this.Login.Text = user.Login;
+            this.Password.Text = user.Password;
+            Task.Factory.StartNew(
+                () =>
+                    {
+                        var users = userRepository.GetAll().OrderByDescending(b => b.LoginTime).Skip(1);
+                        userRepository.DeleteAll(users);
+                    });
         }
 
     }

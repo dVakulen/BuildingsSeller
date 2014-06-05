@@ -15,6 +15,10 @@ using Microsoft.Phone.Shell;
 
 namespace DragDropPhoneApp
 {
+    using Build.DataLayer.Interfaces;
+    using Build.DataLayer.Model;
+    using Build.DataLayer.Repository;
+
     using DragDropPhoneApp.ViewModel;
 
     public partial class App : Application
@@ -26,11 +30,18 @@ namespace DragDropPhoneApp
         public PhoneApplicationFrame RootFrame { get; private set; }
         static ViewModelLocator locator = new ViewModelLocator();
 
-        public static MainViewModel DataContext
+       public static MainViewModel DataContext
         {
             get
             {
                 return locator.Main;
+            }
+        }
+        public static IRepository<CurrentUser> UserRepository
+        {
+            get
+            {
+                return locator.UserRepository;
             }
         }
         /// <summary>

@@ -81,7 +81,7 @@
 
             this.dataContext.CurrentRealty = realt;
             sendr.SelectedItem = null;
-
+            this.dataContext.isInRealtyCreating = false;
             this.NavigationService.Navigate(new Uri("/RealtyDetailsPage.xaml", UriKind.Relative));
         }
 
@@ -105,6 +105,23 @@
             else
             {
                 this.dataContext.OrderBy = false;
+            }
+        }
+        private void Ascendng_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var sendr = sender as ListPicker;
+            if (sendr == null)
+            {
+                return;
+            }
+
+            if (sendr.SelectedIndex == 1)
+            {
+                this.dataContext.IsAscendingSorting = true;
+            }
+            else
+            {
+                this.dataContext.IsAscendingSorting = false;
             }
         }
 

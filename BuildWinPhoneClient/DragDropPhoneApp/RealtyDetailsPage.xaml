@@ -21,32 +21,52 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding Path=LocalizedResources.BuildSeller, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Realty descript" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+        
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Margin="12,133,12,15" Grid.RowSpan="2">
-            <Image  Tap="Image_Tap" Name="ImageRealt" Stretch="UniformToFill"   Source="{Binding CurrentRealty.PictureSource}" Margin="25,1,35,311"   >
+        <Grid x:Name="ContentPanel"  Grid.RowSpan="2">
+            <phone:Pivot Title="Realty description" Name="pivot" Margin="-3, 0, 0, 0" >
+
+                <phone:PivotItem Header="{Binding Path=LocalizedResources.Image, Source={StaticResource LocalizedStrings}}">
+                    <ScrollViewer >
+
+                        <Image  Tap="Image_Tap" Name="ImageRealt" Stretch="UniformToFill"   Source="{Binding CurrentRealty.PictureSource}"   >
                 <!--, Converter={StaticResource BooleanToVisibilityConverter}-->
-            </Image>
-            <ScrollViewer Margin="-10,296,10,83" >
+                        </Image>
+                    </ScrollViewer>
+                </phone:PivotItem>
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.Details, Source={StaticResource LocalizedStrings}}">
+
+                <ScrollViewer Margin="-10,0,10,0" >
                 <StackPanel Margin="20" Name="TeamsStackPanel">
+                  
+
                     <Button x:Name="ShowOnMap" Content="ShowOnMap" Width="377" Click="Button_Click"/>
 
-                   
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Named, Mode=TwoWay}" VerticalAlignment="Top" Width="419"/>
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Price, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
+                            <TextBlock  HorizontalAlignment="Center" Height="32"  TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="484" TextAlignment="Center"/>
+                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Named, Mode=TwoWay}" VerticalAlignment="Top" Width="459"/>
+                            <TextBlock  HorizontalAlignment="Center" Height="32"  TextWrapping="Wrap" Text="Price" VerticalAlignment="Top" Width="484" TextAlignment="Center"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Square, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Address, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Description, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Owner.Phone}" VerticalAlignment="Top" Width="456"/>
-                    <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Named, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
-                </StackPanel>
-            </ScrollViewer>
+                            <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Price, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
 
+                            <TextBlock  HorizontalAlignment="Center" Height="32"  TextWrapping="Wrap" Text="Square" VerticalAlignment="Top" Width="484" TextAlignment="Center"/>
+
+                            <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Square, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
+                            <TextBlock  HorizontalAlignment="Center" Height="32"  TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" Width="484" TextAlignment="Center"/>
+
+                            <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Address, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
+                            <TextBlock  HorizontalAlignment="Center" Height="32"  TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Width="484" TextAlignment="Center"/>
+
+                            <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Description, Mode=TwoWay}" VerticalAlignment="Top" Width="456"/>
+                            <TextBlock  HorizontalAlignment="Center" Height="32"  TextWrapping="Wrap" Text="Phone" VerticalAlignment="Top" Width="484" TextAlignment="Center"/>
+
+                            <TextBox HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="{Binding CurrentRealty.Owner.Phone}" VerticalAlignment="Top" Width="456"/>
+                         
+                        </StackPanel>
+                </ScrollViewer>
+            </phone:PivotItem>
+
+            </phone:Pivot>
         </Grid>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>

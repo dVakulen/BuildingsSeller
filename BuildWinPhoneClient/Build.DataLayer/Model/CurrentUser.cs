@@ -25,9 +25,12 @@ namespace Build.DataLayer.Model
                 this.id = value;
             }
         }
-
+        [Column]
         public string Login;
 
+        [Column]
+        public DateTime LoginTime;
+        [Column]
         public string Password;
     }
 }

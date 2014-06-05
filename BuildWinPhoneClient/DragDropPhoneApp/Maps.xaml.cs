@@ -112,7 +112,7 @@ namespace DragDropPhoneApp
 
             this.OriginMarker = this.MakeDotMarker(origin, false);
             this.DestinationMarker = this.MakeDotMarker(destination, true);
-            this.map1.SetView(origin, 14);
+          this.map1.SetView(origin,this.map1.ZoomLevel);
             this.markerLayer = new MapLayer();
             this.map1.Layers.Add(this.markerLayer);
             this.markerLayer.Add(this.OriginMarker);
