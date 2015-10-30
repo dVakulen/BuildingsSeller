@@ -44,13 +44,13 @@ namespace BuildSeller.Service
         {
             foreach (Users adresat in adresatsList)
             {
-                mailSender.SendMail(@"dimitriu777@gmail.com", adresat.Email, Title, message);
+                mailSender.SendMail(@"@gmail.com", adresat.Email, Title, message);
             }
         }
 
         public static void SendToOne(string message, string Title, string from, Users adresat)
         {
-            mailSender.SendMail(@"dimitriu777@gmail.com", adresat.Email, Title, message);
+            mailSender.SendMail(@"@gmail.com", adresat.Email, Title, message);
         }
 
         private static void c_RealtyAdded(object sender, RealtyCreatedEventArgs e)
@@ -63,7 +63,7 @@ namespace BuildSeller.Service
             }
 
             string message = "New realty" + e.Reallty.Named + " were added to our assortiment \n" +
-            "You can see details by clicking the following link : http://10.11.72.115/Realty/Details/" +
+            "You can see details by clicking the following link : /Realty/Details/" +
             e.Reallty.Id;
 
             Send(message, "New realty for you", string.Empty, usList);
