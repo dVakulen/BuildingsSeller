@@ -27,7 +27,7 @@ namespace BuildSeller.Service
             mailSender = new MailHelper();
             mailSender.smtpServer = new SmtpClient("smtp.gmail.com", 587);
             mailSender.smtpServer.UseDefaultCredentials = false;
-            mailSender.smtpServer.Credentials = new NetworkCredential("dimitriu777@gmail.com",
+            mailSender.smtpServer.Credentials = new NetworkCredential("@gmail.com",
             "710914710914" + Resources.pw);
             mailSender.smtpServer.EnableSsl = true;
             SubscriptionMessenger subscriptionMessenger = SubscriptionMessenger.Instance;
