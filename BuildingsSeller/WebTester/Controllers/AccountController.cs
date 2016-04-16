@@ -324,7 +324,7 @@ namespace BuildSeller.Controllers
                     Login = model.Login,
                     Password = model.Password,
                     Patronymic = model.Patronymic,
-                    Activated = false,
+                    Activated = true,
                     Phone = model.Phone,
                     Adress = model.Adress,
                     Roles = new List<Role>(),
