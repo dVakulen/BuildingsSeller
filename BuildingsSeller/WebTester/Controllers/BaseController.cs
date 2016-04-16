@@ -20,7 +20,7 @@ namespace BuildSeller.Controllers
 
 
 
-    [HandleError(ExceptionType = typeof(InvalidOperationException), View = "Error")]
+   // [HandleError(ExceptionType = typeof(InvalidOperationException), View = "Error")]
     public class BaseController : Controller
     {
         #region OnActionExecuting
@@ -48,7 +48,7 @@ namespace BuildSeller.Controllers
 
 
 
-        protected override void OnException(ExceptionContext filterContext)
+    /*    protected override void OnException(ExceptionContext filterContext)
         {
 
             if (filterContext == null)
@@ -61,7 +61,7 @@ namespace BuildSeller.Controllers
             filterContext.ExceptionHandled = true;
 
             filterContext.Result = View("Error");
-        }
+        }*/
         #endregion
 
 
