@@ -85,7 +85,7 @@ namespace BuildSeller
 
         protected void Application_EndRequest(Object sender, EventArgs e)
         {
-            HttpContext context = HttpContext.Current;
+           /* HttpContext context = HttpContext.Current;
             if (context.Response.Status.Substring(0, 3).Equals("401"))
             {
 
@@ -102,7 +102,7 @@ namespace BuildSeller
                 routeData.Values["action"] = "ErrorPage";
                 var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
                 controller.Execute(rc);
-            }
+            }*/
         }
         protected void Application_Start()
         {
