@@ -181,6 +181,7 @@ namespace BuildSeller.Controllers
             this.ViewBag.UsersNames = this.GetUserOrdered(usersName);
 
             this.ViewBag.RolesForThisUser = thisUserRoles;
+
             return this.View("ManageUsers");
         }
 
