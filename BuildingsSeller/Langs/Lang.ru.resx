@@ -241,7 +241,7 @@
     <value>Домой</value>
   </data>
   <data name="Realty" xml:space="preserve">
-    <value>Недвижимость</value>
+    <value>Товар</value>
   </data>
   <data name="RegisterBack" xml:space="preserve">
     <value>Назад</value>
@@ -295,7 +295,7 @@
     <value>MVC Basic </value>
   </data>
   <data name="WebBuildings" xml:space="preserve">
-    <value>Строения онлайн</value>
+    <value>Электротехника онлайн</value>
   </data>
   <data name="BuildSellerPasswordRecovery" xml:space="preserve">
     <value>Восстановление пароля вебтестер</value>
@@ -328,7 +328,7 @@
     <value>Цена</value>
   </data>
   <data name="Square" xml:space="preserve">
-    <value>Площадь</value>
+    <value>Вес</value>
   </data>
   <data name="UserFunc" xml:space="preserve">
     <value>Функционал пользователя</value>
