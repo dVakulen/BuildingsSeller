@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Realty</h4>
+        <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true)
         
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Square, new { @class = "control-label col-md-2" })
+            @Html.Label("Weight",new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Square)
                 @Html.ValidationMessageFor(model => model.Square)
@@ -54,7 +54,7 @@
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(model => model.BuildCategory, new { @class = "control-label col-md-2" })
+            @Html.Label("ProductCategory", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Cats", ViewBag.Cats as SelectList, new { @id = "catsList", @class = "form-control" })
             </div>
