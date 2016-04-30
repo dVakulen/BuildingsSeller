@@ -362,7 +362,7 @@ namespace BuildSeller.Controllers
         public ActionResult Delete(int id)
         {
             Realty realty = this.realtyService.GetAllIncluding(realty1 => realty1.Owner).FirstOrDefault(x => x.Id == id);
-            if (realty.Owner.Login != this.User.Identity.Name ||
+            if (realty.Owner.Login != this.User.Identity.Name &&
            !RolesManager.IsUserInRole(userService.Get(this.User.Identity.Name), UsersRoles.Administrator))
             {
                 this.TempData["Message"] = ColorfullMessages.SetDivs("You dont have permission to delete this product",
