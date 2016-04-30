@@ -241,7 +241,7 @@
     <value>Home</value>
   </data>
   <data name="Realty" xml:space="preserve">
-    <value>Realty</value>
+    <value>Product</value>
   </data>
   <data name="RegisterBack" xml:space="preserve">
     <value>Back</value>
@@ -292,10 +292,10 @@
     <value>MVC Basic </value>
   </data>
   <data name="WebBuildings" xml:space="preserve">
-    <value>WebBuildings</value>
+    <value>WebShop</value>
   </data>
   <data name="BuildSellerPasswordRecovery" xml:space="preserve">
-    <value>BuildSeller Password Recovery</value>
+    <value>ProductSeller Password Recovery</value>
   </data>
   <data name="Adress" xml:space="preserve">
     <value>Adress</value>
@@ -325,7 +325,7 @@
     <value>Price</value>
   </data>
   <data name="Square" xml:space="preserve">
-    <value>Square</value>
+    <value>Weight</value>
   </data>
   <data name="UserFunc" xml:space="preserve">
     <value>UserFunc</value>
