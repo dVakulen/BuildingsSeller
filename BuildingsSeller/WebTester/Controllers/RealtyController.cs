@@ -166,14 +166,14 @@ namespace BuildSeller.Controllers
                 .Where(x => !x.IsSold
                 && x.Address.ToUpper().Contains(sity.ToUpper())
                 && x.BuildCategory.CatName.ToUpper() == category.ToUpper());
-                this.TempData["Message"] = ColorfullMessages.SetDivs("Seek by sity and category", MessageType.info);
+                this.TempData["Message"] = ColorfullMessages.SetDivs("Seek by city and category", MessageType.info);
             }
             else
             {
                 realties = this.realtyService.GetAllIncluding(realty => realty.BuildCategory, realty => realty.Owner)
                 .Where(x => !x.IsSold
                 && x.Address.ToUpper().Contains(sity.ToUpper()));
-                this.TempData["Message"] = ColorfullMessages.SetDivs("Seek by sity", MessageType.info);
+                this.TempData["Message"] = ColorfullMessages.SetDivs("Seek by city", MessageType.info);
             }
 
             if (realties == null || realties.Count() == 0)
@@ -279,7 +279,7 @@ namespace BuildSeller.Controllers
                 messenger.SendRealtyCreated(realty);
 
                 Logger.Info("realty " + realty.Named + " created");
-                this.TempData["Message"] = ColorfullMessages.SetDivs("Realty created succesfully", MessageType.success);
+                this.TempData["Message"] = ColorfullMessages.SetDivs("Product created succesfully", MessageType.success);
                 return this.RedirectToAction("Index");
             }
             catch
@@ -305,7 +305,7 @@ namespace BuildSeller.Controllers
             .FirstOrDefault(x => x.Id == id);
             if (realty.Owner.Login != this.User.Identity.Name)
             {
-                this.TempData["Message"] = ColorfullMessages.SetDivs("You dont have permission to edit this realty",
+                this.TempData["Message"] = ColorfullMessages.SetDivs("You dont have permission to edit this product",
                 MessageType.warning);
 
                 return this.RedirectToAction("Index");
@@ -350,7 +350,7 @@ namespace BuildSeller.Controllers
             try
             {
                 this.realtyService.Update(realty);
-                this.TempData["Message"] = ColorfullMessages.SetDivs("Realty info updated", MessageType.success);
+                this.TempData["Message"] = ColorfullMessages.SetDivs("Product info updated", MessageType.success);
                 return this.RedirectToAction("Index");
             }
             catch
@@ -363,9 +363,9 @@ namespace BuildSeller.Controllers
         {
             Realty realty = this.realtyService.GetAllIncluding(realty1 => realty1.Owner).FirstOrDefault(x => x.Id == id);
             if (realty.Owner.Login != this.User.Identity.Name ||
-            !RolesManager.IsUserInRole(realty.Owner, UsersRoles.Administrator))
+           !RolesManager.IsUserInRole(userService.Get(this.User.Identity.Name), UsersRoles.Administrator))
             {
-                this.TempData["Message"] = ColorfullMessages.SetDivs("You dont have permission to delete this realty",
+                this.TempData["Message"] = ColorfullMessages.SetDivs("You dont have permission to delete this product",
                 MessageType.warning);
                 return this.RedirectToAction("Index");
             }
@@ -373,7 +373,7 @@ namespace BuildSeller.Controllers
             Logger.Info("realty " + realty.Named + " deleted");
             this.realtyService.Delete(id);
 
-            this.TempData["Message"] = ColorfullMessages.SetDivs("Realty deleted", MessageType.info);
+            this.TempData["Message"] = ColorfullMessages.SetDivs("Product deleted", MessageType.info);
             return this.RedirectToAction("Index");
         }
 
