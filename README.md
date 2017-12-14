@@ -1,6 +1,7 @@
 BuildingsSeller
 ===============
-An ASP.NET-MVC application with 3 - tier architecture and web api that being consumed by windows phone client.
-In this project were implemented: custom role system, client-server communication based on Restful Web Api. On client side -  MVVM pattern.
-
-Demo can be seen at the following link: http://realty-online.azurewebsites.net/
+An ASP.NET-MVC application with 3 - tier architecture and web api for windows phone client.
+Were implemented:
+ - Role system
+ - Client-server communication based on REST principles.
+ - MVVM pattern in mobile client.
